@@ -2,46 +2,40 @@ package com.mythmayor.mainproject.ui.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleEventObserver;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
-import com.mythmayor.mainproject.contract.LoginContract;
-import com.mythmayor.mainproject.presenter.LoginPresenter;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
-import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
-import com.mythmayor.basicproject.response.LoginResponse;
-import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.net.NetUtil;
 import com.mythmayor.mainproject.R;
+import com.mythmayor.mainproject.contract.RegisterContract;
+import com.mythmayor.mainproject.presenter.RegisterPresenter;
+import com.mythmayor.basicproject.request.RegisterRequest;
+import com.mythmayor.basicproject.response.RegisterResponse;
 
 /**
  * Created by mythmayor on 2020/6/30.
- * 登录页面
+ * 注册页面
  */
-@Route(path = "/mainproject/LoginActivity")
-public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements LoginContract.View {
+@Route(path = "/mainproject/RegisterActivity")
+public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.View {
 
     private TextInputEditText etusername;
     private TextInputEditText etpassword;
-    private Button btnlogin;
     private Button btnregister;
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
@@ -49,25 +43,17 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
         etusername = (TextInputEditText) findViewById(R.id.et_username);
         etpassword = (TextInputEditText) findViewById(R.id.et_password);
-        btnlogin = (Button) findViewById(R.id.btn_login);
         btnregister = (Button) findViewById(R.id.btn_register);
-        getLifecycle().addObserver(new LifecycleEventObserver() {
-            @Override
-            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                LogUtil.d(event.name());
-            }
-        });
     }
 
     @Override
     protected void initEvent() {
-        btnlogin.setOnClickListener(this);
         btnregister.setOnClickListener(this);
     }
 
     @Override
     protected void initData(Intent intent) {
-        mPresenter = new LoginPresenter();
+        mPresenter = new RegisterPresenter();
         mPresenter.attachView(this);
     }
 
@@ -75,14 +61,12 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     public void onClick(View v) {
         super.onClick(v);
         //在Android依赖库中switch-case语句访问资源ID时会报错，这是因为Android library中生成的R.java中的资源ID不是常数
-        if (v.getId() == R.id.btn_login) {
-            login();
-        } else if (v.getId() == R.id.btn_register) {
+        if (v.getId() == R.id.btn_register) {
             register();
         }
     }
 
-    private void login() {
+    private void register() {
         String username = getUsername();
         String password = getPassword();
         LogUtil.i("username=" + username + ", password=" + password);
@@ -90,12 +74,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             ToastUtil.showToast(this, "请输入账号和密码");
             return;
         }
-        LoginRequest request = new LoginRequest(username, password);
-        mPresenter.login(request);
-    }
-
-    private void register() {
-        IntentUtil.startActivity(this, RegisterActivity.class);
+        RegisterRequest request = new RegisterRequest(username, password);
+        mPresenter.register(request);
     }
 
     //获取账号
@@ -110,7 +90,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void showLoading() {
-        ProgressDlgUtil.show(this, "正在登录，请稍后...");
+        ProgressDlgUtil.show(this, "正在注册，请稍后...");
     }
 
     @Override
@@ -125,20 +105,14 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void onSuccess(BaseResponse baseResp) {
-        LoginResponse resp = (LoginResponse) baseResp;
-        LogUtil.i("response=" + NetUtil.mGson.toJson(resp));
-        if (resp.getErrorCode() == 0) {//登录成功
-            ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
-            IntentUtil.startActivity(this, MainActivity.class);
+        RegisterResponse resp = (RegisterResponse) baseResp;
+        Log.i("❤驭霖·骏泊☆Myth.Mayor❤", "RegisterActivity - onSuccess: " + NetUtil.mGson.toJson(resp));
+        if (resp.getErrorCode() == 0) {//注册成功
+            ToastUtil.showToast(getApplicationContext(), "注册成功: " + resp.getData().getUsername());
             finish();
-        } else {//登录失败
+        } else {//注册失败
             ToastUtil.showToast(this, resp.getErrorMsg());
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override

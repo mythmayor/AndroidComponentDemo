@@ -20,16 +20,19 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
         <activity android:name=".ui.activity.LoginActivity">
-            <!--作为Library时注释掉，作为Application时打开注释-->
-            <!--<intent-filter>
+            <!-- 作为Library时注释掉，作为Application时打开注释 -->
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
 
-        <!--android7.0读取文件需要注册FileProvider-->
+        <!-- android7.0读取文件需要注册FileProvider -->
         <!--<provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.mythmayor.mainproject.fileprovider"
@@ -39,8 +42,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>-->
-
-        <!--支持超过16:9的纵横比设备-->
+        <!-- 支持超过16:9的纵横比设备 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />

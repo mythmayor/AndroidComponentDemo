@@ -1,9 +1,9 @@
-package com.mythmayor.basicproject.model;
+package com.mythmayor.mainproject.model;
 
-import com.mythmayor.basicproject.contract.LoginContract;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.net.RetrofitClient;
+import com.mythmayor.mainproject.contract.LoginContract;
 
 import io.reactivex.rxjava3.core.Observable;
 

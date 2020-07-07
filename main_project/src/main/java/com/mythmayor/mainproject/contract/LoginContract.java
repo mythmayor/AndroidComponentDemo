@@ -1,4 +1,4 @@
-package com.mythmayor.basicproject.contract;
+package com.mythmayor.mainproject.contract;
 
 import com.mythmayor.basicproject.base.BaseView;
 import com.mythmayor.basicproject.request.LoginRequest;
@@ -17,16 +17,7 @@ public interface LoginContract {
     }
 
     interface View extends BaseView {
-        @Override
-        void showLoading();
 
-        @Override
-        void hideLoading();
-
-        @Override
-        void onError(String errMessage);
-
-        void onSuccess(LoginResponse resp);
     }
 
     interface Presenter {

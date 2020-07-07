@@ -1,6 +1,7 @@
 package com.mythmayor.basicproject.utils.net;
 
 import com.mythmayor.basicproject.response.LoginResponse;
+import com.mythmayor.basicproject.response.RegisterResponse;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Field;
@@ -23,5 +24,16 @@ public interface APIService {
     @FormUrlEncoded
     @POST("user/login")
     Observable<LoginResponse> login(@Field("username") String username, @Field("password") String password);
+
+    /**
+     * 注册接口
+     *
+     * @param username 账号
+     * @param password 密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<RegisterResponse> register(@Field("username") String username, @Field("password") String password);
 
 }

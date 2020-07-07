@@ -1,14 +1,14 @@
-package com.mythmayor.basicproject.presenter;
+package com.mythmayor.mainproject.presenter;
 
 import com.mythmayor.basicproject.base.BasePresenter;
-import com.mythmayor.basicproject.contract.LoginContract;
 import com.mythmayor.basicproject.itype.NetCallback;
-import com.mythmayor.basicproject.model.LoginModel;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.net.NetUtil;
 import com.mythmayor.basicproject.utils.net.RxScheduler;
+import com.mythmayor.mainproject.contract.LoginContract;
+import com.mythmayor.mainproject.model.LoginModel;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
@@ -47,8 +47,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     }
 
                     @Override
-                    public void onNext(@NonNull LoginResponse bean) {
-                        mView.onSuccess(bean);
+                    public void onNext(@NonNull LoginResponse resp) {
+                        mView.onSuccess(resp);
                     }
 
                     @Override

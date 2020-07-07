@@ -1,5 +1,7 @@
 package com.mythmayor.basicproject.base;
 
+import com.mythmayor.basicproject.response.BaseResponse;
+
 import autodispose2.AutoDisposeConverter;
 
 /**
@@ -24,6 +26,13 @@ public interface BaseView {
      * @param errMessage
      */
     void onError(String errMessage);
+
+    /**
+     * 数据获取成功
+     *
+     * @param baseResp
+     */
+    void onSuccess(BaseResponse baseResp);
 
     /**
      * 绑定Android生命周期 防止RxJava内存泄漏
