@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "androidx.appcompat:appcompat:$rootProject.ext.supportLibraryVersion"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCoreVersion"
+
+    api "androidx.legacy:legacy-support-v4:$rootProject.ext.legacyVersion"
+    api "com.google.android.material:material:$rootProject.ext.materialVersion"
+    api "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"//glide
+    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"//gson
+    api "com.zhy:okhttputils:$rootProject.ext.okhttputilsVersion"//okhttputils
+    api "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"//eventbus
+    api "androidx.lifecycle:lifecycle-runtime:$rootProject.ext.lifecycleVersion"//lifecycle
+    //ARouter
+    api("com.alibaba:arouter-api:$rootProject.ext.arouterApi") {
+        exclude group: 'com.android.support'
+    }
+    //leakcanary: 使用debugImplementation,因为LeakCanary只应该在调试版本中使用。另外当前版本无需在Application中进行初始化。
+    debugApi "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
+    //okhttp3
+    api "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttpVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.loggingInterceptorVersion"
+    //retrofit2
+    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava3:$rootProject.ext.retrofitVersion"
+    //AutoDispose解决RxJava内存泄漏
+    api "com.uber.autodispose2:autodispose:$rootProject.ext.autodisposeVersion"
+    api "com.uber.autodispose2:autodispose-android:$rootProject.ext.autodisposeVersion"
+    api "com.uber.autodispose2:autodispose-lifecycle:$rootProject.ext.autodisposeVersion"
+    api "com.uber.autodispose2:autodispose-androidx-lifecycle:$rootProject.ext.autodisposeVersion"
+    //沉浸式状态栏
+    api "com.gyf.immersionbar:immersionbar:$rootProject.ext.immersionbarVersion"//基础依赖包，必须要依赖
+    api "com.gyf.immersionbar:immersionbar-components:$rootProject.ext.immersionbarVersion"
+    //fragment快速实现（可选）
+    api "com.gyf.immersionbar:immersionbar-ktx:$rootProject.ext.immersionbarVersion"//kotlin扩展（可选）
+}

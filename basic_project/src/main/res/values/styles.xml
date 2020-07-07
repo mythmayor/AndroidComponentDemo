@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Application theme. -->
+    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowAnimationStyle">@style/activity_exchange_animation</item>
+        <item name="colorControlActivated">@android:color/holo_blue_light</item>
+        <!--解决启动APP时白屏问题-->
+        <!--<item name="android:windowBackground">@null</item>-->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <!--页面切换动画-->
+    <style name="activity_exchange_animation">
+        <item name="android:activityOpenEnterAnimation">@anim/into_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_static</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_static</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_from_right</item>
+    </style>
+
+    <!--Splash Theme 启动全屏-->
+    <style name="SplashTheme" parent="MyAppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--BaseDialog样式-->
+    <style name="dialog_base" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--登录输入框浮动标签-->
+    <style name="login_hintAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_067AFF</item>
+    </style>
+</resources>

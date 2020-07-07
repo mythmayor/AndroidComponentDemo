@@ -1,0 +1,5 @@
+rootProject.name='AndroidComponentDemo'
+include ':app'
+include ':basic_library'
+include ':basic_project'
+include ':main_project'

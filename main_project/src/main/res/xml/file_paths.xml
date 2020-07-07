@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--指定共享目录-->
+    <paths>
+        <external-path
+            name="files"
+            path="" />
+    </paths>
+</resources>
