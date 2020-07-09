@@ -15,7 +15,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
-import com.mythmayor.basicproject.utils.net.NetUtil;
+import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.RegisterContract;
 import com.mythmayor.mainproject.presenter.RegisterPresenter;
@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     @Override
     public void onSuccess(BaseResponse baseResp) {
         RegisterResponse resp = (RegisterResponse) baseResp;
-        Log.i("❤驭霖·骏泊☆Myth.Mayor❤", "RegisterActivity - onSuccess: " + NetUtil.mGson.toJson(resp));
+        Log.i("❤驭霖·骏泊☆Myth.Mayor❤", "RegisterActivity - onSuccess: " + HttpUtil.mGson.toJson(resp));
         if (resp.getErrorCode() == 0) {//注册成功
             ToastUtil.showToast(getApplicationContext(), "注册成功: " + resp.getData().getUsername());
             finish();

@@ -1,4 +1,4 @@
-package com.mythmayor.basicproject.utils.net;
+package com.mythmayor.basicproject.utils.http;
 
 import org.reactivestreams.Publisher;
 

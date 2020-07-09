@@ -5,8 +5,8 @@ import com.mythmayor.basicproject.itype.NetCallback;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.LogUtil;
-import com.mythmayor.basicproject.utils.net.NetUtil;
-import com.mythmayor.basicproject.utils.net.RxScheduler;
+import com.mythmayor.basicproject.utils.http.HttpUtil;
+import com.mythmayor.basicproject.utils.http.RxScheduler;
 import com.mythmayor.mainproject.contract.LoginContract;
 import com.mythmayor.mainproject.model.LoginModel;
 
@@ -62,16 +62,59 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         mView.hideLoading();
                     }
                 });
+        mModel.login2(request)
+                .compose(RxScheduler.Obs_io_main())
+                .to(mView.bindAutoDispose())//解决内存泄漏
+                .subscribe(new Observer<LoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull LoginResponse resp) {
+                        LogUtil.d("login2 - " + HttpUtil.mGson.toJson(resp));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.d("login2 - " + e.getCause().getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+        mModel.login3(request)
+                .compose(RxScheduler.Obs_io_main())
+                .to(mView.bindAutoDispose())//解决内存泄漏
+                .subscribe(new Observer<LoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull LoginResponse resp) {
+                        LogUtil.d("login3 - " + HttpUtil.mGson.toJson(resp));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.d("login3 - " + e.getCause().getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     private void useOkHttpUtils(LoginRequest request) {
         mView.showLoading();
-        NetUtil.login2(request, new NetCallback() {
+        HttpUtil.login(request, new NetCallback() {
             @Override
             public void onSuccess(String response, int id) {
                 mView.hideLoading();
-                LogUtil.i(response);
-                LoginResponse resp = NetUtil.mGson.fromJson(response, LoginResponse.class);
+                LoginResponse resp = HttpUtil.mGson.fromJson(response, LoginResponse.class);
                 mView.onSuccess(resp);
             }
 

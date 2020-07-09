@@ -1,4 +1,4 @@
-package com.mythmayor.basicproject.utils.net;
+package com.mythmayor.basicproject.utils.http;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -23,15 +23,15 @@ import okhttp3.Request;
  * Created by mythmayor on 2020/6/30.
  * 接口请求辅助工具类
  */
-public class NetTool {
+public class HttpTool {
 
-    private static NetTool ourInstance = new NetTool();
+    private static HttpTool ourInstance = new HttpTool();
 
-    public static NetTool getInstance() {
+    public static HttpTool getInstance() {
         return ourInstance;
     }
 
-    private NetTool() {
+    private HttpTool() {
     }
 
     /**

@@ -2,6 +2,8 @@ package com.mythmayor.basicproject.utils;
 
 import android.util.Log;
 
+import com.mythmayor.basicproject.BuildConfig;
+
 import java.util.Locale;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Locale;
  */
 public class LogUtil {
 
-    private static boolean LOGALL = true;
+    private static boolean LOGALL = BuildConfig.LOG_DEBUG;
     private static boolean LOGV = LOGALL;
     private static boolean LOGD = LOGALL;
     private static boolean LOGI = LOGALL;

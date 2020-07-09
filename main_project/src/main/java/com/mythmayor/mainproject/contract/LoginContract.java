@@ -14,6 +14,10 @@ public interface LoginContract {
 
     interface Model {
         Observable<LoginResponse> login(LoginRequest request);
+
+        Observable<LoginResponse> login2(LoginRequest request);
+
+        Observable<LoginResponse> login3(LoginRequest request);
     }
 
     interface View extends BaseView {

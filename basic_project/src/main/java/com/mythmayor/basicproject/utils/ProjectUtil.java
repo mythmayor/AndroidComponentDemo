@@ -354,6 +354,7 @@ public class ProjectUtil {
 
     /**
      * 获取设备IMEI
+     *
      * @param context Context
      * @return IMEI
      */
@@ -843,5 +844,13 @@ public class ProjectUtil {
         } finally {
             mmr.release();
         }
+    }
+
+    public static int getAESKeyPart1(int x, int y) {
+        for (int i = 1; i <= x * y; i++) {
+            if (i % x == 0 && i % y == 0)
+                return i;
+        }
+        return x * y;
     }
 }

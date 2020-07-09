@@ -1,4 +1,4 @@
-package com.mythmayor.basicproject.utils.net;
+package com.mythmayor.basicproject.utils.http;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static volatile RetrofitClient instance;
-    private APIService apiService;
+    private HttpService httpService;
     private Retrofit retrofit;
     private OkHttpClient okHttpClient;
 
@@ -92,7 +92,7 @@ public class RetrofitClient {
         return okHttpClient;
     }
 
-    public APIService getApi() {
+    public HttpService getHttpService() {
         //初始化一个client,不然retrofit会自己默认添加一个
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
@@ -106,9 +106,9 @@ public class RetrofitClient {
                     .build();
         }
         //创建—— 网络请求接口—— 实例
-        if (apiService == null) {
-            apiService = retrofit.create(APIService.class);
+        if (httpService == null) {
+            httpService = retrofit.create(HttpService.class);
         }
-        return apiService;
+        return httpService;
     }
 }

@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
+import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.mainproject.contract.LoginContract;
 import com.mythmayor.mainproject.presenter.LoginPresenter;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
@@ -24,7 +25,7 @@ import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
-import com.mythmayor.basicproject.utils.net.NetUtil;
+import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
 
 /**
@@ -69,6 +70,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     protected void initData(Intent intent) {
         mPresenter = new LoginPresenter();
         mPresenter.attachView(this);
+        LoginRequest accountInfo = UserInfoManager.getAccountInfo(this);
+        if (accountInfo != null) {
+            etusername.setText(accountInfo.getUsername());
+            etpassword.setText(accountInfo.getPassword());
+        }
     }
 
     @Override
@@ -126,8 +132,9 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void onSuccess(BaseResponse baseResp) {
         LoginResponse resp = (LoginResponse) baseResp;
-        LogUtil.i("response=" + NetUtil.mGson.toJson(resp));
+        LogUtil.i("response=" + HttpUtil.mGson.toJson(resp));
         if (resp.getErrorCode() == 0) {//登录成功
+            UserInfoManager.saveAccountInfo(this, new LoginRequest(getUsername(), getPassword()));
             ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
             IntentUtil.startActivity(this, MainActivity.class);
             finish();

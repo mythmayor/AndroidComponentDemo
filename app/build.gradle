@@ -27,17 +27,27 @@ android {
             keyAlias 'test'
             keyPassword '123456'
         }
-        /*debugConfig {
+        debugConfig {
             storeFile file('../test.jks')
             storePassword '123456'
             keyAlias 'test'
             keyPassword '123456'
-        }*/
+        }
     }
 
     buildTypes {
         release {
+            //开启混淆，删除无用代码
+            minifyEnabled true
+            //开启删除无用资源
+            shrinkResources true
+            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig
             minifyEnabled false
+            signingConfig signingConfigs.debugConfig
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

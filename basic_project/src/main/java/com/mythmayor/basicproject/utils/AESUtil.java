@@ -68,7 +68,7 @@ public class AESUtil {
             return toHex(result);
         } catch (Exception e) {
             e.printStackTrace();
-            return "加密失败";
+            return "";//加密失败
         }
     }
 
@@ -88,7 +88,7 @@ public class AESUtil {
             return toHex(result);
         } catch (Exception e) {
             e.printStackTrace();
-            return "加密失败";
+            return "";//加密失败
         }
     }
 
@@ -109,7 +109,7 @@ public class AESUtil {
             return new String(result, "utf-8");
         } catch (Exception e) {
             e.printStackTrace();
-            return "解密失败";
+            return "";//解密失败
         }
     }
 

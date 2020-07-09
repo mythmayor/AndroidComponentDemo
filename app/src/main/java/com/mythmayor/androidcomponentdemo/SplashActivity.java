@@ -64,7 +64,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enterMyApp() {
-        boolean isUserLogin = PrefUtil.getBoolean(mContext, PrefUtil.IS_USER_LOGIN, false);
+        boolean isUserLogin = PrefUtil.getBoolean(mContext, PrefUtil.SP_IS_USER_LOGIN, false);
         if (isUserLogin) {
             if (isAppWentToBg) {
                 //IntentUtil.startActivity(this, MainActivity.class);

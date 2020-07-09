@@ -11,7 +11,8 @@ import android.content.SharedPreferences;
 public class PrefUtil {
 
     private static final String SHARE_PREFS_NAME = "mythmayor";
-    public static final String IS_USER_LOGIN = "IS_USER_LOGIN";//登录状态
+    public static final String SP_IS_USER_LOGIN = "IS_USER_LOGIN";//登录状态
+    public static final String SP_ACCOUNT = "SP_ACCOUNT";//登录账号信息
     public static final String SP_LOGIN_INFO = "SP_LOGIN_INFO";//登录信息
 
     public static void putBoolean(Context ctx, String key, boolean value) {

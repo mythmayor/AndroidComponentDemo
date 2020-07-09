@@ -8,22 +8,30 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.ImmersionBar;
-import com.mythmayor.basicproject.base.BaseActivity;
 import com.mythmayor.basicproject.base.BaseDialog;
+import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
+import com.mythmayor.basicproject.request.LoginRequest;
+import com.mythmayor.basicproject.request.UserInfoRequest;
+import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.ui.dialog.LogoutDialog;
 import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
+import com.mythmayor.basicproject.utils.UserInfoManager;
+import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
+import com.mythmayor.mainproject.contract.MainContract;
+import com.mythmayor.mainproject.presenter.MainPresenter;
 
 /**
  * Created by mythmayor on 2020/6/30.
  * 主页面
  */
 @Route(path = "/mainproject/MainActivity")
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View {
 
     private TextView tvlogout;
     private final long EXIT_APP_BACK_PRESSED_INTERVAL = 1500;
@@ -48,7 +56,14 @@ public class MainActivity extends BaseActivity  {
 
     @Override
     protected void initData(Intent intent) {
-        PrefUtil.putBoolean(this, PrefUtil.IS_USER_LOGIN, true);
+        PrefUtil.putBoolean(this, PrefUtil.SP_IS_USER_LOGIN, true);
+        mPresenter = new MainPresenter();
+        mPresenter.attachView(this);
+        LoginRequest accountInfo = UserInfoManager.getAccountInfo(this);
+        if (accountInfo != null) {
+            UserInfoRequest request = new UserInfoRequest(accountInfo.getUsername(), accountInfo.getPassword());
+            mPresenter.getUserInfo(request);
+        }
     }
 
     @Override
@@ -72,12 +87,34 @@ public class MainActivity extends BaseActivity  {
             @Override
             public void onYesClick(Object o) {
                 dialog.dismiss();
+                String accountInfo = PrefUtil.getString(MainActivity.this, PrefUtil.SP_ACCOUNT, "");
                 PrefUtil.clear(MainActivity.this);
+                PrefUtil.putString(MainActivity.this, PrefUtil.SP_ACCOUNT, accountInfo);
                 IntentUtil.startActivityClearTask(MainActivity.this, LoginActivity.class);
             }
         });
         dialog.show();
         //ProjectUtil.setDialogWindowAttr(dialog);
+    }
+
+    @Override
+    public void showLoading() {
+        ToastUtil.showToast(this, "正在获取用户信息...");
+    }
+
+    @Override
+    public void hideLoading() {
+    }
+
+    @Override
+    public void onError(String errMessage) {
+        ToastUtil.showToast(this, "获取用户信息失败，原因：" + errMessage);
+    }
+
+    @Override
+    public void onSuccess(BaseResponse baseResp) {
+        UserInfoResponse resp = (UserInfoResponse) baseResp;
+        ToastUtil.showToast(this, "获取用户信息成功！" + HttpUtil.mGson.toJson(resp));
     }
 
     @Override
