@@ -19,6 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
+        <!-- 支持超过16:9的纵横比设备 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <activity android:name=".ui.activity.LoginActivity">
             <!-- 作为Library时注释掉，作为Application时打开注释 -->
             <!--
@@ -31,6 +36,7 @@
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
 
         <!-- android7.0读取文件需要注册FileProvider -->
         <!--<provider
@@ -42,10 +48,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>-->
-        <!-- 支持超过16:9的纵横比设备 -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.1" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * Created by mythmayor on 2020/7/7.
+ * 注册Presenter
  */
 public class RegisterPresenter extends BasePresenter<RegisterContract.View> implements RegisterContract.Presenter {
 

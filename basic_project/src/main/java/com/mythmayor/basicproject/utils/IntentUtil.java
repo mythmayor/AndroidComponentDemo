@@ -47,7 +47,7 @@ public class IntentUtil {
         context.startActivity(intent);
     }
 
-    public static void startHtml5Activity(Context context, String title, String url, Class<?> cls) {
+    public static void startWebViewActivity(Context context, String title, String url, Class<?> cls) {
         Intent intent = new Intent();
         intent.setClass(context, cls);
         intent.putExtra(MyConstant.INTENT_EXTRA_TITLE, title);

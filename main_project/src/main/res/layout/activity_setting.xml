@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_D8D8D8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_white"
+            android:orientation="vertical">
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_clearcache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_text="清理缓存" />
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_marginLeft="20dp" />
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_checkupdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_text="检查新版本" />
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_marginLeft="20dp" />
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_userprivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_text="用户隐私协议" />
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_marginLeft="20dp" />
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_aboutus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_text="关于我们" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@color/color_white"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="退出登录"
+            android:textColor="@color/color_red" />
+    </LinearLayout>
+</LinearLayout>

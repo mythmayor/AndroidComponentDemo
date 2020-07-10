@@ -17,6 +17,7 @@ import okhttp3.Call;
 
 /**
  * Created by mythmayor on 2020/6/30.
+ * 登录Presenter
  */
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 

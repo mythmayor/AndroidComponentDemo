@@ -21,6 +21,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
+        <!--支持超过16:9的纵横比设备-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -51,11 +56,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <!--支持超过16:9的纵横比设备-->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.1" />
     </application>
 
 </manifest>

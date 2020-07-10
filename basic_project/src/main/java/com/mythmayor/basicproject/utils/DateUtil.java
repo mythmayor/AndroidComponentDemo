@@ -128,7 +128,7 @@ public class DateUtil {
     /**
      * 根据日期查询星期几
      *
-     * @param date 需要查询的日期，格式为2019-08-28
+     * @param date 需要查询的日期，格式为2020-06-30
      * @return
      */
     public static String getWeekFromDate(String date) {

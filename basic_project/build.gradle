@@ -16,13 +16,13 @@ android {
 
     buildTypes {
         release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"//显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"//显示Log
             buildConfigField "String", "AES_KEY_PART2", "\"3456\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            buildConfigField "boolean", "LOG_DEBUG", "false"//不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"//不显示Log
             buildConfigField "String", "AES_KEY_PART2", "\"3456\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

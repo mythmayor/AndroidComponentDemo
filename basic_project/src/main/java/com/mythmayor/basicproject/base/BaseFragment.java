@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+
+import com.gyf.immersionbar.components.SimpleImmersionFragment;
 
 /**
  * Created by mythmayor on 2020/6/30.
  * Fragment基类，实现了懒加载
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends SimpleImmersionFragment implements View.OnClickListener {
 
     //用于标记视图是否初始化
     protected boolean isVisible;
@@ -103,4 +104,8 @@ public abstract class BaseFragment extends Fragment {
      * 初始化数据
      */
     protected abstract void initData();
+
+    @Override
+    public void onClick(View v) {
+    }
 }

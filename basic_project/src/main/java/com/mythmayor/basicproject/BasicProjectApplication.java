@@ -6,7 +6,6 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.mythmayor.basicproject.base.BaseActivity;
-import com.mythmayor.basicproject.utils.CrashHandler;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -54,7 +53,7 @@ public class BasicProjectApplication {
     public void init(Application application) {
         initData(application);
         initNetwork();
-        CrashHandler.getInstance().init(application);
+        //CrashHandler.getInstance().init(application);
     }
 
     private void initData(Application application) {

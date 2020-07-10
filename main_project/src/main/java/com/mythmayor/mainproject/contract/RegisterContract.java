@@ -12,7 +12,6 @@ import io.reactivex.rxjava3.core.Observable;
 public interface RegisterContract {
     interface Model {
         Observable<RegisterResponse> register(RegisterRequest request);
-
     }
 
     interface View extends BaseView {

@@ -42,12 +42,11 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initData(Intent intent) {
-        final Lifecycle lifecycle = getLifecycle();
         mHandler = new LifecycleHandler(new LifecycleOwner() {
             @NonNull
             @Override
             public Lifecycle getLifecycle() {
-                return lifecycle;
+                return SplashActivity.this.getLifecycle();
             }
         });
     }

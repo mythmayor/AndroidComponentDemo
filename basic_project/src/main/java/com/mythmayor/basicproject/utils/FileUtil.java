@@ -1,6 +1,15 @@
 package com.mythmayor.basicproject.utils;
 
+import android.content.Context;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 
 /**
@@ -68,5 +77,65 @@ public class FileUtil {
             file.delete();
         } else {
         }
+    }
+
+    /**
+     * 文件存储，文件会存放在/data/data/<package-name>/files/目录下
+     *
+     * @param context  上下文
+     * @param fileName 文件名，不包含路径
+     * @param fileMode 文件的操作模式，主要分为两种：Context.MODE_PRIVATE 覆盖、Context.MODE_APPEND 追加
+     * @param content  存放的内容
+     */
+    public static void fileWrite(Context context, String fileName, int fileMode, String content) {
+        FileOutputStream out = null;
+        BufferedWriter writer = null;
+        try {
+            out = context.openFileOutput(fileName, fileMode);
+            writer = new BufferedWriter(new OutputStreamWriter(out));
+            writer.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 文件读取，会读取存放在/data/data/<package-name>/files/目录下的文件
+     *
+     * @param context  上下文
+     * @param fileName 文件名，不包含路径
+     * @return
+     */
+    public static String fileRead(Context context, String fileName) {
+        FileInputStream in = null;
+        BufferedReader reader = null;
+        StringBuilder content = new StringBuilder();
+        try {
+            in = context.openFileInput(fileName);
+            reader = new BufferedReader(new InputStreamReader(in));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                content.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return content.toString();
     }
 }

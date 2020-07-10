@@ -14,9 +14,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
-import com.mythmayor.basicproject.utils.UserInfoManager;
-import com.mythmayor.mainproject.contract.LoginContract;
-import com.mythmayor.mainproject.presenter.LoginPresenter;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -25,8 +22,11 @@ import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
+import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
+import com.mythmayor.mainproject.contract.LoginContract;
+import com.mythmayor.mainproject.presenter.LoginPresenter;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -134,7 +134,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         LoginResponse resp = (LoginResponse) baseResp;
         LogUtil.i("response=" + HttpUtil.mGson.toJson(resp));
         if (resp.getErrorCode() == 0) {//登录成功
-            UserInfoManager.saveAccountInfo(this, new LoginRequest(getUsername(), getPassword()));
+            UserInfoManager.setAccountInfo(this, new LoginRequest(getUsername(), getPassword()));
+            UserInfoManager.setLoginInfo(this, HttpUtil.mGson.toJson(resp));
             ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
             IntentUtil.startActivity(this, MainActivity.class);
             finish();

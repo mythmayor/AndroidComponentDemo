@@ -22,6 +22,24 @@
 
 #############################################
 #
+# 代码混淆规则
+#
+# 使用了自定义控件那么要保证它们不参与混淆
+# 使用了枚举要保证枚举不被混淆
+# 对第三方库中的类不进行混淆
+# 运用了反射的类也不进行混淆
+# 使用了 Gson 之类的工具要使 JavaBean 类即实体类不被混淆
+# 在引用第三方库的时候，一般会标明库的混淆规则的，建议在使用的时候就把混淆规则添加上去，免得到最后才去找
+# 有用到 WebView 的 JS 调用也需要保证写的接口方法不混淆，原因和第一条一样
+# Parcelable 的子类和 Creator 静态成员变量不混淆，否则会产生 Android.os.BadParcelableException 异常
+# 使用的四大组件，自定义的Application* 实体类
+# JNI中调用的类
+# Layout布局使用的View构造函数（自定义控件）、android:onClick等。
+#############################################
+
+
+#############################################
+#
 # 通用混淆配置（APP通用）
 #
 #############################################
@@ -162,6 +180,11 @@
     public void *(android.webkit.webView, jav.lang.String);
 }
 
+# 使用了 Gson 之类的工具要使 JavaBean 类即实体类不被混淆
+-keep public class com.mythmayor.basicproject.bean.**{*;}
+-keep public class com.mythmayor.basicproject.request.**{*;}
+-keep public class com.mythmayor.basicproject.response.**{*;}
+
 #############################################
 #
 # 第三方依赖库的混淆
@@ -181,7 +204,7 @@
   *** rewind();
 }
 # for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+# -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
 # okhttputils
 #okhttputils

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="left">
+    <shape>
+        <corners android:radius="2dp" />
+        <solid android:color="@color/color_0067FF" />
+    </shape>
+</clip>

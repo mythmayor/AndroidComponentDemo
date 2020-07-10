@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * Created by mythmayor on 2020/7/8.
+ * 首页Presenter
  */
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
 

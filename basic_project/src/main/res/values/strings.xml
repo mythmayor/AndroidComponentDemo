@@ -1,3 +1,14 @@
 <resources>
     <string name="AES_KEY_PART3">7890</string>
+    <string name="dialog_text">提示</string>
+    <string name="dialog_download01">版本更新</string>
+    <string name="dialog_download02">取消下载</string>
+    <string name="select_email_client">请选择邮件客户端</string>
+    <string name="updateutil01">下载已取消</string>
+    <string name="updateutil02">发现新版本</string>
+    <string name="updateutil03">一键升级</string>
+    <string name="updateutil04">取消</string>
+    <string name="updateutil05">确定</string>
+    <string name="updateutil06">当前无WIFI连接，更新将消耗手机流量，是否继续？</string>
+
 </resources>

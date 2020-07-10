@@ -58,7 +58,7 @@ public class LogToFileUtil {
     private static String getFilePath(Context context) {
         String path = "";
         if (Environment.MEDIA_MOUNTED.equals(Environment.MEDIA_MOUNTED) || !Environment.isExternalStorageRemovable()) {//如果外部储存可用
-            path = context.getExternalFilesDir(null).getPath();//获得外部存储路径,默认路径为 /storage/emulated/0/Android/data/com.waka.workspace.logtofile/files/Logs/log_2016-03-14_16-15-09.log
+            path = context.getExternalFilesDir(null).getPath();//获得外部存储路径,默认路径为 /storage/emulated/0/Android/data/<package-name>/files/Logs/xxx.log
             //path = Environment.getExternalStorageDirectory() + File.separator + Constant.CACHE_PATH;
         } else {
             path = context.getFilesDir().getPath();//直接存在/data/data里，非root手机是看不到的

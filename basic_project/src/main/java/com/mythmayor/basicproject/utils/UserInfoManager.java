@@ -2,7 +2,6 @@ package com.mythmayor.basicproject.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.request.LoginRequest;
@@ -14,7 +13,8 @@ import com.mythmayor.basicproject.utils.http.HttpUtil;
  */
 public class UserInfoManager {
 
-    public static void saveAccountInfo(Context context, LoginRequest account) {
+    //存储账号信息
+    public static void setAccountInfo(Context context, LoginRequest account) {
         if (account == null || TextUtils.isEmpty(account.getUsername()) || TextUtils.isEmpty(account.getPassword())) {
             return;
         }
@@ -25,6 +25,7 @@ public class UserInfoManager {
         }
     }
 
+    //获取账号信息
     public static LoginRequest getAccountInfo(Context context) {
         try {
             String accountInfo = PrefUtil.getString(context, PrefUtil.SP_ACCOUNT, "");
@@ -40,15 +41,21 @@ public class UserInfoManager {
         return null;
     }
 
-    /**
-     * 获取登录信息
-     */
+    //存储登录信息
+    public static void setLoginInfo(Context context, String loginInfo) {
+        PrefUtil.putString(context, PrefUtil.SP_LOGIN_INFO, loginInfo);
+    }
+
+    //获取登录信息
     public static LoginResponse.DataBean getLoginInfo(Context context) {
-        LoginResponse bean = HttpUtil.mGson.fromJson(PrefUtil.getString(context, PrefUtil.SP_LOGIN_INFO, ""), LoginResponse.class);
-        if (null != bean) {
-            return bean.getData();
-        } else {
-            return null;
+        try {
+            LoginResponse bean = HttpUtil.mGson.fromJson(PrefUtil.getString(context, PrefUtil.SP_LOGIN_INFO, ""), LoginResponse.class);
+            if (null != bean) {
+                return bean.getData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
 }

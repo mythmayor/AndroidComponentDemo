@@ -1,0 +1,134 @@
+package com.mythmayor.mainproject.ui.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.base.BaseMvpFragment;
+import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.response.LoginResponse;
+import com.mythmayor.basicproject.ui.view.NavigationItemView;
+import com.mythmayor.basicproject.utils.IntentUtil;
+import com.mythmayor.basicproject.utils.MyToastUtil;
+import com.mythmayor.basicproject.utils.UserInfoManager;
+import com.mythmayor.mainproject.R;
+import com.mythmayor.mainproject.contract.DFragmentContract;
+import com.mythmayor.mainproject.presenter.DFragmentPresenter;
+import com.mythmayor.mainproject.ui.activity.SettingActivity;
+
+/**
+ * Created by mythmayor on 2020/7/9.
+ */
+public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DFragmentContract.View {
+
+    //标记Fragment是否初始化完成
+    private boolean isPrepared;
+    private View view;
+
+    private ImageView ivavatar;
+    private TextView tvname;
+    private LinearLayout llpersonalinfo;
+    private NavigationItemView nivmessage;
+    private NavigationItemView nivfeedback;
+    private NavigationItemView nivmodifypwd;
+    private NavigationItemView nivsetting;
+
+    @Override
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        isPrepared = true;
+        if (view == null) {
+            view = super.onCreateView(inflater, container, savedInstanceState);
+        }
+        return view;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_d;
+    }
+
+    @Override
+    protected void initView(View view) {
+        ivavatar = (ImageView) view.findViewById(R.id.iv_avatar);
+        tvname = (TextView) view.findViewById(R.id.tv_name);
+        llpersonalinfo = (LinearLayout) view.findViewById(R.id.ll_personalinfo);
+        nivmessage = (NavigationItemView) view.findViewById(R.id.niv_message);
+        nivfeedback = (NavigationItemView) view.findViewById(R.id.niv_feedback);
+        nivmodifypwd = (NavigationItemView) view.findViewById(R.id.niv_modifypwd);
+        nivsetting = (NavigationItemView) view.findViewById(R.id.niv_setting);
+    }
+
+    @Override
+    protected void initEvent() {
+        llpersonalinfo.setOnClickListener(this);
+        nivmessage.setOnClickListener(this);
+        nivfeedback.setOnClickListener(this);
+        nivmodifypwd.setOnClickListener(this);
+        nivsetting.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter = new DFragmentPresenter();
+        mPresenter.attachView(this);
+        LoginResponse.DataBean loginInfo = UserInfoManager.getLoginInfo(getActivity());
+        if (loginInfo != null) {
+            tvname.setText(loginInfo.getUsername());
+        } else {
+            tvname.setText("--");
+        }
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void hideLoading() {
+    }
+
+    @Override
+    public void onError(String errMessage) {
+    }
+
+    @Override
+    public void onSuccess(BaseResponse baseResp) {
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        if (v == llpersonalinfo) {
+            MyToastUtil.showToast(getActivity(), "个人信息");
+        } else if (v == nivmessage) {
+            MyToastUtil.showToast(getActivity(), "消息通知");
+        } else if (v == nivfeedback) {
+            MyToastUtil.showToast(getActivity(), "意见反馈");
+        } else if (v == nivmodifypwd) {
+            MyToastUtil.showToast(getActivity(), "修改密码");
+        } else if (v == nivsetting) {
+            IntentUtil.startActivity(getActivity(), SettingActivity.class);
+        }
+    }
+}

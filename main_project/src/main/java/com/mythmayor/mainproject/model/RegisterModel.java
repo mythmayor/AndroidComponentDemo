@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Created by mythmayor on 2020/7/7.
+ * 注册Model
  */
 public class RegisterModel implements RegisterContract.Model {
     @Override
