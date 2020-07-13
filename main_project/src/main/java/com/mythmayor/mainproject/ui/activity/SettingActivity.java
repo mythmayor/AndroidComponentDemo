@@ -8,13 +8,19 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.base.BaseDialog;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.ui.activity.WebViewActivity;
 import com.mythmayor.basicproject.ui.dialog.LogoutDialog;
 import com.mythmayor.basicproject.ui.view.NavigationItemView;
 import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
+import com.mythmayor.basicproject.utils.ToastUtil;
+import com.mythmayor.basicproject.utils.UpdateUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.SettingContract;
 import com.mythmayor.mainproject.presenter.SettingPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mythmayor on 2020/7/10.
@@ -36,6 +42,8 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
 
     @Override
     public void initSubView(View view) {
+        mPresenter = new SettingPresenter();
+        mPresenter.attachView(this);
         nivclearcache = (NavigationItemView) findViewById(R.id.niv_clearcache);
         nivcheckupdate = (NavigationItemView) findViewById(R.id.niv_checkupdate);
         nivuserprivacy = (NavigationItemView) findViewById(R.id.niv_userprivacy);
@@ -45,13 +53,16 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
 
     @Override
     public void initSubEvent() {
+        nivclearcache.setOnClickListener(this);
+        nivcheckupdate.setOnClickListener(this);
+        nivuserprivacy.setOnClickListener(this);
+        nivaboutus.setOnClickListener(this);
         tvlogout.setOnClickListener(this);
     }
 
     @Override
     public void initSubData(Intent intent) {
-        mPresenter = new SettingPresenter();
-        mPresenter.attachView(this);
+
     }
 
     @Override
@@ -64,7 +75,21 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
     public void onClick(View v) {
         super.onClick(v);
         //在Android依赖库中switch-case语句访问资源ID时会报错，这是因为Android library中生成的R.java中的资源ID不是常数
-        if (v == tvlogout) {
+        if (v == nivclearcache) {
+            nivclearcache.setContent("0M");
+            ToastUtil.showToast(this, "清理缓存成功");
+        } else if (v == nivcheckupdate) {
+            List<String> updateContent = new ArrayList<>();
+            updateContent.add("1.修复已知Bug。");
+            updateContent.add("2.优化用户体验。");
+            String url = "https://shouji.sogou.com/apkdl/?gr=opact&tp=pcyunying&id=0";
+            UpdateUtil updateUtil = new UpdateUtil(this, "1.0.0", false, updateContent, url);
+            updateUtil.alertUpdateAppDialog();
+        } else if (v == nivuserprivacy) {
+            IntentUtil.startWebViewActivity(this, "用户隐私协议", "https://www.baidu.com/", WebViewActivity.class);
+        } else if (v == nivaboutus) {
+            IntentUtil.startActivity(this, AboutUsActivity.class);
+        } else if (v == tvlogout) {
             showLogoutDialog();
         }
     }

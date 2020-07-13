@@ -16,7 +16,7 @@ public interface MyConstant {
     String INTENT_EXTRA_TITLE = "INTENT_EXTRA_TITLE";
     String INTENT_EXTRA_URL = "INTENT_EXTRA_URL";
 
-    String APK_NAME = "MyApp.apk";
+    String APK_NAME = "MyApp_prod";
 
     //网络请求
     String URL_BASE = "https://www.wanandroid.com";

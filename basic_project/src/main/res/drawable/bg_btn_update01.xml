@@ -2,13 +2,13 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <!-- 实心    -->
-    <solid android:color="@color/color_FF7A37" />
+    <solid android:color="@color/color_0067FF" />
 
     <!-- 描边 -->     
     <stroke
         android:width="0dp"
-        android:color="@color/color_transparent" />
+        android:color="@color/color_0067FF" />
            
     <!-- 圆角 -->  
-    <corners android:bottomRightRadius="5dp" />
+    <corners android:radius="5dp" /> 
 </shape>

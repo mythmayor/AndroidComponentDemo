@@ -571,7 +571,7 @@ public class ProjectUtil {
             install.addCategory(Intent.CATEGORY_DEFAULT);
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri apkUri = FileProvider.getUriForFile(context, "com.zkpsych.sifaassistant.fileprovider", file);//在AndroidManifest中的android:authorities值
+                Uri apkUri = FileProvider.getUriForFile(context, "com.mythmayor.androidcomponentdemo.fileprovider", file);//在AndroidManifest中的android:authorities值
                 install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
                 install.setDataAndType(apkUri, "application/vnd.android.package-archive");
             } else {

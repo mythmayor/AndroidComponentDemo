@@ -2,9 +2,13 @@
 <resources>
 
     <declare-styleable name="NavigationItemView">
-        <attr name="niv_icon" format="reference" />
-        <attr name="niv_text" format="string" />
-        <attr name="niv_arrowImage" format="reference" />
+        <attr name="niv_icon" format="reference|color" />
+        <attr name="niv_title" format="string" />
+        <attr name="niv_content" format="string" />
+        <attr name="niv_drawableLeft" format="reference|color" />
+        <attr name="niv_drawableRight" format="reference|color" />
+        <attr name="niv_drawablePadding" format="dimension" />
+        <attr name="niv_arrowImage" format="reference|color" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">

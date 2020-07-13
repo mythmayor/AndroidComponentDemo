@@ -40,6 +40,8 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     protected void initView() {
+        mPresenter = new RegisterPresenter();
+        mPresenter.attachView(this);
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
         etusername = (TextInputEditText) findViewById(R.id.et_username);
         etpassword = (TextInputEditText) findViewById(R.id.et_password);
@@ -53,8 +55,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     protected void initData(Intent intent) {
-        mPresenter = new RegisterPresenter();
-        mPresenter.attachView(this);
+
     }
 
     @Override
@@ -106,7 +107,6 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     @Override
     public void onSuccess(BaseResponse baseResp) {
         RegisterResponse resp = (RegisterResponse) baseResp;
-        Log.i("❤驭霖·骏泊☆Myth.Mayor❤", "RegisterActivity - onSuccess: " + HttpUtil.mGson.toJson(resp));
         if (resp.getErrorCode() == 0) {//注册成功
             ToastUtil.showToast(getApplicationContext(), "注册成功: " + resp.getData().getUsername());
             finish();

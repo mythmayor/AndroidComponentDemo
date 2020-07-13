@@ -23,13 +23,11 @@ import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
-import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.ui.view.NoScrollViewPager;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
-import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.MainContract;
 import com.mythmayor.mainproject.presenter.MainPresenter;
@@ -61,7 +59,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     private final long EXIT_APP_BACK_PRESSED_INTERVAL = 1500;
     private long mCurrBackPressTimeMillis;
     private long mPrevBackPressTimeMillis;
-    private static final int WHAT_MESSAGE_GETUSERINFO = 1;
+    private static final int WHAT_EVENT = 1;
 
     @SuppressLint("HandlerLeak")
     private LifecycleHandler mHandler = new LifecycleHandler(new LifecycleOwner() {
@@ -74,8 +72,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
-                case WHAT_MESSAGE_GETUSERINFO:
-                    getUserInfo();
+                case WHAT_EVENT:
                     break;
                 default:
                     break;
@@ -90,6 +87,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     protected void initView() {
+        mPresenter = new MainPresenter();
+        mPresenter.attachView(this);
         ImmersionBar.with(this).statusBarDarkFont(true).statusBarColor(R.color.color_white).fitsSystemWindows(true).init();
         mViewPager = (NoScrollViewPager) findViewById(R.id.viewpager_main);
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -120,9 +119,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     protected void initData(Intent intent) {
         PrefUtil.putBoolean(this, PrefUtil.SP_IS_USER_LOGIN, true);
-        mPresenter = new MainPresenter();
-        mPresenter.attachView(this);
-        mHandler.sendEmptyMessageDelayed(WHAT_MESSAGE_GETUSERINFO, 3000);
         initViewPager();
     }
 
@@ -155,7 +151,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     public void showLoading() {
-        ToastUtil.showToast(this, "正在获取用户信息...");
     }
 
     @Override
@@ -164,13 +159,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     public void onError(String errMessage) {
-        ToastUtil.showToast(this, "获取用户信息失败，原因：" + errMessage);
     }
 
     @Override
     public void onSuccess(BaseResponse baseResp) {
-        UserInfoResponse resp = (UserInfoResponse) baseResp;
-        ToastUtil.showToast(this, "获取用户信息成功！" + HttpUtil.mGson.toJson(resp));
     }
 
     @Override

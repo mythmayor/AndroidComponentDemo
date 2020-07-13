@@ -65,8 +65,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="消息通知" />
+                app:niv_title="消息通知" />
 
             <View
                 style="@style/line_horizontal"
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="意见反馈" />
+                app:niv_title="意见反馈" />
 
             <View
                 style="@style/line_horizontal"
@@ -90,7 +91,7 @@
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="修改密码" />
+                app:niv_title="修改密码" />
 
             <View
                 style="@style/line_horizontal"
@@ -101,8 +102,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="设置" />
+                app:niv_title="设置" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

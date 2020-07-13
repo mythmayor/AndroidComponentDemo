@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/color_white">
+    android:background="@color/color_white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +24,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_content="36M"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="清理缓存" />
+                app:niv_title="清理缓存" />
 
             <View
                 style="@style/line_horizontal"
@@ -36,8 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_content="有新版本可用"
+                app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="检查新版本" />
+                app:niv_title="检查新版本" />
 
             <View
                 style="@style/line_horizontal"
@@ -49,7 +52,7 @@
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="用户隐私协议" />
+                app:niv_title="用户隐私协议" />
 
             <View
                 style="@style/line_horizontal"
@@ -61,7 +64,7 @@
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
-                app:niv_text="关于我们" />
+                app:niv_title="关于我们" />
         </LinearLayout>
 
         <TextView

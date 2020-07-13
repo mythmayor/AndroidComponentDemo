@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,16 +15,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.mythmayor.basicproject.R;
-import com.mythmayor.basicproject.itype.OnMyClickListener;
 
 /**
  * Created by mythmayor on 2020/7/10.
  */
-public class NavigationItemView extends FrameLayout  {
+public class NavigationItemView extends FrameLayout {
 
     private LinearLayout llitem;
     private ImageView ivicon;
     private TextView tvtitle;
+    private TextView tvcontent;
     private ImageView ivarrow;
 
     public NavigationItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -43,10 +42,19 @@ public class NavigationItemView extends FrameLayout  {
         if (iconDrawable != null) {
             ivicon.setImageDrawable(iconDrawable);
         }
-        String text = typedArray.getString(R.styleable.NavigationItemView_niv_text);
-        if (!TextUtils.isEmpty(text)) {
-            tvtitle.setText(text);
+        String title = typedArray.getString(R.styleable.NavigationItemView_niv_title);
+        if (!TextUtils.isEmpty(title)) {
+            tvtitle.setText(title);
         }
+        String content = typedArray.getString(R.styleable.NavigationItemView_niv_content);
+        if (!TextUtils.isEmpty(content)) {
+            tvcontent.setText(content);
+        }
+        Drawable leftDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_drawableLeft);
+        Drawable rightDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_drawableRight);
+        tvcontent.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, rightDrawable, null);
+        int padding = typedArray.getDimensionPixelSize(R.styleable.NavigationItemView_niv_drawablePadding, 10);
+        tvcontent.setCompoundDrawablePadding(padding);
         Drawable arrowDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_arrowImage);
         if (arrowDrawable != null) {
             ivarrow.setImageDrawable(arrowDrawable);
@@ -58,6 +66,7 @@ public class NavigationItemView extends FrameLayout  {
         llitem = (LinearLayout) findViewById(R.id.ll_item);
         ivicon = (ImageView) findViewById(R.id.iv_icon);
         tvtitle = (TextView) findViewById(R.id.tv_title);
+        tvcontent = (TextView) findViewById(R.id.tv_content);
         ivarrow = (ImageView) findViewById(R.id.iv_arrow);
     }
 
@@ -68,8 +77,32 @@ public class NavigationItemView extends FrameLayout  {
         ivicon.setImageResource(iconResId);
     }
 
-    public void setText(String title) {
+    public void setTitle(String title) {
         tvtitle.setText(title);
+    }
+
+    public void setContent(String content) {
+        tvcontent.setText(content);
+    }
+
+    public void isShowTips(boolean show) {
+        if (show) {
+            tvcontent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.bg_notification_tips, 0);
+        } else {
+            tvcontent.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+    }
+
+    public void isShowTips(boolean show, int drawableLeftResId, int drawableRightResId) {
+        if (show) {
+            tvcontent.setCompoundDrawablesWithIntrinsicBounds(drawableLeftResId, 0, drawableRightResId, 0);
+        } else {
+            tvcontent.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+    }
+
+    public void setContentDrawablePadding(int padding) {
+        tvcontent.setCompoundDrawablePadding(padding);
     }
 
     public void setArrowImage(int arrowResId) {

@@ -17,11 +17,14 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.ui.view.NavigationItemView;
 import com.mythmayor.basicproject.utils.IntentUtil;
-import com.mythmayor.basicproject.utils.MyToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.DFragmentContract;
 import com.mythmayor.mainproject.presenter.DFragmentPresenter;
+import com.mythmayor.mainproject.ui.activity.ChangePasswordActivity;
+import com.mythmayor.mainproject.ui.activity.FeedbackActivity;
+import com.mythmayor.mainproject.ui.activity.NotificationActivity;
+import com.mythmayor.mainproject.ui.activity.PersonalInfoActivity;
 import com.mythmayor.mainproject.ui.activity.SettingActivity;
 
 /**
@@ -120,13 +123,13 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     public void onClick(View v) {
         super.onClick(v);
         if (v == llpersonalinfo) {
-            MyToastUtil.showToast(getActivity(), "个人信息");
+            IntentUtil.startActivity(getActivity(), PersonalInfoActivity.class);
         } else if (v == nivmessage) {
-            MyToastUtil.showToast(getActivity(), "消息通知");
+            IntentUtil.startActivity(getActivity(), NotificationActivity.class);
         } else if (v == nivfeedback) {
-            MyToastUtil.showToast(getActivity(), "意见反馈");
+            IntentUtil.startActivity(getActivity(), FeedbackActivity.class);
         } else if (v == nivmodifypwd) {
-            MyToastUtil.showToast(getActivity(), "修改密码");
+            IntentUtil.startActivity(getActivity(), ChangePasswordActivity.class);
         } else if (v == nivsetting) {
             IntentUtil.startActivity(getActivity(), SettingActivity.class);
         }

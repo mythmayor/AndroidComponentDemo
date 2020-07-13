@@ -24,10 +24,18 @@
         android:singleLine="true"
         android:textColor="@color/color_black" />
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:drawablePadding="6dp"
+        android:textColor="@color/color_black" />
+
     <ImageView
         android:id="@+id/iv_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="20dp" />
 </LinearLayout>

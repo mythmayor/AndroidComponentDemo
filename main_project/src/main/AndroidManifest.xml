@@ -37,6 +37,11 @@
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.activity.FeedbackActivity" />
+        <activity android:name=".ui.activity.NotificationActivity" />
+        <activity android:name=".ui.activity.PersonalInfoActivity" />
+        <activity android:name=".ui.activity.AboutUsActivity" />
 
         <!-- android7.0读取文件需要注册FileProvider -->
         <!--<provider

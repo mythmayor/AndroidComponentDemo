@@ -47,6 +47,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     protected void initView() {
+        mPresenter = new LoginPresenter();
+        mPresenter.attachView(this);
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
         etusername = (TextInputEditText) findViewById(R.id.et_username);
         etpassword = (TextInputEditText) findViewById(R.id.et_password);
@@ -68,8 +70,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     protected void initData(Intent intent) {
-        mPresenter = new LoginPresenter();
-        mPresenter.attachView(this);
         LoginRequest accountInfo = UserInfoManager.getAccountInfo(this);
         if (accountInfo != null) {
             etusername.setText(accountInfo.getUsername());

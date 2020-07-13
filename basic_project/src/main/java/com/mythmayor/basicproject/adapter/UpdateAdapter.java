@@ -16,6 +16,7 @@ import java.util.List;
  * Created by mythmayor on 2020/6/30.
  */
 public class UpdateAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
+
     private Context mContext;
     private List<String> mList;
     private LayoutInflater mInflater;
@@ -41,8 +42,8 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateViewHolder> {
         return mList != null ? mList.size() : 0;
     }
 
-    public void refreshDatas(List<String> mList) {
-        this.mList = mList;
+    public void refreshData(List<String> list) {
+        mList = list;
         notifyDataSetChanged();
     }
 }

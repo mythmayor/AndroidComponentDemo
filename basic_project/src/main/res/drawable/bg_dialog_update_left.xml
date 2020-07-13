@@ -10,7 +10,5 @@
         android:color="@color/color_transparent" />
            
     <!-- 圆角 -->  
-    <corners
-        android:bottomLeftRadius="5dp" /> 
-        
+    <corners android:bottomLeftRadius="5dp" />
 </shape>

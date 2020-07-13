@@ -1,66 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="268dp"
-    android:layout_height="315dp"
-    android:layout_gravity="center_horizontal"
-    android:background="@color/color_0067FF">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="50dp"
-        android:padding="5dp"
-        android:src="@mipmap/dialog_close"
-        android:visibility="gone" />
+    <LinearLayout
+        android:layout_width="236dp"
+        android:layout_height="266dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_0B9A27"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="118dp">
-
-        <TextView
-            android:id="@+id/mythmayor01"
+        <ImageView
+            android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/updateutil02"
-            android:textColor="@color/color_white"
-            android:textSize="15sp" />
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:src="@mipmap/dialog_close"
+            android:visibility="visible" />
 
-        <TextView
-            android:id="@+id/tv_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mythmayor01"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/color_white"
-            android:textSize="9sp" />
-
-        <TextView
-            android:id="@+id/tv_update"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:padding="7dp"
-            android:text="@string/updateutil03"
-            android:textColor="@color/color_white"
-            android:textSize="13sp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/tv_update"
-            android:layout_below="@+id/tv_version"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"></androidx.recyclerview.widget.RecyclerView>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/mythmayor01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/updateutil02"
+                android:textColor="@color/color_white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mythmayor01"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/color_white"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_btn_update"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@string/updateutil03"
+                android:textColor="@color/color_white"
+                android:textSize="13sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_update"
+                android:layout_below="@+id/tv_version"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"></androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

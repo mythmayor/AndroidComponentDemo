@@ -40,6 +40,9 @@ public class UpdateUtil {
     private boolean mForceUpdate;
     private List<String> mUpdateContent;
     private LifecycleHandler mHandler;
+    private String mApkSubPath;//Apk的二级路径
+    private String mApkAbsolutePath;//Apk的完整路径
+    private boolean isApkFileExists;//Apk文件是否存在
 
     @SuppressLint("HandlerLeak")
     public UpdateUtil(AppCompatActivity activity, String version, boolean forceUpdate, List<String> updateContent, String url) {
@@ -47,7 +50,9 @@ public class UpdateUtil {
         mVersion = version;
         mForceUpdate = forceUpdate;
         mUpdateContent = updateContent;
-        mUtil = new DownloadUtil(mActivity, url, mHandler, MyConstant.APK_NAME);
+        mApkSubPath = "/Apk/" + MyConstant.APK_NAME + "_" + mVersion + ".apk";
+        mApkAbsolutePath = BasicProjectApplication.getInstance().getContext().getExternalFilesDir("") + "/Download" + mApkSubPath;
+        isApkFileExists = new File(mApkAbsolutePath).exists();
         mHandler = new LifecycleHandler(new LifecycleOwner() {
             @NonNull
             @Override
@@ -61,8 +66,7 @@ public class UpdateUtil {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         mDialog.setProgress(100);
                         canceledDialog();
-                        String filePath = BasicProjectApplication.getInstance().getContext().getExternalFilesDir("") + "/Download/" + MyConstant.APK_NAME;
-                        install(filePath);
+                        install(mApkAbsolutePath);
                         break;
                     case DownloadManager.STATUS_RUNNING:
                         int progress = (int) msg.obj;
@@ -78,6 +82,7 @@ public class UpdateUtil {
                 }
             }
         };
+        mUtil = new DownloadUtil(mActivity, url, mHandler, mApkSubPath);
     }
 
     private void showDialog() {
@@ -104,13 +109,17 @@ public class UpdateUtil {
         }
     }
 
-    public void alertUpdateApp() {
-        final UpdateDialog01 dialog = new UpdateDialog01(mActivity, "V" + mVersion, mForceUpdate, mUpdateContent);
+    public void alertUpdateAppDialog() {
+        final UpdateDialog01 dialog = new UpdateDialog01(mActivity, "v" + mVersion, mForceUpdate, mUpdateContent);
         dialog.setYesOnclickListener(new UpdateDialog01.onYesOnclickListener() {
             @Override
             public void onYesClick() {
                 dialog.dismiss();
-                checkNetType();
+                if (isApkFileExists) {
+                    install(mApkAbsolutePath);
+                } else {
+                    checkNetType();
+                }
             }
         });
         dialog.setNoOnclickListener(new UpdateDialog01.onNoOnclickListener() {
@@ -124,6 +133,12 @@ public class UpdateUtil {
     }
 
     private void checkNetType() {
+        //先清除目录下的旧安装包
+        File old = new File(mActivity.getExternalFilesDir("") + "/Download/Apk/");
+        //删除webview 缓存目录
+        if (old.exists()) {
+            FileUtil.deleteFile(old);
+        }
         //判断是连接的内网还是外网主要用到ConnectivityManager
         ConnectivityManager cm = (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiNet = false;
@@ -139,11 +154,6 @@ public class UpdateUtil {
             e.printStackTrace();
         }
         if (isWifiNet) {//连接的WiFi
-            File old = new File(mActivity.getExternalFilesDir("") + "/Download/" + MyConstant.APK_NAME);
-            //删除webview 缓存目录
-            if (old.exists()) {
-                FileUtil.deleteFile(old);
-            }
             download();
         } else if (isGprsNet) {//连接的数据网络
             alertTrafficWarn();
@@ -156,11 +166,6 @@ public class UpdateUtil {
             @Override
             public void onYesClick() {
                 dialog.dismiss();
-                File old = new File(mActivity.getExternalFilesDir("") + "/Download/" + MyConstant.APK_NAME);
-                //删除webview 缓存目录
-                if (old.exists()) {
-                    FileUtil.deleteFile(old);
-                }
                 download();
             }
         });
@@ -168,7 +173,7 @@ public class UpdateUtil {
             @Override
             public void onNoClick() {
                 dialog.dismiss();
-                alertUpdateApp();
+                alertUpdateAppDialog();
             }
         });
         dialog.show();
@@ -194,13 +199,13 @@ public class UpdateUtil {
         /** 清除Pref缓存 */
         //PrefUtil.clear(MeetActivity.this);
         ProjectUtil.installApk(mActivity, filePath);
-        mActivity.finish();
+        //mActivity.finish();
     }
 
     class ClearCacheTask extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... params) {
-            Glide.get(BasicProjectApplication.getInstance().getContext()).clearDiskCache();
+            GlideCacheUtil.getInstance().clearImageAllCache(BasicProjectApplication.getInstance().getContext());
             return getCacheSize();
         }
 

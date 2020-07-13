@@ -64,6 +64,7 @@ public class UpdateDialog01 extends Dialog {
             ivclose.setVisibility(View.VISIBLE);
             setCancelable(true);
         } else {
+            ivclose.setVisibility(View.INVISIBLE);
             setCancelable(false);
         }
     }
@@ -73,7 +74,7 @@ public class UpdateDialog01 extends Dialog {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter = new UpdateAdapter(mContext);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.refreshDatas(mContent);
+        mAdapter.refreshData(mContent);
     }
 
     private void handleUserInput() {
