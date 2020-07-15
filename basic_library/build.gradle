@@ -12,6 +12,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), "room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -43,10 +49,12 @@ dependencies {
     api "com.zhy:okhttputils:$rootProject.ext.okhttputilsVersion"//okhttputils
     api "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"//eventbus
     api "androidx.lifecycle:lifecycle-runtime:$rootProject.ext.lifecycleVersion"//lifecycle
+    api "com.android.support:multidex:$rootProject.ext.multidexVersion"//解决方法数超过65535的报错问题
     //ARouter
     api("com.alibaba:arouter-api:$rootProject.ext.arouterApi") {
         exclude group: 'com.android.support'
     }
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //leakcanary: 使用debugImplementation,因为LeakCanary只应该在调试版本中使用。另外当前版本无需在Application中进行初始化。
     debugApi "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
     //okhttp3
@@ -64,6 +72,21 @@ dependencies {
     //沉浸式状态栏
     api "com.gyf.immersionbar:immersionbar:$rootProject.ext.immersionbarVersion"//基础依赖包，必须要依赖
     api "com.gyf.immersionbar:immersionbar-components:$rootProject.ext.immersionbarVersion"
-    //fragment快速实现（可选）
+    //沉浸式状态栏 - fragment快速实现（可选）
     api "com.gyf.immersionbar:immersionbar-ktx:$rootProject.ext.immersionbarVersion"//kotlin扩展（可选）
+    //AndroidAutoSize适配方案
+    api "me.jessyan:autosize:$rootProject.ext.autosizeVersion"
+    //Room持久性库
+    api "androidx.room:room-runtime:$roomVersion"
+    //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    //Room持久性库 - optional - Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$roomVersion"
+    //Room持久性库 - optional - RxJava support for Room
+    api "androidx.room:room-rxjava2:$roomVersion"
+    //Room持久性库 - optional - Guava support for Room, including Optional and ListenableFuture
+    api "androidx.room:room-guava:$roomVersion"
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$roomVersion"
+
 }

@@ -70,7 +70,10 @@
 - 项目基于AndroidStudio进行研发，使用到的gradle编译工具版本为"3.6.3"，gradle的版本为"5.6.4"，编译版本(compileSdkVersion)为29，构建工具版本(buildToolsVersion)为"29.0.3"，最小版本(minSdkVersion)为19，目标版本(targetSdkVersion)为29。使用了AndroidX的依赖库。
 - 项目整体采用组件化、模块化结构，结合MVP架构方式，另可通过MVPHelper插件自动生成MVP架构基础代码。
 - 项目网络框架封装了两个，其一是用Retrofit+Rxjava+Okhttp，可参考RetrofitClient类。其二是用OkHttpUtils，可参考NetUtil类。两者皆有各自的优缺点，可根据项目实际情况与开发者情况选择使用。
-- 项目图片框架使用Glide，并且封装了GlideUtil与GlideCacheUtil两个工具类，基本覆盖绝大多数图片加载场景。
+- 项目使用Glide作为图片框架，并且封装了GlideUtil与GlideCacheUtil两个工具类，基本覆盖绝大多数图片加载场景。
+- 项目使用AndroidAutoSize框架处理屏幕适配。
+- 项目使用Room持久性库以进行数据库操作，并进行了一定的封装。
+- 项目使用LiveData(可观察的数据持有者类)来处理数据。
 - 项目使用Gson框架来进行Json数据的操作与处理。
 - 项目使用EventBus框架来进行事件发布和订阅。
 - 项目使用Lifecycle框架监听Activity与Fragment的生命周期变化。
@@ -170,7 +173,10 @@ If it is a separate application, you need to comment out this line of code.
 - The project is developed based on AndroidStudio. The gradle compilation tool version used is "3.6.3", the gradle version is "5.6.4", the compiled version (compileSdkVersion) is 29, and the build tool version (buildToolsVersion) is "29.0.3" , The minimum version (minSdkVersion) is 19, and the target version (targetSdkVersion) is 29. The dependency library of AndroidX is used.
 - The project as a whole adopts a componentized, modular structure, combined with the MVP architecture, and the MVPHelper plug-in can be used to automatically generate the basic code of the MVP architecture.
 - The project network framework encapsulates two, one is to use Retrofit+Rxjava+Okhttp, refer to RetrofitClient class. The second is to use OkHttpUtils, refer to NetUtil class. Both have their own advantages and disadvantages, and can be used according to the actual situation of the project and the situation of the developer.
-- The project picture framework uses Glide, and encapsulates the two tool classes GlideUtil and GlideCacheUtil, which basically covers most image loading scenarios.
+- The project uses Glide as the picture frame, and encapsulates the two tool classes GlideUtil and GlideCacheUtil, which basically covers most image loading scenarios.
+- The project uses the AndroidAutoSize framework to handle screen adaptation.
+- The project uses the Room persistence library for database operations, and is encapsulated.
+- The project uses LiveData (observable data holder class) to process the data.
 - The project uses the Gson framework to operate and process Json data.
 - The project uses the EventBus framework for event publishing and subscription.
 - The project uses the Lifecycle framework to monitor the life cycle changes of Activity and Fragment.

@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.mythmayor.basicproject.base.BaseActivity;
+import com.mythmayor.basicproject.database.AppDatabase;
+import com.mythmayor.basicproject.database.DataRepository;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -49,6 +51,8 @@ public class BasicProjectApplication {
     private List<BaseActivity> mActivities;
     //要销毁的Activity的集合
     private Map<String, Activity> mDestoryMap;
+    //全局的线程池
+    private AppExecutors mAppExecutors;
 
     public void init(Application application) {
         initData(application);
@@ -61,7 +65,8 @@ public class BasicProjectApplication {
         mApplication = application;
         mActivities = new LinkedList<>();
         mDestoryMap = new HashMap<>();
-        if(BuildConfig.DEBUG){
+        mAppExecutors = new AppExecutors();
+        if (BuildConfig.DEBUG) {
             ARouter.openLog();//打印日志
             ARouter.openDebug();//开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
@@ -78,6 +83,7 @@ public class BasicProjectApplication {
                 .build();
         OkHttpUtils.initClient(mOkHttpCLient);
     }
+
     /**
      * 获取全局的Context
      *
@@ -86,6 +92,7 @@ public class BasicProjectApplication {
     public Context getContext() {
         return mContext;
     }
+
     /**
      * 获取全局的Application
      *
@@ -150,5 +157,17 @@ public class BasicProjectApplication {
                 }
             }
         }
+    }
+
+    public AppExecutors getAppExecutors() {
+        return mAppExecutors;
+    }
+
+    public AppDatabase getAppDatabase() {
+        return AppDatabase.getInstance(mContext, mAppExecutors);
+    }
+
+    public DataRepository getDataRepository() {
+        return DataRepository.getInstance(getAppDatabase());
     }
 }

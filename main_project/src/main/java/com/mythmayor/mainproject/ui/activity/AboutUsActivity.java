@@ -2,10 +2,12 @@ package com.mythmayor.mainproject.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.utils.ProjectUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.AboutUsContract;
 import com.mythmayor.mainproject.presenter.AboutUsPresenter;
@@ -17,6 +19,8 @@ import com.mythmayor.mainproject.presenter.AboutUsPresenter;
 @Route(path = "/mainproject/AboutUsActivity")
 public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> implements AboutUsContract.View {
 
+    private TextView tvversion;
+
     @Override
     public int getSubLayoutResId() {
         return R.layout.activity_about_us;
@@ -26,6 +30,7 @@ public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> i
     public void initSubView(View view) {
         mPresenter = new AboutUsPresenter();
         mPresenter.attachView(this);
+        tvversion = (TextView) findViewById(R.id.tv_version);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> i
 
     @Override
     public void initSubData(Intent intent) {
-
+        tvversion.setText("v" + ProjectUtil.getVersion(this));
     }
 
     @Override

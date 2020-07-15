@@ -11,9 +11,10 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public class TestUtil {
 
     public static void main(String[] args) {
-        testRxJava();
+        //testRxJava();
     }
 
+    //测试RxJava
     private static void testRxJava() {
         //Sample01
         String[] names = {"aaa", "bbb", "ccc", "ddd", "eee", "fff"};
@@ -30,7 +31,7 @@ public class TestUtil {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                System.out.println("onError - " + e.getCause().getMessage());
+                System.out.println("onError - " + e.getMessage());
             }
 
             @Override

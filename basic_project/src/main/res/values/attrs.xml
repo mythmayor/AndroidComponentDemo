@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--原型ImageView样式-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
 
+    <!--导航条样式-->
     <declare-styleable name="NavigationItemView">
         <attr name="niv_icon" format="reference|color" />
         <attr name="niv_title" format="string" />
@@ -11,10 +19,15 @@
         <attr name="niv_arrowImage" format="reference|color" />
     </declare-styleable>
 
-    <declare-styleable name="CircleImageView">
-        <attr name="civ_border_width" format="dimension" />
-        <attr name="civ_border_color" format="color" />
-        <attr name="civ_border_overlay" format="boolean" />
-        <attr name="civ_fill_color" format="color" />
+    <!--搜索框样式-->
+    <declare-styleable name="SearchBar">
+        <attr name="search_isAllowInput" format="boolean" />
+        <attr name="search_showTvcancel" format="boolean" />
+        <attr name="search_bg" format="reference|color" />
+        <attr name="search_tvcancelTextColor" format="reference|color" />
+        <attr name="search_ivsearchSrc" format="reference|color" />
+        <attr name="search_ivclearSrc" format="reference|color" />
+        <attr name="search_hint" format="string" />
     </declare-styleable>
+
 </resources>

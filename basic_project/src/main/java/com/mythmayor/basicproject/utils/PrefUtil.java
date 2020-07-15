@@ -14,6 +14,7 @@ public class PrefUtil {
     public static final String SP_IS_USER_LOGIN = "IS_USER_LOGIN";//登录状态
     public static final String SP_ACCOUNT = "SP_ACCOUNT";//登录账号信息
     public static final String SP_LOGIN_INFO = "SP_LOGIN_INFO";//登录信息
+    public static final String SP_SEARCH_HISTORY = "SP_SEARCH_HISTORY";//搜索历史
 
     public static void putBoolean(Context ctx, String key, boolean value) {
         SharedPreferences pref = ctx.getSharedPreferences(SHARE_PREFS_NAME,

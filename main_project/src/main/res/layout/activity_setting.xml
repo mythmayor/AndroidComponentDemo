@@ -24,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
-                app:niv_content="36M"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="清理缓存" />
 
@@ -37,8 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:niv_arrowImage="@mipmap/arrow_right"
-                app:niv_content="有新版本可用"
-                app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="检查新版本" />
 
@@ -65,6 +62,18 @@
                 app:niv_arrowImage="@mipmap/arrow_right"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="关于我们" />
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_marginLeft="20dp" />
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_testroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_title="Room数据库测试" />
         </LinearLayout>
 
         <TextView

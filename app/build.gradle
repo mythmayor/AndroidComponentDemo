@@ -10,12 +10,12 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName(), "room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
     }
@@ -71,4 +71,6 @@ dependencies {
     //如果是依赖库则取消注释该行代码，如果是单独的应用程序则要注释该行代码。
     implementation project(path: ':main_project')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
 }

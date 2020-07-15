@@ -42,6 +42,8 @@
         <activity android:name=".ui.activity.NotificationActivity" />
         <activity android:name=".ui.activity.PersonalInfoActivity" />
         <activity android:name=".ui.activity.AboutUsActivity" />
+        <activity android:name=".ui.activity.TestRoomDatabaseActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
 
         <!-- android7.0读取文件需要注册FileProvider -->
         <!--<provider

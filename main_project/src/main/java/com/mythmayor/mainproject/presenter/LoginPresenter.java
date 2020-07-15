@@ -78,7 +78,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        LogUtil.d("login2 - " + e.getCause().getMessage());
+                        LogUtil.d("login2 - " + e.getMessage());
                     }
 
                     @Override
@@ -100,7 +100,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        LogUtil.d("login3 - " + e.getCause().getMessage());
+                        LogUtil.d("login3 - " + e.getMessage());
                     }
 
                     @Override

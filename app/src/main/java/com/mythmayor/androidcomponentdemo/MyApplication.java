@@ -1,24 +1,12 @@
 package com.mythmayor.androidcomponentdemo;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.os.Process;
+
+import androidx.multidex.MultiDex;
 
 import com.mythmayor.basicproject.BasicProjectApplication;
-import com.mythmayor.basicproject.base.BaseActivity;
-import com.zhy.http.okhttp.OkHttpUtils;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.ConnectionPool;
-import okhttp3.OkHttpClient;
+import me.jessyan.autosize.AutoSize;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -29,6 +17,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //当App中出现多进程, 并且您需要适配所有的进程, 就需要在App初始化时调用initCompatMultiProcess()
+        AutoSize.initCompatMultiProcess(this);
+        //解决方法数超过65535的报错问题
+        MultiDex.install(this);
         BasicProjectApplication.getInstance().init(this);
     }
 

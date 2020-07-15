@@ -1,7 +1,6 @@
 package com.mythmayor.mainproject.ui.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,7 @@ public class EmptyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_d);
+        setContentView(R.layout.layout_search_bar);
     }
 
 }

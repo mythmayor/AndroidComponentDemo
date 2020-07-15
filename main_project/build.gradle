@@ -18,7 +18,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName(), "room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
     }
@@ -46,4 +46,6 @@ dependencies {
 
     implementation project(path: ':basic_project')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
 }

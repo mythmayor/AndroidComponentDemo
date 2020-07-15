@@ -18,6 +18,7 @@ import com.mythmayor.basicproject.R;
 
 /**
  * Created by mythmayor on 2020/7/10.
+ * 导航条
  */
 public class NavigationItemView extends FrameLayout {
 
@@ -27,13 +28,31 @@ public class NavigationItemView extends FrameLayout {
     private TextView tvcontent;
     private ImageView ivarrow;
 
+    private static final int DEFAULT_DRAWABLE_PADDING = 10;
+
+    public NavigationItemView(@NonNull Context context) {
+        this(context, null);
+    }
+
     public NavigationItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public NavigationItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         //加载布局
         LayoutInflater.from(context).inflate(R.layout.navigation_item_view, this);
         initView();//初始化View
         initAttrs(context, attrs);
         initEvent();//初始化事件
+    }
+
+    private void initView() {
+        llitem = (LinearLayout) findViewById(R.id.ll_item);
+        ivicon = (ImageView) findViewById(R.id.iv_icon);
+        tvtitle = (TextView) findViewById(R.id.tv_title);
+        tvcontent = (TextView) findViewById(R.id.tv_content);
+        ivarrow = (ImageView) findViewById(R.id.iv_arrow);
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
@@ -53,21 +72,13 @@ public class NavigationItemView extends FrameLayout {
         Drawable leftDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_drawableLeft);
         Drawable rightDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_drawableRight);
         tvcontent.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, rightDrawable, null);
-        int padding = typedArray.getDimensionPixelSize(R.styleable.NavigationItemView_niv_drawablePadding, 10);
+        int padding = typedArray.getDimensionPixelSize(R.styleable.NavigationItemView_niv_drawablePadding, DEFAULT_DRAWABLE_PADDING);
         tvcontent.setCompoundDrawablePadding(padding);
         Drawable arrowDrawable = typedArray.getDrawable(R.styleable.NavigationItemView_niv_arrowImage);
         if (arrowDrawable != null) {
             ivarrow.setImageDrawable(arrowDrawable);
         }
         typedArray.recycle();
-    }
-
-    private void initView() {
-        llitem = (LinearLayout) findViewById(R.id.ll_item);
-        ivicon = (ImageView) findViewById(R.id.iv_icon);
-        tvtitle = (TextView) findViewById(R.id.tv_title);
-        tvcontent = (TextView) findViewById(R.id.tv_content);
-        ivarrow = (ImageView) findViewById(R.id.iv_arrow);
     }
 
     private void initEvent() {
