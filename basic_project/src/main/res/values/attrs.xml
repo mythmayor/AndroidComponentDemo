@@ -30,4 +30,30 @@
         <attr name="search_hint" format="string" />
     </declare-styleable>
 
+    <!--输入框样式-->
+    <declare-styleable name="InputBox">
+        <attr name="inputbox_type" format="integer" /><!--1是展示框，2是输入框-->
+        <attr name="inputbox_tvtitleText" format="string" />
+        <attr name="inputbox_tvtitleTextColor" format="reference|color" />
+        <attr name="inputbox_tvtitleTextSize" format="dimension" />
+        <attr name="inputbox_tvcontentText" format="string" />
+        <attr name="inputbox_tvcontentHint" format="string" />
+        <attr name="inputbox_tvcontentTextColor" format="reference|color" />
+        <attr name="inputbox_tvcontentTextSize" format="dimension" />
+        <attr name="inputbox_tvcontentDrawableRight" format="reference|color" />
+        <attr name="inputbox_etcontentText" format="string" />
+        <attr name="inputbox_etcontentHint" format="string" />
+        <attr name="inputbox_etcontentTextColor" format="reference|color" />
+        <attr name="inputbox_etcontentTextSize" format="dimension" />
+    </declare-styleable>
+
+    <!--菊花图 自定义属性-->
+    <declare-styleable name="ChrysanthemumView">
+        <!--线条个数-->
+        <attr name="lineCount" format="integer" />
+        <!--菊花开始颜色-->
+        <attr name="startColor" format="reference|color" />
+        <!--菊花结束颜色-->
+        <attr name="endColor" format="reference|color" />
+    </declare-styleable>
 </resources>

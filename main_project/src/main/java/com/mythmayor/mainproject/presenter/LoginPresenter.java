@@ -33,8 +33,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
         if (!isViewAttached()) {
             return;
         }
-        useRetrofit(request);
-        //useOkHttpUtils(request);
+        //useRetrofit(request);
+        useOkHttpUtils(request);
     }
 
     private void useRetrofit(LoginRequest request) {
@@ -111,7 +111,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
     private void useOkHttpUtils(LoginRequest request) {
         mView.showLoading();
-        HttpUtil.login(request, new NetCallback() {
+        HttpUtil.login2(request, new NetCallback() {
             @Override
             public void onSuccess(String response, int id) {
                 mView.hideLoading();

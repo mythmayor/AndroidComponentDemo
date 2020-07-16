@@ -184,6 +184,7 @@
 -keep public class com.mythmayor.basicproject.bean.**{*;}
 -keep public class com.mythmayor.basicproject.request.**{*;}
 -keep public class com.mythmayor.basicproject.response.**{*;}
+-keep public class com.mythmayor.basicproject.database.entity.**{*;}
 
 #############################################
 #

@@ -24,4 +24,6 @@
     <color name="color_FF7A37">#FF7A37</color>
     <color name="color_FF7000">#FF7000</color>
     <color name="color_F7F7F7">#F7F7F7</color>
+    <color name="color_50000000">#50000000</color>
+    <color name="color_33000000">#33000000</color>
 </resources>

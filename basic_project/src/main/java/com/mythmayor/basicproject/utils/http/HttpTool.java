@@ -78,8 +78,6 @@ public class HttpTool {
         build.execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                String message = e.getMessage();
-                ProgressDlgUtil.dismiss();
                 if (!isNetworkAvailable(BasicProjectApplication.getInstance().getContext())) {
                     ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_NET);
                 } else {
@@ -92,7 +90,6 @@ public class HttpTool {
 
             @Override
             public void onResponse(String response, int id) {
-                //ProgressDlgUtil.dismiss();
                 try {
                     if (null != callback) {
                         callback.onSuccess(response, id);
@@ -145,7 +142,6 @@ public class HttpTool {
         build.execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ProgressDlgUtil.dismiss();
                 if (!isNetworkAvailable(BasicProjectApplication.getInstance().getContext())) {
                     ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_NET);
                 } else {
@@ -158,7 +154,6 @@ public class HttpTool {
 
             @Override
             public void onResponse(String response, int id) {
-                //ProgressDlgUtil.dismiss();
                 try {
                     if (null != callback) {
                         callback.onSuccess(response, id);

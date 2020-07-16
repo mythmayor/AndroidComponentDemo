@@ -2,7 +2,6 @@ package com.mythmayor.mainproject.ui.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,16 +10,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
+import com.mythmayor.basicproject.request.RegisterRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.response.RegisterResponse;
+import com.mythmayor.basicproject.ui.dialog.ProgressDialog02;
 import com.mythmayor.basicproject.utils.LogUtil;
-import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
-import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.RegisterContract;
 import com.mythmayor.mainproject.presenter.RegisterPresenter;
-import com.mythmayor.basicproject.request.RegisterRequest;
-import com.mythmayor.basicproject.response.RegisterResponse;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -91,12 +89,12 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void showLoading() {
-        ProgressDlgUtil.show(this, "正在注册，请稍后...");
+        ProgressDialog02.show(this, "正在注册，请稍后...");
     }
 
     @Override
     public void hideLoading() {
-        ProgressDlgUtil.dismiss();
+        ProgressDialog02.disappear();
     }
 
     @Override

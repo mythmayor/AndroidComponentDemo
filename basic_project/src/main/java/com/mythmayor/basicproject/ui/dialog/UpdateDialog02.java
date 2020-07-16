@@ -11,6 +11,7 @@ import com.mythmayor.basicproject.R;
 
 /**
  * Created by mythm on 2020/6/30.
+ * 更新弹窗2
  */
 public class UpdateDialog02 extends Dialog {
 

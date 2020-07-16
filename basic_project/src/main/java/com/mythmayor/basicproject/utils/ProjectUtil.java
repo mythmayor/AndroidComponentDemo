@@ -234,9 +234,8 @@ public class ProjectUtil {
      * 设置NumberPicker分隔线的样式
      *
      * @param numberPicker 要设置的NumberPicker控件
-     * @param activity     当前界面
      */
-    public static void setNumberPickerDividerColor(NumberPicker numberPicker, Activity activity) {
+    public static void setNumberPickerDividerColor(NumberPicker numberPicker) {
         //设置picker分割线的颜色
         NumberPicker picker = numberPicker;
         Field[] pickerFields = NumberPicker.class.getDeclaredFields();
@@ -246,7 +245,7 @@ public class ProjectUtil {
                 try {
                     //pf.set(picker.getHeight(), 10);
                     //设置分割线的颜色值 透明
-                    pf.set(picker, new ColorDrawable(activity.getResources().getColor(R.color.colorAccent)));
+                    pf.set(picker, new ColorDrawable(CommonUtil.getColor(R.color.color_FF7000)));
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 } catch (Resources.NotFoundException e) {

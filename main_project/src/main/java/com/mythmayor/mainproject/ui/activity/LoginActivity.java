@@ -18,9 +18,9 @@ import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.LoginResponse;
+import com.mythmayor.basicproject.ui.dialog.ProgressDialog01;
 import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
-import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
@@ -116,12 +116,12 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void showLoading() {
-        ProgressDlgUtil.show(this, "正在登录，请稍后...");
+        ProgressDialog01.show(this,"正在登录，请稍后...");
     }
 
     @Override
     public void hideLoading() {
-        ProgressDlgUtil.dismiss();
+        ProgressDialog01.disappear();
     }
 
     @Override

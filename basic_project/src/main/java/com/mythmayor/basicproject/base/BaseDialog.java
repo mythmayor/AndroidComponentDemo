@@ -19,6 +19,10 @@ public abstract class BaseDialog extends Dialog {
         super(context, R.style.dialog_base);
     }
 
+    public BaseDialog(Context context,int themeResId) {
+        super(context, themeResId);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

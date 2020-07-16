@@ -69,13 +69,13 @@ public class SearchBar extends FrameLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SearchBar);
         isAllowInput = typedArray.getBoolean(R.styleable.SearchBar_search_isAllowInput, DEFAULT_IS_ALLOW_INPUT);
         boolean showTvcancel = typedArray.getBoolean(R.styleable.SearchBar_search_showTvcancel, DEFAULT_SHOW_TVCANCEL);
-        tvcancel.setVisibility(showTvcancel ? VISIBLE : GONE);
+        isShowTvcancel(showTvcancel);
         Drawable llsearchDrawable = typedArray.getDrawable(R.styleable.SearchBar_search_bg);
         if (llsearchDrawable != null) {
             llsearch.setBackground(llsearchDrawable);
         }
         int color = typedArray.getColor(R.styleable.SearchBar_search_tvcancelTextColor, DEFAULT_TVCANCEL_TEXTCOLOR);
-        tvcancel.setTextColor(color);
+        setTvcancelTextColor(color);
         Drawable ivsearchDrawable = typedArray.getDrawable(R.styleable.SearchBar_search_ivsearchSrc);
         if (ivsearchDrawable != null) {
             ivsearch.setImageDrawable(ivsearchDrawable);
@@ -85,9 +85,7 @@ public class SearchBar extends FrameLayout {
             ivclear.setImageDrawable(ivclearDrawable);
         }
         String hint = typedArray.getString(R.styleable.SearchBar_search_hint);
-        if (!TextUtils.isEmpty(hint)) {
-            etsearch.setHint(hint);
-        }
+        setEtSearchHint(hint);
         typedArray.recycle();
     }
 
@@ -172,7 +170,9 @@ public class SearchBar extends FrameLayout {
     }
 
     public void setEtSearchHint(String hint) {
-        etsearch.setHint(hint);
+        if (!TextUtils.isEmpty(hint)) {
+            etsearch.setHint(hint);
+        }
     }
 
     public void setEtSearchText(String text) {
