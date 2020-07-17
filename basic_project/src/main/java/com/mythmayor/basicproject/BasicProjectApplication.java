@@ -57,6 +57,13 @@ public class BasicProjectApplication {
     public void init(Application application) {
         initData(application);
         initNetwork();
+        /**
+         * TODO-LIST
+         * 登录页面增加记住账号密码的勾选框
+         * 注册加验证码
+         * 添加消息推送
+         * 地图集成
+         */
         //CrashHandler.getInstance().init(application);
     }
 

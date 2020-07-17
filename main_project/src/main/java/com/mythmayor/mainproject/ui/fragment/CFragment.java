@@ -14,6 +14,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.CFragmentContract;
 import com.mythmayor.mainproject.presenter.CFragmentPresenter;
+import com.mythmayor.mainproject.ui.activity.MainActivity;
 
 /**
  * Created by mythmayor on 2020/7/9.
@@ -23,6 +24,7 @@ public class CFragment extends BaseMvpFragment<CFragmentPresenter> implements CF
     //标记Fragment是否初始化完成
     private boolean isPrepared;
     private View view;
+    private MainActivity mMainActivity;
 
     @Override
     protected void lazyLoad() {
@@ -48,7 +50,7 @@ public class CFragment extends BaseMvpFragment<CFragmentPresenter> implements CF
 
     @Override
     protected void initView(View view) {
-
+        mMainActivity = (MainActivity) getActivity();
     }
 
     @Override

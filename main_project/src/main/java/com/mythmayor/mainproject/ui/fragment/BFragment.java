@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.BFragmentContract;
 import com.mythmayor.mainproject.presenter.BFragmentPresenter;
+import com.mythmayor.mainproject.ui.activity.MainActivity;
 
 /**
  * Created by mythmayor on 2020/7/9.
@@ -23,6 +25,9 @@ public class BFragment extends BaseMvpFragment<BFragmentPresenter> implements BF
     //标记Fragment是否初始化完成
     private boolean isPrepared;
     private View view;
+    private ImageView ivdrawerleft;
+    private ImageView ivdrawerright;
+    private MainActivity mMainActivity;
 
     @Override
     protected void lazyLoad() {
@@ -48,18 +53,31 @@ public class BFragment extends BaseMvpFragment<BFragmentPresenter> implements BF
 
     @Override
     protected void initView(View view) {
-
+        ivdrawerleft = (ImageView) view.findViewById(R.id.iv_drawer_left);
+        ivdrawerright = (ImageView) view.findViewById(R.id.iv_drawer_right);
+        mMainActivity = (MainActivity) getActivity();
     }
 
     @Override
     protected void initEvent() {
-
+        ivdrawerleft.setOnClickListener(this);
+        ivdrawerright.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
         mPresenter = new BFragmentPresenter();
         mPresenter.attachView(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        if (v == ivdrawerleft) {
+            mMainActivity.openLeftDrawer();
+        } else if (v == ivdrawerright) {
+            mMainActivity.openRightDrawer();
+        }
     }
 
     @Override

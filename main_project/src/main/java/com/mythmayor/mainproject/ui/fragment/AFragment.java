@@ -17,6 +17,7 @@ import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.AFragmentContract;
 import com.mythmayor.mainproject.presenter.AFragmentPresenter;
+import com.mythmayor.mainproject.ui.activity.MainActivity;
 import com.mythmayor.mainproject.ui.activity.SearchActivity;
 
 /**
@@ -28,6 +29,7 @@ public class AFragment extends BaseMvpFragment<AFragmentPresenter> implements AF
     private boolean isPrepared;
     private View view;
     private SearchBar mSearchBar;
+    private MainActivity mMainActivity;
 
     @Override
     protected void lazyLoad() {
@@ -54,6 +56,7 @@ public class AFragment extends BaseMvpFragment<AFragmentPresenter> implements AF
     @Override
     protected void initView(View view) {
         mSearchBar = (SearchBar) view.findViewById(R.id.search_bar);
+        mMainActivity = (MainActivity) getActivity();
     }
 
     @Override

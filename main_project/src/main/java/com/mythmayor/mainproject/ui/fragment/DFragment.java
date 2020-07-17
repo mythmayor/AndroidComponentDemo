@@ -23,6 +23,7 @@ import com.mythmayor.mainproject.contract.DFragmentContract;
 import com.mythmayor.mainproject.presenter.DFragmentPresenter;
 import com.mythmayor.mainproject.ui.activity.ChangePasswordActivity;
 import com.mythmayor.mainproject.ui.activity.FeedbackActivity;
+import com.mythmayor.mainproject.ui.activity.MainActivity;
 import com.mythmayor.mainproject.ui.activity.NotificationActivity;
 import com.mythmayor.mainproject.ui.activity.PersonalInfoActivity;
 import com.mythmayor.mainproject.ui.activity.SettingActivity;
@@ -43,6 +44,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     private NavigationItemView nivfeedback;
     private NavigationItemView nivmodifypwd;
     private NavigationItemView nivsetting;
+    private MainActivity mMainActivity;
 
     @Override
     protected void lazyLoad() {
@@ -75,6 +77,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
         nivfeedback = (NavigationItemView) view.findViewById(R.id.niv_feedback);
         nivmodifypwd = (NavigationItemView) view.findViewById(R.id.niv_modifypwd);
         nivsetting = (NavigationItemView) view.findViewById(R.id.niv_setting);
+        mMainActivity = (MainActivity) getActivity();
     }
 
     @Override
