@@ -18,9 +18,13 @@ public interface MyConstant {
 
     String APK_NAME = "MyApp_prod";
 
-    //网络请求
+    //网络请求地址
+    //接口基础地址
     String URL_BASE = "https://www.wanandroid.com";
-    String URL_LOGIN = URL_BASE + "/user/login";//登录接口
+    //接口相对地址
+    String URL_LOGIN = "/user/login";//登录接口
+    //接口绝对地址
+    String URL_ABSOLUTE_LOGIN = URL_BASE + URL_LOGIN;//登录接口
 
     //AES密钥
     //String AES_KEY = "1234567890!@#$%^";

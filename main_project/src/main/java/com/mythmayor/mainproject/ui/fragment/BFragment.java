@@ -81,23 +81,27 @@ public class BFragment extends BaseMvpFragment<BFragmentPresenter> implements BF
     }
 
     @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
-    @Override
-    public void onError(String errMessage) {
-    }
-
-    @Override
-    public void onSuccess(BaseResponse baseResp) {
-    }
-
-    @Override
     public void initImmersionBar() {
         ImmersionBar.with(this).statusBarDarkFont(false).titleBarMarginTop(R.id.view_blank).init();
+    }
+
+    @Override
+    public void showLoading(String address) {
+
+    }
+
+    @Override
+    public void hideLoading(String address) {
+
+    }
+
+    @Override
+    public void onError(String address, String errMessage) {
+
+    }
+
+    @Override
+    public void onSuccess(String address, BaseResponse baseResp) {
+
     }
 }

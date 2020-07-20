@@ -1,5 +1,6 @@
 package com.mythmayor.mainproject.presenter;
 
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BasePresenter;
 import com.mythmayor.basicproject.itype.NetCallback;
 import com.mythmayor.basicproject.request.LoginRequest;
@@ -33,8 +34,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
         if (!isViewAttached()) {
             return;
         }
-        //useRetrofit(request);
-        useOkHttpUtils(request);
+        useRetrofit(request);
+        //useOkHttpUtils(request);
     }
 
     private void useRetrofit(LoginRequest request) {
@@ -44,23 +45,23 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .subscribe(new Observer<LoginResponse>() {//这里需要在build.gradle中指定jdk版本，否则会报错
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mView.showLoading();
+                        mView.showLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onNext(@NonNull LoginResponse resp) {
-                        mView.onSuccess(resp);
+                        mView.onSuccess(MyConstant.URL_LOGIN, resp);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        mView.onError(e.getMessage());
-                        mView.hideLoading();
+                        mView.onError(MyConstant.URL_LOGIN, e.getMessage());
+                        mView.hideLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onComplete() {
-                        mView.hideLoading();
+                        mView.hideLoading(MyConstant.URL_LOGIN);
                     }
                 });
         mModel.login2(request)
@@ -110,19 +111,19 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     }
 
     private void useOkHttpUtils(LoginRequest request) {
-        mView.showLoading();
+        mView.showLoading(MyConstant.URL_LOGIN);
         HttpUtil.login2(request, new NetCallback() {
             @Override
             public void onSuccess(String response, int id) {
-                mView.hideLoading();
+                mView.hideLoading(MyConstant.URL_LOGIN);
                 LoginResponse resp = HttpUtil.mGson.fromJson(response, LoginResponse.class);
-                mView.onSuccess(resp);
+                mView.onSuccess(MyConstant.URL_LOGIN, resp);
             }
 
             @Override
             public void onFailed(Call call, Exception e, int id) {
-                mView.hideLoading();
-                mView.onError(e.getMessage());
+                mView.hideLoading(MyConstant.URL_LOGIN);
+                mView.onError(MyConstant.URL_LOGIN, e.getMessage());
             }
         });
     }

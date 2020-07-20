@@ -102,22 +102,6 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     }
 
     @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
-    @Override
-    public void onError(String errMessage) {
-    }
-
-    @Override
-    public void onSuccess(BaseResponse baseResp) {
-    }
-
-    @Override
     public void initImmersionBar() {
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
     }
@@ -136,5 +120,25 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
         } else if (v == nivsetting) {
             IntentUtil.startActivity(getActivity(), SettingActivity.class);
         }
+    }
+
+    @Override
+    public void showLoading(String address) {
+
+    }
+
+    @Override
+    public void hideLoading(String address) {
+
+    }
+
+    @Override
+    public void onError(String address, String errMessage) {
+
+    }
+
+    @Override
+    public void onSuccess(String address, BaseResponse baseResp) {
+
     }
 }

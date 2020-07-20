@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
@@ -37,6 +39,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     private TextInputEditText etusername;
     private TextInputEditText etpassword;
+    private CheckBox cbremember;
     private Button btnlogin;
     private Button btnregister;
 
@@ -52,6 +55,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
         etusername = (TextInputEditText) findViewById(R.id.et_username);
         etpassword = (TextInputEditText) findViewById(R.id.et_password);
+        cbremember = (CheckBox) findViewById(R.id.cb_remember);
         btnlogin = (Button) findViewById(R.id.btn_login);
         btnregister = (Button) findViewById(R.id.btn_register);
         getLifecycle().addObserver(new LifecycleEventObserver() {
@@ -66,14 +70,24 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     protected void initEvent() {
         btnlogin.setOnClickListener(this);
         btnregister.setOnClickListener(this);
+        cbremember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            }
+        });
     }
 
     @Override
     protected void initData(Intent intent) {
         LoginRequest accountInfo = UserInfoManager.getAccountInfo(this);
         if (accountInfo != null) {
+            cbremember.setChecked(true);
             etusername.setText(accountInfo.getUsername());
             etpassword.setText(accountInfo.getPassword());
+        } else {
+            cbremember.setChecked(false);
+            etusername.setText("");
+            etpassword.setText("");
         }
     }
 
@@ -115,36 +129,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
-    public void showLoading() {
-        ProgressDialog01.show(this,"正在登录，请稍后...");
-    }
-
-    @Override
-    public void hideLoading() {
-        ProgressDialog01.disappear();
-    }
-
-    @Override
-    public void onError(String errMessage) {
-        ToastUtil.showToast(this, errMessage);
-    }
-
-    @Override
-    public void onSuccess(BaseResponse baseResp) {
-        LoginResponse resp = (LoginResponse) baseResp;
-        LogUtil.i("response=" + HttpUtil.mGson.toJson(resp));
-        if (resp.getErrorCode() == 0) {//登录成功
-            UserInfoManager.setAccountInfo(this, new LoginRequest(getUsername(), getPassword()));
-            UserInfoManager.setLoginInfo(this, HttpUtil.mGson.toJson(resp));
-            ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
-            IntentUtil.startActivity(this, MainActivity.class);
-            finish();
-        } else {//登录失败
-            ToastUtil.showToast(this, resp.getErrorMsg());
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
@@ -157,6 +141,40 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             LogUtil.d("移动网络连接");
         } else if (status == NetworkBroadcastReceiver.NETWORK_WIFI) {//无线网络连接
             LogUtil.d("无线网络连接");
+        }
+    }
+
+    @Override
+    public void showLoading(String address) {
+        ProgressDialog01.show(this, "正在登录，请稍后...");
+    }
+
+    @Override
+    public void hideLoading(String address) {
+        ProgressDialog01.disappear();
+    }
+
+    @Override
+    public void onError(String address, String errMessage) {
+        ToastUtil.showToast(this, errMessage);
+    }
+
+    @Override
+    public void onSuccess(String address, BaseResponse baseResp) {
+        LoginResponse resp = (LoginResponse) baseResp;
+        LogUtil.i("response=" + HttpUtil.mGson.toJson(resp));
+        if (resp.getErrorCode() == 0) {//登录成功
+            if (cbremember.isChecked()) {
+                UserInfoManager.setAccountInfo(this, new LoginRequest(getUsername(), getPassword()));
+            } else {
+                UserInfoManager.clearAccountInfo(this);
+            }
+            UserInfoManager.setLoginInfo(this, HttpUtil.mGson.toJson(resp));
+            ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
+            IntentUtil.startActivity(this, MainActivity.class);
+            finish();
+        } else {//登录失败
+            ToastUtil.showToast(this, resp.getErrorMsg());
         }
     }
 }

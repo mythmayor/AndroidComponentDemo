@@ -111,22 +111,22 @@ public class PersonalInfoActivity extends BaseTitleBarMvpActivity<PersonalInfoPr
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(String address) {
         ProgressDialog01.show(this, "正在提交，请稍后...");
     }
 
     @Override
-    public void hideLoading() {
+    public void hideLoading(String address) {
         ProgressDialog01.disappear();
     }
 
     @Override
-    public void onError(String errMessage) {
+    public void onError(String address, String errMessage) {
         ToastUtil.showToast(this, errMessage);
     }
 
     @Override
-    public void onSuccess(BaseResponse baseResp) {
+    public void onSuccess(String address, BaseResponse baseResp) {
         UserInfoResponse resp = (UserInfoResponse) baseResp;
         ToastUtil.showToast(this, "Success");
     }

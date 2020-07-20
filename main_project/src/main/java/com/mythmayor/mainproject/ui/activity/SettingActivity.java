@@ -96,7 +96,7 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
             IntentUtil.startWebViewActivity(this, "用户隐私协议", "https://www.baidu.com/", WebViewActivity.class);
         } else if (v == nivaboutus) {
             IntentUtil.startActivity(this, AboutUsActivity.class);
-        }else if (v == nivtestroom) {
+        } else if (v == nivtestroom) {
             IntentUtil.startActivity(this, TestRoomDatabaseActivity.class);
         } else if (v == tvlogout) {
             showLogoutDialog();
@@ -127,18 +127,18 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(String address) {
     }
 
     @Override
-    public void hideLoading() {
+    public void hideLoading(String address) {
     }
 
     @Override
-    public void onError(String errMessage) {
+    public void onError(String address, String errMessage) {
     }
 
     @Override
-    public void onSuccess(BaseResponse baseResp) {
+    public void onSuccess(String address, BaseResponse baseResp) {
     }
 }

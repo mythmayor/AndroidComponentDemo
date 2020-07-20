@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import com.mythmayor.basicproject.BasicProjectApplication;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.itype.NetCallback;
-import com.mythmayor.basicproject.utils.ProgressDlgUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -41,7 +40,7 @@ public class HttpTool {
      * @param params 表单请求参数
      */
     public void postForm(String url, Map<String, String> params, StringCallback callback) {
-        if (MyConstant.URL_LOGIN.equals(url)) {
+        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             OkHttpUtils.post().url(url).params(params).build().execute(callback);
         } else {
             OkHttpUtils.post().url(url).addHeader("Authorization", getToken()).params(params).build().execute(callback);
@@ -55,7 +54,7 @@ public class HttpTool {
      * @param json Json请求参数
      */
     public void postJson(String url, String json, StringCallback callback) {
-        if (MyConstant.URL_LOGIN.equals(url)) {
+        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build().execute(callback);
         } else {
             OkHttpUtils.postString().url(url).addHeader("Authorization", getToken()).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build().execute(callback);
@@ -70,7 +69,7 @@ public class HttpTool {
      */
     public void postForm(String url, Map<String, String> params, final NetCallback callback) {
         RequestCall build;
-        if (MyConstant.URL_LOGIN.equals(url)) {
+        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             build = OkHttpUtils.post().url(url).params(params).build();
         } else {
             build = OkHttpUtils.post().url(url).addHeader("Authorization", getToken()).params(params).build();
@@ -134,7 +133,7 @@ public class HttpTool {
      */
     public void postJson(String url, String json, final NetCallback callback) {
         RequestCall build;
-        if (MyConstant.URL_LOGIN.equals(url)) {
+        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             build = OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
         } else {
             build = OkHttpUtils.postString().url(url).addHeader("Authorization", getToken()).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build();

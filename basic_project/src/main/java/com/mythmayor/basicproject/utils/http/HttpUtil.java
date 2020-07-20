@@ -57,7 +57,7 @@ public class HttpUtil {
 
     //登录接口-Json
     public static void login(LoginRequest request, NetCallback callback) {
-        requestNetData(MyConstant.URL_LOGIN, mGson.toJson(request), callback);
+        requestNetData(MyConstant.URL_ABSOLUTE_LOGIN, mGson.toJson(request), callback);
     }
 
     //登录接口-表单
@@ -65,7 +65,7 @@ public class HttpUtil {
         Map<String, String> params = getBaseParams();
         params.put("username", request.getUsername());
         params.put("password", request.getPassword());
-        requestNetData(MyConstant.URL_LOGIN, params, callback);
+        requestNetData(MyConstant.URL_ABSOLUTE_LOGIN, params, callback);
     }
 
     /**

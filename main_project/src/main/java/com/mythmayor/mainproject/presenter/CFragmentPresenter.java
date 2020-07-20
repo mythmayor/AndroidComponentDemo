@@ -1,5 +1,6 @@
 package com.mythmayor.mainproject.presenter;
 
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BasePresenter;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.UserInfoResponse;
@@ -38,23 +39,23 @@ public class CFragmentPresenter extends BasePresenter<CFragmentContract.View> im
                 .subscribe(new Observer<UserInfoResponse>() {//这里需要在build.gradle中指定jdk版本，否则会报错
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mView.showLoading();
+                        mView.showLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onNext(@NonNull UserInfoResponse resp) {
-                        mView.onSuccess(resp);
+                        mView.onSuccess(MyConstant.URL_LOGIN,resp);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        mView.onError(e.getMessage());
-                        mView.hideLoading();
+                        mView.onError(MyConstant.URL_LOGIN,e.getMessage());
+                        mView.hideLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onComplete() {
-                        mView.hideLoading();
+                        mView.hideLoading(MyConstant.URL_LOGIN);
                     }
                 });
     }

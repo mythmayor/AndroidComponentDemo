@@ -1,5 +1,6 @@
 package com.mythmayor.basicproject.utils.http;
 
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.response.RegisterResponse;
 import com.mythmayor.basicproject.response.UserInfoResponse;
@@ -28,7 +29,7 @@ public interface HttpService {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/login")
+    @POST(MyConstant.URL_LOGIN)
     Observable<LoginResponse> login(@Field("username") String username, @Field("password") String password);
 
     /**
@@ -37,7 +38,7 @@ public interface HttpService {
      * @param body
      * @return
      */
-    @POST("user/login")
+    @POST(MyConstant.URL_LOGIN)
     Observable<LoginResponse> login2(@Body RequestBody body);
 
     /**
@@ -47,7 +48,7 @@ public interface HttpService {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/login")
+    @POST(MyConstant.URL_LOGIN)
     Observable<LoginResponse> login3(@FieldMap Map<String, Object> params);
 
     /**
@@ -58,7 +59,7 @@ public interface HttpService {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/login")
+    @POST(MyConstant.URL_LOGIN)
     Observable<RegisterResponse> register(@Field("username") String username, @Field("password") String password);
 
     /**
@@ -69,7 +70,7 @@ public interface HttpService {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/login")
+    @POST(MyConstant.URL_LOGIN)
     Observable<UserInfoResponse> getUserInfo(@Field("username") String username, @Field("password") String password);
 
 }

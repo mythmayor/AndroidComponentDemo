@@ -97,22 +97,22 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(String address) {
         ProgressDialog01.show(this, "正在提交，请稍后...");
     }
 
     @Override
-    public void hideLoading() {
+    public void hideLoading(String address) {
         ProgressDialog01.disappear();
     }
 
     @Override
-    public void onError(String errMessage) {
+    public void onError(String address, String errMessage) {
         ToastUtil.showToast(this, errMessage);
     }
 
     @Override
-    public void onSuccess(BaseResponse baseResp) {
+    public void onSuccess(String address, BaseResponse baseResp) {
         UserInfoResponse resp = (UserInfoResponse) baseResp;
         ToastUtil.showToast(this, "提交成功，感谢您的反馈！");
         finish();

@@ -206,22 +206,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     }
 
     @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
-    @Override
-    public void onError(String errMessage) {
-    }
-
-    @Override
-    public void onSuccess(BaseResponse baseResp) {
-    }
-
-    @Override
     public void onBackPressed() {
         //super.onBackPressed();
         exitApp();
@@ -290,5 +274,21 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     //打开手势滑动
     public void setOpenGestureSwipe() {
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    @Override
+    public void showLoading(String address) {
+    }
+
+    @Override
+    public void hideLoading(String address) {
+    }
+
+    @Override
+    public void onError(String address, String errMessage) {
+    }
+
+    @Override
+    public void onSuccess(String address, BaseResponse baseResp) {
     }
 }

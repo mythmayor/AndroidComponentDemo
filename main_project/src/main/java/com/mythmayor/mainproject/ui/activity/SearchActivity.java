@@ -134,22 +134,18 @@ public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements 
     }
 
     @Override
-    public void showLoading() {
-
+    public void showLoading(String address) {
     }
 
     @Override
-    public void hideLoading() {
-
+    public void hideLoading(String address) {
     }
 
     @Override
-    public void onError(String errMessage) {
-
+    public void onError(String address, String errMessage) {
     }
 
     @Override
-    public void onSuccess(BaseResponse baseResp) {
-
+    public void onSuccess(String address, BaseResponse baseResp) {
     }
 }

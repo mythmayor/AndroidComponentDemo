@@ -41,6 +41,11 @@ public class UserInfoManager {
         return null;
     }
 
+    //存储账号信息
+    public static void clearAccountInfo(Context context) {
+        PrefUtil.putString(context, PrefUtil.SP_ACCOUNT, "");
+    }
+
     //存储登录信息
     public static void setLoginInfo(Context context, String loginInfo) {
         PrefUtil.putString(context, PrefUtil.SP_LOGIN_INFO, loginInfo);

@@ -4,7 +4,7 @@
 
 ## 中文介绍
 
-##### 项目是以组件化、模块化技术为基础搭建的Android开发框架，可基于此框架快速进行开发。项目中集成了Retrofit2、Rxjava3/AutoDispose2(解决RxJava内存泄漏问题)、Okhttp3、OkhttpUtils、Glide、Gson、EventBus、Lifycycle等框架，并针对网络请求、图片加载、Handler等做了进一步的封装。另外项目中添加了常用的工具类，可直接使用。
+##### 项目是以组件化、模块化技术为基础搭建的Android开发框架，可基于此框架快速进行开发。项目中集成了Retrofit2、Rxjava3/AutoDispose2(解决RxJava内存泄漏问题)、Okhttp3、OkhttpUtils、Glide、AndroidAutoSize、Room、LiveData、Gson、EventBus、Lifycycle、ImmersionBar、LeakCanary等框架，并针对网络请求、图片加载、数据库操作、Handler等做了进一步的封装。另外项目中添加了常用的工具类，可直接使用。
 
 ### 组件化、模块化说明
 
@@ -111,7 +111,7 @@ Github地址：https://github.com/mythmayor/MvvmArchitecture
 
 ## Introduction in English
 
-##### The project is an Android development framework built on the basis of componentized and modularized technology, and can be quickly developed based on this framework. The project integrates Retrofit2, Rxjava3/AutoDispose2 (to solve RxJava memory leak problem), Okhttp3, OkhttpUtils, Glide, Gson, EventBus, Lifycycle and other frameworks, and further encapsulates network requests, image loading, Handler and so on. In addition, common tools are added to the project, which can be used directly.
+##### The project is an Android development framework built on the basis of componentized and modularized technology, and can be quickly developed based on this framework. The project integrates Retrofit2, Rxjava3/AutoDispose2 (to solve RxJava memory leak problem), Okhttp3, OkhttpUtils, Glide, AndroidAutoSize, Room, LiveData, Gson, EventBus, Lifycycle, ImmersionBar, LeakCanary and other frameworks, and further encapsulates network requests, image loading, Database operations, Handler and so on. In addition, common tools are added to the project, which can be used directly.
 
 ### Componentized and Modularized Instructions
 
