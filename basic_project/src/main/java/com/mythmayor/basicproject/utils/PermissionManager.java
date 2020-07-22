@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ import java.util.List;
  * <p>
  * 该工具类提供：1.申请所有权限；2.申请单个权限；3.申请自定义权限组。以3为例：
  * String[] permissionArray = new String[]{PermissionManager.PERMISSION_CAMERA,PermissionManager.PERMISSION_MICROPHONE,PermissionManager.PERMISSION_PHONE,PermissionManager.PERMISSION_STORAGE};
- * PermissionManager.getInstance(this).getCustomPermission(permissionArray);
+ * PermissionManager.getInstance().getCustomPermission(this, permissionArray);
  */
 /*
     在Activity中可通过onRequestPermissionsResult来获取申请权限的结果，示例代码：
@@ -62,21 +63,19 @@ import java.util.List;
                         int grantResult = grantResults[i];
                         boolean success = grantResult == PackageManager.PERMISSION_GRANTED;
                         if (success) {
-                            //单项权限申请成功
+                            //permissions[i]单项权限申请成功
                         } else {
-                            //单项权限申请失败
+                            //permissions[i]单项权限申请失败
                         }
                     }
                 }
                 break;
             default:
-
                 break;
     }
 }*/
 public class PermissionManager {
 
-    private static Context mContext;
     /**
      * 权限
      */
@@ -141,8 +140,7 @@ public class PermissionManager {
     private PermissionManager() {
     }
 
-    public static PermissionManager getInstance(Context context) {
-        mContext = context;
+    public static PermissionManager getInstance() {
         return SingletonHolder.instance;
     }
 
@@ -151,11 +149,11 @@ public class PermissionManager {
      *
      * @return true已获取所有权限，false未获取所有权限
      */
-    public boolean checkAllPermission() {
+    public boolean checkAllPermission(Context context) {
         isAllPermissionOk = true;
         mPermissionList.clear();
         for (int i = 0; i < mAllPermissionArray.length; i++) {
-            if (ContextCompat.checkSelfPermission(mContext, mAllPermissionArray[i]) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, mAllPermissionArray[i]) != PackageManager.PERMISSION_GRANTED) {
                 mPermissionList.add(mAllPermissionArray[i]);
                 isAllPermissionOk = false;
             }
@@ -166,14 +164,28 @@ public class PermissionManager {
     /**
      * 获取所有权限
      */
-    public void getAllPermission() {
-        checkAllPermission();
+    public void getAllPermission(Activity activity) {
+        checkAllPermission(activity);
         if (mPermissionList.isEmpty()) {
             //未授予的权限为空，表示都授予了
         } else {
             //请求权限方法
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
-            ActivityCompat.requestPermissions((Activity) mContext, permissions, REQUEST_CODE_ALL);
+            ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE_ALL);
+        }
+    }
+
+    /**
+     * 获取所有权限
+     */
+    public void getAllPermission(Fragment fragment) {
+        checkAllPermission(fragment.getContext());
+        if (mPermissionList.isEmpty()) {
+            //未授予的权限为空，表示都授予了
+        } else {
+            //请求权限方法
+            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            fragment.requestPermissions(permissions, REQUEST_CODE_ALL);
         }
     }
 
@@ -183,7 +195,7 @@ public class PermissionManager {
      * @param customPermissionArray 自定义权限数组
      * @return true已获取自定义权限，false未获取自定义权限
      */
-    public boolean checkCustomPermission(String[] customPermissionArray) {
+    public boolean checkCustomPermission(Context context, String[] customPermissionArray) {
         mCustomPermissionArray = customPermissionArray;
         if (mCustomPermissionArray == null || mCustomPermissionArray.length == 0) {
             return false;
@@ -191,7 +203,7 @@ public class PermissionManager {
         isCustomPermissionOk = true;
         mPermissionList.clear();
         for (int i = 0; i < mCustomPermissionArray.length; i++) {
-            if (ContextCompat.checkSelfPermission(mContext, mCustomPermissionArray[i]) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, mCustomPermissionArray[i]) != PackageManager.PERMISSION_GRANTED) {
                 mPermissionList.add(mCustomPermissionArray[i]);
                 isCustomPermissionOk = false;
             }
@@ -204,14 +216,30 @@ public class PermissionManager {
      *
      * @param customPermissionArray 自定义权限数组
      */
-    public void getCustomPermission(String[] customPermissionArray) {
-        checkCustomPermission(customPermissionArray);
+    public void getCustomPermission(Activity activity, String[] customPermissionArray) {
+        checkCustomPermission(activity, customPermissionArray);
         if (mPermissionList.isEmpty()) {
             //未授予的权限为空，表示都授予了
         } else {
             //请求权限方法
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
-            ActivityCompat.requestPermissions((Activity) mContext, permissions, REQUEST_CODE_CUSTOM);
+            ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE_CUSTOM);
+        }
+    }
+
+    /**
+     * 获取自定义权限
+     *
+     * @param customPermissionArray 自定义权限数组
+     */
+    public void getCustomPermission(Fragment fragment, String[] customPermissionArray) {
+        checkCustomPermission(fragment.getContext(), customPermissionArray);
+        if (mPermissionList.isEmpty()) {
+            //未授予的权限为空，表示都授予了
+        } else {
+            //请求权限方法
+            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            fragment.requestPermissions(permissions, REQUEST_CODE_CUSTOM);
         }
     }
 
@@ -220,8 +248,8 @@ public class PermissionManager {
      *
      * @return true已获取日历权限，false未获取日历权限
      */
-    public boolean checkCalendarPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_CALENDAR);
+    public boolean checkCalendarPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_CALENDAR);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isCalendarPermissionOk = false;
         } else {
@@ -233,9 +261,18 @@ public class PermissionManager {
     /**
      * 获取日历权限-拒绝权限后仍然弹出权限窗
      */
-    public void getCalendarPermission1() {
-        if (!checkCalendarPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
+    public void getCalendarPermission1(Activity activity) {
+        if (!checkCalendarPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
+        }
+    }
+
+    /**
+     * 获取日历权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getCalendarPermission1(Fragment fragment) {
+        if (!checkCalendarPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
         }
     }
 
@@ -243,15 +280,34 @@ public class PermissionManager {
      * 获取日历权限-拒绝权限后不再弹出权限窗
      * shouldShowRequestPermissionRationale方法，如果用户已经拒绝过则返回true，即不再弹出权限窗
      */
-    public void getCalendarPermission2() {
+    public void getCalendarPermission2(Activity activity) {
         // Should we show an explanation?
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_CALENDAR)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_CALENDAR)) {
             // Show an expanation to the user *asynchronously* -- don't block
             // this thread waiting for the user's response! After the user
             // sees the explanation, try again to request the permission.
         } else {
             // No explanation needed, we can request the permission.
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
+            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+            // app-defined int constant. The callback method gets the
+            // result of the request.
+        }
+    }
+
+    /**
+     * 获取日历权限-拒绝权限后不再弹出权限窗
+     * shouldShowRequestPermissionRationale方法，如果用户已经拒绝过则返回true，即不再弹出权限窗
+     */
+    public void getCalendarPermission2(Fragment fragment) {
+        // Should we show an explanation?
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_CALENDAR)) {
+            // Show an expanation to the user *asynchronously* -- don't block
+            // this thread waiting for the user's response! After the user
+            // sees the explanation, try again to request the permission.
+        } else {
+            // No explanation needed, we can request the permission.
+            fragment.requestPermissions(new String[]{PERMISSION_CALENDAR}, REQUEST_CODE_CALENDAR);
             // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
             // app-defined int constant. The callback method gets the
             // result of the request.
@@ -263,8 +319,8 @@ public class PermissionManager {
      *
      * @return true已获取摄像头权限，false未获取摄像头权限
      */
-    public boolean checkCameraPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_CAMERA);
+    public boolean checkCameraPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_CAMERA);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isCameraPermissionOk = false;
         } else {
@@ -276,19 +332,38 @@ public class PermissionManager {
     /**
      * 获取摄像头权限-拒绝权限后仍然弹出权限窗
      */
-    public void getCameraPermission1() {
-        if (!checkCameraPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
+    public void getCameraPermission1(Activity activity) {
+        if (!checkCameraPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
+        }
+    }
+
+    /**
+     * 获取摄像头权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getCameraPermission1(Fragment fragment) {
+        if (!checkCameraPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
         }
     }
 
     /**
      * 获取摄像头权限-拒绝权限后不再弹出权限窗
      */
-    public void getCameraPermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_CAMERA)) {
+    public void getCameraPermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_CAMERA)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
+        }
+    }
+
+    /**
+     * 获取摄像头权限-拒绝权限后不再弹出权限窗
+     */
+    public void getCameraPermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_CAMERA}, REQUEST_CODE_CAMERA);
         }
     }
 
@@ -297,8 +372,8 @@ public class PermissionManager {
      *
      * @return true已获取联系人权限，false未获取联系人权限
      */
-    public boolean checkContactsPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_CONTACTS);
+    public boolean checkContactsPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_CONTACTS);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isContactsPermissionOk = false;
         } else {
@@ -310,19 +385,38 @@ public class PermissionManager {
     /**
      * 获取联系人权限-拒绝权限后仍然弹出权限窗
      */
-    public void getContactsPermission1() {
-        if (!checkContactsPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
+    public void getContactsPermission1(Activity activity) {
+        if (!checkContactsPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
+        }
+    }
+
+    /**
+     * 获取联系人权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getContactsPermission1(Fragment fragment) {
+        if (!checkContactsPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
         }
     }
 
     /**
      * 获取联系人权限-拒绝权限后不再弹出权限窗
      */
-    public void getContactsPermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_CONTACTS)) {
+    public void getContactsPermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_CONTACTS)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
+        }
+    }
+
+    /**
+     * 获取联系人权限-拒绝权限后不再弹出权限窗
+     */
+    public void getContactsPermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_CONTACTS)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_CONTACTS}, REQUEST_CODE_CONTACTS);
         }
     }
 
@@ -331,8 +425,8 @@ public class PermissionManager {
      *
      * @return true已获取定位权限，false未获取定位权限
      */
-    public boolean checkLocationPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_LOCATION);
+    public boolean checkLocationPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_LOCATION);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isLocationPermissionOk = false;
         } else {
@@ -344,19 +438,38 @@ public class PermissionManager {
     /**
      * 获取定位权限-拒绝权限后仍然弹出权限窗
      */
-    public void getLocationPermission1() {
-        if (!checkLocationPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
+    public void getLocationPermission1(Activity activity) {
+        if (!checkLocationPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
+        }
+    }
+
+    /**
+     * 获取定位权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getLocationPermission1(Fragment fragment) {
+        if (!checkLocationPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
         }
     }
 
     /**
      * 获取定位权限-拒绝权限后不再弹出权限窗
      */
-    public void getLocationPermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_LOCATION)) {
+    public void getLocationPermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_LOCATION)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
+        }
+    }
+
+    /**
+     * 获取定位权限-拒绝权限后不再弹出权限窗
+     */
+    public void getLocationPermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_LOCATION)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_LOCATION}, REQUEST_CODE_LOCATION);
         }
     }
 
@@ -365,8 +478,8 @@ public class PermissionManager {
      *
      * @return true已获取麦克风权限，false未获取麦克风权限
      */
-    public boolean checkMicrophonePermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_MICROPHONE);
+    public boolean checkMicrophonePermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_MICROPHONE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isMicrophonePermissionOk = false;
         } else {
@@ -378,19 +491,38 @@ public class PermissionManager {
     /**
      * 获取麦克风权限-拒绝权限后仍然弹出权限窗
      */
-    public void getMicrophonePermission1() {
-        if (!checkMicrophonePermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
+    public void getMicrophonePermission1(Activity activity) {
+        if (!checkMicrophonePermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
+        }
+    }
+
+    /**
+     * 获取麦克风权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getMicrophonePermission1(Fragment fragment) {
+        if (!checkMicrophonePermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
         }
     }
 
     /**
      * 获取麦克风权限-拒绝权限后不再弹出权限窗
      */
-    public void getMicrophonePermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_MICROPHONE)) {
+    public void getMicrophonePermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_MICROPHONE)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
+        }
+    }
+
+    /**
+     * 获取麦克风权限-拒绝权限后不再弹出权限窗
+     */
+    public void getMicrophonePermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_MICROPHONE)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_MICROPHONE}, REQUEST_CODE_MICROPHONE);
         }
     }
 
@@ -399,8 +531,8 @@ public class PermissionManager {
      *
      * @return true已获取手机状态权限，false未获取手机状态权限
      */
-    public boolean checkPhonePermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_PHONE);
+    public boolean checkPhonePermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_PHONE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isPhonePermissionOk = false;
         } else {
@@ -412,19 +544,38 @@ public class PermissionManager {
     /**
      * 获取手机状态权限-拒绝权限后仍然弹出权限窗
      */
-    public void getPhonePermission1() {
-        if (!checkPhonePermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
+    public void getPhonePermission1(Activity activity) {
+        if (!checkPhonePermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
+        }
+    }
+
+    /**
+     * 获取手机状态权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getPhonePermission1(Fragment fragment) {
+        if (!checkPhonePermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
         }
     }
 
     /**
      * 获取手机状态权限-拒绝权限后不再弹出权限窗
      */
-    public void getPhonePermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_PHONE)) {
+    public void getPhonePermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_PHONE)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
+        }
+    }
+
+    /**
+     * 获取手机状态权限-拒绝权限后不再弹出权限窗
+     */
+    public void getPhonePermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_PHONE)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_PHONE}, REQUEST_CODE_PHONE);
         }
     }
 
@@ -433,8 +584,8 @@ public class PermissionManager {
      *
      * @return true已获取传感器权限，false未获取传感器权限
      */
-    public boolean checkSensorsPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_SENSORS);
+    public boolean checkSensorsPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_SENSORS);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isSensorsPermissionOk = false;
         } else {
@@ -446,19 +597,38 @@ public class PermissionManager {
     /**
      * 获取传感器权限-拒绝权限后仍然弹出权限窗
      */
-    public void getSensorsPermission1() {
-        if (!checkSensorsPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
+    public void getSensorsPermission1(Activity activity) {
+        if (!checkSensorsPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
+        }
+    }
+
+    /**
+     * 获取传感器权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getSensorsPermission1(Fragment fragment) {
+        if (!checkSensorsPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
         }
     }
 
     /**
      * 获取传感器权限-拒绝权限后不再弹出权限窗
      */
-    public void getSensorsPermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_SENSORS)) {
+    public void getSensorsPermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_SENSORS)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
+        }
+    }
+
+    /**
+     * 获取传感器权限-拒绝权限后不再弹出权限窗
+     */
+    public void getSensorsPermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_SENSORS)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_SENSORS}, REQUEST_CODE_SENSORS);
         }
     }
 
@@ -467,8 +637,8 @@ public class PermissionManager {
      *
      * @return true已获取短信权限，false未获取短信权限
      */
-    public boolean checkSmsPermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_SMS);
+    public boolean checkSmsPermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_SMS);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isSmsPermissionOk = false;
         } else {
@@ -480,19 +650,38 @@ public class PermissionManager {
     /**
      * 获取短信权限-拒绝权限后仍然弹出权限窗
      */
-    public void getSmsPermission1() {
-        if (!checkSmsPermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
+    public void getSmsPermission1(Activity activity) {
+        if (!checkSmsPermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
+        }
+    }
+
+    /**
+     * 获取短信权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getSmsPermission1(Fragment fragment) {
+        if (!checkSmsPermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
         }
     }
 
     /**
      * 获取短信权限-拒绝权限后不再弹出权限窗
      */
-    public void getSmsPermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_SMS)) {
+    public void getSmsPermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_SMS)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
+        }
+    }
+
+    /**
+     * 获取短信权限-拒绝权限后不再弹出权限窗
+     */
+    public void getSmsPermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_SMS)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_SMS}, REQUEST_CODE_SMS);
         }
     }
 
@@ -501,8 +690,8 @@ public class PermissionManager {
      *
      * @return true已获取存储权限，false未获取存储权限
      */
-    public boolean checkStoragePermission() {
-        int permission = ActivityCompat.checkSelfPermission(mContext, PERMISSION_STORAGE);
+    public boolean checkStoragePermission(Context context) {
+        int permission = ContextCompat.checkSelfPermission(context, PERMISSION_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             isStoragePermissionOk = false;
         } else {
@@ -514,19 +703,38 @@ public class PermissionManager {
     /**
      * 获取存储权限-拒绝权限后仍然弹出权限窗
      */
-    public void getStoragePermission1() {
-        if (!checkStoragePermission()) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
+    public void getStoragePermission1(Activity activity) {
+        if (!checkStoragePermission(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
+        }
+    }
+
+    /**
+     * 获取存储权限-拒绝权限后仍然弹出权限窗
+     */
+    public void getStoragePermission1(Fragment fragment) {
+        if (!checkStoragePermission(fragment.getContext())) {
+            fragment.requestPermissions(new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
         }
     }
 
     /**
      * 获取存储权限-拒绝权限后不再弹出权限窗
      */
-    public void getStoragePermission2() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, PERMISSION_STORAGE)) {
+    public void getStoragePermission2(Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, PERMISSION_STORAGE)) {
         } else {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
+            ActivityCompat.requestPermissions(activity, new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
+        }
+    }
+
+    /**
+     * 获取存储权限-拒绝权限后不再弹出权限窗
+     */
+    public void getStoragePermission2(Fragment fragment) {
+        if (fragment.shouldShowRequestPermissionRationale(PERMISSION_STORAGE)) {
+        } else {
+            fragment.requestPermissions(new String[]{PERMISSION_STORAGE}, REQUEST_CODE_STORAGE);
         }
     }
 

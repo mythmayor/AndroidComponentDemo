@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.itype.NetCallback;
 import com.mythmayor.basicproject.utils.ToastUtil;
@@ -77,10 +77,10 @@ public class HttpTool {
         build.execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                if (!isNetworkAvailable(BasicProjectApplication.getInstance().getContext())) {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_NET);
+                if (!isNetworkAvailable(BasicApplication.getInstance().getContext())) {
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_NET);
                 } else {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_SERVER);
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_SERVER);
                 }
                 if (null != callback) {
                     callback.onFailed(call, e, id);
@@ -94,7 +94,7 @@ public class HttpTool {
                         callback.onSuccess(response, id);
                     }
                 } catch (Exception e) {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_DATA);
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_DATA);
                     e.printStackTrace();
                 }
             }
@@ -141,10 +141,10 @@ public class HttpTool {
         build.execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                if (!isNetworkAvailable(BasicProjectApplication.getInstance().getContext())) {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_NET);
+                if (!isNetworkAvailable(BasicApplication.getInstance().getContext())) {
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_NET);
                 } else {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_SERVER);
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_SERVER);
                 }
                 if (null != callback) {
                     callback.onFailed(call, e, id);
@@ -158,7 +158,7 @@ public class HttpTool {
                         callback.onSuccess(response, id);
                     }
                 } catch (Exception e) {
-                    ToastUtil.showToast(BasicProjectApplication.getInstance().getContext(),MyConstant.ERROR_DATA);
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_DATA);
                     e.printStackTrace();
                 }
             }

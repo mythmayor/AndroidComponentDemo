@@ -86,7 +86,10 @@ dependencies {
     api "androidx.room:room-rxjava2:$roomVersion"
     //Room持久性库 - optional - Guava support for Room, including Optional and ListenableFuture
     api "androidx.room:room-guava:$roomVersion"
-    // Test helpers
+    //Room持久性库 - Test helpers
     testImplementation "androidx.room:room-testing:$roomVersion"
-
+    //高德地图：latest.integration为最新版本
+    api "com.amap.api:3dmap:latest.integration"//3D地图
+    api "com.amap.api:search:latest.integration"//搜索
+    api "com.amap.api:location:latest.integration"//定位
 }

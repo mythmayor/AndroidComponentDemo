@@ -17,7 +17,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.bumptech.glide.Glide;
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.base.LifecycleHandler;
@@ -51,7 +51,7 @@ public class UpdateUtil {
         mForceUpdate = forceUpdate;
         mUpdateContent = updateContent;
         mApkSubPath = "/Apk/" + MyConstant.APK_NAME + "_" + mVersion + ".apk";
-        mApkAbsolutePath = BasicProjectApplication.getInstance().getContext().getExternalFilesDir("") + "/Download" + mApkSubPath;
+        mApkAbsolutePath = BasicApplication.getInstance().getContext().getExternalFilesDir("") + "/Download" + mApkSubPath;
         isApkFileExists = new File(mApkAbsolutePath).exists();
         mHandler = new LifecycleHandler(new LifecycleOwner() {
             @NonNull
@@ -205,7 +205,7 @@ public class UpdateUtil {
     class ClearCacheTask extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... params) {
-            GlideCacheUtil.getInstance().clearImageAllCache(BasicProjectApplication.getInstance().getContext());
+            GlideCacheUtil.getInstance().clearImageAllCache(BasicApplication.getInstance().getContext());
             return getCacheSize();
         }
 

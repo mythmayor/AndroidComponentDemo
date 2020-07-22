@@ -11,7 +11,7 @@ import android.media.ExifInterface;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -63,7 +63,7 @@ public class CommonUtil {
      * 获取Resource对象
      */
     public static Resources getResources() {
-        return BasicProjectApplication.getInstance().getContext().getResources();
+        return BasicApplication.getInstance().getContext().getResources();
     }
 
     /**

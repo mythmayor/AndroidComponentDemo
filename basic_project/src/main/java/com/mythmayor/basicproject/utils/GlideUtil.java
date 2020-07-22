@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.itype.OnGlideLoadListener;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class GlideUtil {
         }
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        Glide.with(BasicProjectApplication.getInstance().getContext())
+        Glide.with(BasicApplication.getInstance().getContext())
                 .load(url)
                 .apply(options)
                 .preload();
@@ -58,7 +58,7 @@ public class GlideUtil {
         }
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        Glide.with(BasicProjectApplication.getInstance().getContext())
+        Glide.with(BasicApplication.getInstance().getContext())
                 .load(url)
                 .apply(options)
                 .into(new SimpleTarget<Drawable>() {//加上这段代码可以解决加载不显示的问题
@@ -83,7 +83,7 @@ public class GlideUtil {
                 .placeholder(errImageId)
                 .error(errImageId)
                 .diskCacheStrategy(DiskCacheStrategy.DATA);
-        Glide.with(BasicProjectApplication.getInstance().getContext())
+        Glide.with(BasicApplication.getInstance().getContext())
                 .load(url)
                 .apply(options)
                 .into(new SimpleTarget<Drawable>() {
@@ -109,7 +109,7 @@ public class GlideUtil {
             String url = imageList.get(mIndex);
             RequestOptions options = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.DATA);
-            Glide.with(BasicProjectApplication.getInstance().getContext())
+            Glide.with(BasicApplication.getInstance().getContext())
                     .load(url)
                     .apply(options)
                     .listener(new RequestListener<Drawable>() {
@@ -148,7 +148,7 @@ public class GlideUtil {
      */
     public static void getImageWidthHeight(String pathUrl, final GetImageData data) {
         //获取图片真正的宽高
-        Glide.with(BasicProjectApplication.getInstance().getContext())
+        Glide.with(BasicApplication.getInstance().getContext())
                 .load(pathUrl)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
@@ -183,6 +183,6 @@ public class GlideUtil {
      */
     public static void destroy() {
         //Glide.with(MyApplication.getContext()).pauseRequests();
-        GlideCacheUtil.getInstance().clearImageAllCache(BasicProjectApplication.getInstance().getContext());
+        GlideCacheUtil.getInstance().clearImageAllCache(BasicApplication.getInstance().getContext());
     }
 }

@@ -17,6 +17,8 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.ui.view.NavigationItemView;
 import com.mythmayor.basicproject.utils.IntentUtil;
+import com.mythmayor.basicproject.utils.PermissionManager;
+import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.DFragmentContract;
@@ -24,6 +26,7 @@ import com.mythmayor.mainproject.presenter.DFragmentPresenter;
 import com.mythmayor.mainproject.ui.activity.ChangePasswordActivity;
 import com.mythmayor.mainproject.ui.activity.FeedbackActivity;
 import com.mythmayor.mainproject.ui.activity.MainActivity;
+import com.mythmayor.mainproject.ui.activity.MapTestActivity;
 import com.mythmayor.mainproject.ui.activity.NotificationActivity;
 import com.mythmayor.mainproject.ui.activity.PersonalInfoActivity;
 import com.mythmayor.mainproject.ui.activity.SettingActivity;
@@ -44,7 +47,11 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     private NavigationItemView nivfeedback;
     private NavigationItemView nivmodifypwd;
     private NavigationItemView nivsetting;
+    private NavigationItemView nivmaptest;
     private MainActivity mMainActivity;
+    private String[] mPermissionArray = new String[]{
+            PermissionManager.PERMISSION_LOCATION
+    };
 
     @Override
     protected void lazyLoad() {
@@ -52,6 +59,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
             return;
         }
     }
+
 
     @Nullable
     @Override
@@ -77,6 +85,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
         nivfeedback = (NavigationItemView) view.findViewById(R.id.niv_feedback);
         nivmodifypwd = (NavigationItemView) view.findViewById(R.id.niv_modifypwd);
         nivsetting = (NavigationItemView) view.findViewById(R.id.niv_setting);
+        nivmaptest = (NavigationItemView) view.findViewById(R.id.niv_maptest);
         mMainActivity = (MainActivity) getActivity();
     }
 
@@ -87,6 +96,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
         nivfeedback.setOnClickListener(this);
         nivmodifypwd.setOnClickListener(this);
         nivsetting.setOnClickListener(this);
+        nivmaptest.setOnClickListener(this);
     }
 
     @Override
@@ -107,6 +117,18 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PermissionManager.REQUEST_CODE_CUSTOM) {
+            if (!PermissionManager.getInstance().checkCustomPermission(getContext(), mPermissionArray)) {
+                ToastUtil.showToast("用户拒绝开启权限");
+            }else {
+                IntentUtil.startActivity(getActivity(), MapTestActivity.class);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         super.onClick(v);
         if (v == llpersonalinfo) {
@@ -119,6 +141,12 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
             IntentUtil.startActivity(getActivity(), ChangePasswordActivity.class);
         } else if (v == nivsetting) {
             IntentUtil.startActivity(getActivity(), SettingActivity.class);
+        } else if (v == nivmaptest) {
+            if (!PermissionManager.getInstance().checkCustomPermission(getContext(), mPermissionArray)) {
+                PermissionManager.getInstance().getCustomPermission(this, mPermissionArray);
+            } else {
+                IntentUtil.startActivity(getActivity(), MapTestActivity.class);
+            }
         }
     }
 

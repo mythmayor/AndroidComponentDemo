@@ -24,19 +24,19 @@ import okhttp3.OkHttpClient;
 /**
  * Created by mythmayor on 2020/7/6.
  */
-public class BasicProjectApplication {
+public class BasicApplication {
 
-    private static final String TAG = BasicProjectApplication.class.getSimpleName();
-    private static volatile BasicProjectApplication instance;
+    private static final String TAG = BasicApplication.class.getSimpleName();
+    private static volatile BasicApplication instance;
 
-    private BasicProjectApplication() {
+    private BasicApplication() {
     }
 
-    public static BasicProjectApplication getInstance() {
+    public static BasicApplication getInstance() {
         if (instance == null) {
-            synchronized (BasicProjectApplication.class) {
+            synchronized (BasicApplication.class) {
                 if (instance == null) {
-                    instance = new BasicProjectApplication();
+                    instance = new BasicApplication();
                 }
             }
         }
@@ -59,8 +59,6 @@ public class BasicProjectApplication {
         initNetwork();
         /**
          * TODO-LIST
-         * 登录页面增加记住账号密码的勾选框
-         * 注册加验证码
          * 添加消息推送
          * 地图集成
          */

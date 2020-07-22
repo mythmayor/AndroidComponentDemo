@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.media.MediaMetadataRetriever;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -851,5 +852,26 @@ public class ProjectUtil {
                 return i;
         }
         return x * y;
+    }
+
+    /**
+     * 判断GPS是否开启
+     *
+     * @return true 表示开启
+     */
+    public static boolean isGpsOpen(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return gps;
+    }
+
+    public static boolean isGpsNetWorkOpen(Context context) {
+        ConnectivityManager cm =(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo network = cm.getActiveNetworkInfo();
+        if (network != null) {
+            return network.isAvailable();
+        }
+        return false;
     }
 }

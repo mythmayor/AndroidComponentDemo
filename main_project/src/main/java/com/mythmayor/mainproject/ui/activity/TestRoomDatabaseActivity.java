@@ -13,7 +13,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.database.DataGenerator;
@@ -111,7 +111,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
     }
 
     private void initDatabase() {
-        mDataRepository = BasicProjectApplication.getInstance().getDataRepository();
+        mDataRepository = BasicApplication.getInstance().getDataRepository();
         mDataRepository.getDatabaseCreated().observe(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean exist) {
@@ -213,7 +213,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
 
     private void insertAll() {
         List<UserEntity> users = DataGenerator.generateUsers();
-        BasicProjectApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
+        BasicApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 mDataRepository.getAppDatabase().runInTransaction(new Runnable() {
@@ -234,7 +234,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
     }
 
     private void insertOne() {
-        BasicProjectApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
+        BasicApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 int index = mDataRepository.allUsers().size() + 1;
@@ -254,7 +254,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
     }
 
     private void deleteOne() {
-        BasicProjectApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
+        BasicApplication.getInstance().getAppExecutors().diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 List<UserEntity> list = mDataRepository.allUsers();

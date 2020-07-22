@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,7 +49,7 @@ public class PrintErrorLogUtil {
             String fileName = DateUtil.getYMD(System.currentTimeMillis()) + ".log";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 //获取文件输出路径
-                String path = BasicProjectApplication.getInstance().getContext().getExternalFilesDir("") + "/crashlogs/";
+                String path = BasicApplication.getInstance().getContext().getExternalFilesDir("") + "/crashlogs/";
                 //创建文件夹和文件
                 File dir = new File(path);
                 if (!dir.exists()) {
@@ -82,9 +82,9 @@ public class PrintErrorLogUtil {
         StringBuffer sb = new StringBuffer();
         try {
             //获取包管理器
-            PackageManager pm = BasicProjectApplication.getInstance().getContext().getPackageManager();
+            PackageManager pm = BasicApplication.getInstance().getContext().getPackageManager();
             //获取包信息
-            PackageInfo pi = pm.getPackageInfo(BasicProjectApplication.getInstance().getContext().getPackageName(),
+            PackageInfo pi = pm.getPackageInfo(BasicApplication.getInstance().getContext().getPackageName(),
                     PackageManager.GET_ACTIVITIES);
             if (pi != null) {
                 //版本号
@@ -114,7 +114,7 @@ public class PrintErrorLogUtil {
     }
 
     public static void clearLogs() {
-        String path = BasicProjectApplication.getInstance().getContext().getExternalFilesDir("") + "/crashlogs/";
+        String path = BasicApplication.getInstance().getContext().getExternalFilesDir("") + "/crashlogs/";
         File file = new File(path);
         if (file.exists()) {
             File[] files = file.listFiles();

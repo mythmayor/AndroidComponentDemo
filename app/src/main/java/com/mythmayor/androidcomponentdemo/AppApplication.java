@@ -4,15 +4,15 @@ import android.app.Application;
 
 import androidx.multidex.MultiDex;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 
 import me.jessyan.autosize.AutoSize;
 
 /**
  * Created by mythmayor on 2020/6/30.
- * 全局Application
+ * App模块Application
  */
-public class MyApplication extends Application {
+public class AppApplication extends Application {
 
     @Override
     public void onCreate() {
@@ -21,14 +21,14 @@ public class MyApplication extends Application {
         AutoSize.initCompatMultiProcess(this);
         //解决方法数超过65535的报错问题
         MultiDex.install(this);
-        BasicProjectApplication.getInstance().init(this);
+        BasicApplication.getInstance().init(this);
     }
 
     /**
      * 退出应用程序
      */
     public void quitApplication() {
-        BasicProjectApplication.getInstance().clearAllActivity();
+        BasicApplication.getInstance().clearAllActivity();
         System.exit(0);
     }
 }

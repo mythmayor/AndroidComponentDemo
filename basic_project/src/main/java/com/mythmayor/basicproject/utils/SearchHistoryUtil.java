@@ -3,7 +3,7 @@ package com.mythmayor.basicproject.utils;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.bean.SearchHistoryBean;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
 
@@ -32,7 +32,7 @@ public class SearchHistoryUtil {
             return;
         }
         if (TextUtils.isEmpty(historyKey)) historyKey = PrefUtil.SP_SEARCH_HISTORY;
-        String history = PrefUtil.getString(BasicProjectApplication.getInstance().getContext(), historyKey, "");
+        String history = PrefUtil.getString(BasicApplication.getInstance().getContext(), historyKey, "");
         List<SearchHistoryBean> list;
         if (TextUtils.isEmpty(history)) {//搜索历史记录为空，直接存储搜索内容
             list = new ArrayList<>();
@@ -54,12 +54,12 @@ public class SearchHistoryUtil {
             }
         }
         String result = HttpUtil.mGson.toJson(list);
-        PrefUtil.putString(BasicProjectApplication.getInstance().getContext(), historyKey, result);
+        PrefUtil.putString(BasicApplication.getInstance().getContext(), historyKey, result);
     }
 
     public List<SearchHistoryBean> get(String historyKey) {
         if (TextUtils.isEmpty(historyKey)) historyKey = PrefUtil.SP_SEARCH_HISTORY;
-        String history = PrefUtil.getString(BasicProjectApplication.getInstance().getContext(), historyKey, "");
+        String history = PrefUtil.getString(BasicApplication.getInstance().getContext(), historyKey, "");
         List<SearchHistoryBean> list = null;
         if (!TextUtils.isEmpty(history)) {
             list = HttpUtil.mGson.fromJson(history, new TypeToken<List<SearchHistoryBean>>() {
@@ -70,7 +70,7 @@ public class SearchHistoryUtil {
 
     public void clear(String historyKey) {
         if (TextUtils.isEmpty(historyKey)) historyKey = PrefUtil.SP_SEARCH_HISTORY;
-        PrefUtil.putString(BasicProjectApplication.getInstance().getContext(), historyKey, "");
+        PrefUtil.putString(BasicApplication.getInstance().getContext(), historyKey, "");
     }
 
     private List<String> array2List(String[] array) {

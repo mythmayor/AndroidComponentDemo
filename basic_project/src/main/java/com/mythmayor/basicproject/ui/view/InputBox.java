@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.utils.CommonUtil;
 
@@ -33,11 +33,11 @@ public class InputBox extends FrameLayout {
 
     private static final int DEFAULT_TYPE = TYPE_DISPLAY;
     private static final int DEFAULT_TVTITLE_TEXTCOLOR = CommonUtil.getColor(R.color.color_666666);
-    private static final int DEFAULT_TVTITLE_TEXTSIZE = CommonUtil.sp2px(BasicProjectApplication.getInstance().getContext(), 16);
+    private static final int DEFAULT_TVTITLE_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
     private static final int DEFAULT_TVCONTENT_TEXTCOLOR = CommonUtil.getColor(R.color.color_333333);
-    private static final int DEFAULT_TVCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicProjectApplication.getInstance().getContext(), 16);
+    private static final int DEFAULT_TVCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
     private static final int DEFAULT_ETCONTENT_TEXTCOLOR = CommonUtil.getColor(R.color.color_333333);
-    private static final int DEFAULT_ETCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicProjectApplication.getInstance().getContext(), 16);
+    private static final int DEFAULT_ETCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
 
     public InputBox(@NonNull Context context) {
         this(context, null);

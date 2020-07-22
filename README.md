@@ -60,7 +60,11 @@
 如果是作为依赖库则需要在注释掉<intent-filter>相关代码；
 如果是作为单独的应用程序则需要取消注释<intent-filter>相关代码。
 
-4.打开app模块下的build.gradle，设置dependencies中对该库的依赖。
+4.打开该模块下的清单文件，设置<application-name>配置。
+如果是作为依赖库则需要在<application>中配置(android:name=".MainApplication")；
+如果是作为单独的应用程序则需要取消<application-name>的配置。
+
+5.打开app模块下的build.gradle，设置dependencies中对该库的依赖。
 如果是作为依赖库则需要取消注释该行代码；
 如果是作为单独的应用程序则需要注释掉该行代码。
 ```
@@ -163,7 +167,11 @@ If it is a separate application, you need to uncomment this line of code.
 If it is used as a dependent library, you need to comment out the relevant code of <intent-filter>;
 If it is a separate application, you need to uncomment the relevant code of <intent-filter>.
 
-4. Open build.gradle under the app module and set the dependency on the library in dependencies.
+4. Open the manifest file under the module and set the <application-name> configuration.
+If it is used as a dependent library, you need to configure (android:name=".MainApplication") in the <application>;
+If it is a separate application, you need to cancel the configuration of <application-name>.
+
+5. Open build.gradle under the app module and set the dependency on the library in dependencies.
 If it is used as a dependent library, you need to uncomment this line of code;
 If it is a separate application, you need to comment out this line of code.
 ```

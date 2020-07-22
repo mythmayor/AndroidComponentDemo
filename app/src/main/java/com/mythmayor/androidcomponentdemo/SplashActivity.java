@@ -1,6 +1,7 @@
 package com.mythmayor.androidcomponentdemo;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
@@ -11,6 +12,7 @@ import com.mythmayor.basicproject.base.BaseActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.utils.LogUtil;
+import com.mythmayor.basicproject.utils.PermissionManager;
 import com.mythmayor.basicproject.utils.PrefUtil;
 
 /**
@@ -25,10 +27,29 @@ public class SplashActivity extends BaseActivity {
     private static boolean isBackPressed = false;
 
     private LifecycleHandler mHandler;
+    private boolean isPermissionRequestFinished;
+    private String[] mPermissionArray = new String[]{
+            PermissionManager.PERMISSION_LOCATION,
+            PermissionManager.PERMISSION_PHONE,
+            PermissionManager.PERMISSION_STORAGE
+    };
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_splash;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PermissionManager.REQUEST_CODE_CUSTOM) {
+            if (permissions.length > 0 && grantResults.length > 0 && permissions.length == grantResults.length) {
+                enterMyApp();
+                for (int i = 0; i < permissions.length; i++) {
+                    LogUtil.d("【权限申请】permission=" + permissions[i] + ", grantResult=" + grantResults[i] + ", " + (grantResults[i] == PackageManager.PERMISSION_GRANTED ? "用户授予了此权限" : "用户拒绝了此权限"));
+                }
+            }
+        }
     }
 
     @Override
@@ -66,7 +87,6 @@ public class SplashActivity extends BaseActivity {
         boolean isUserLogin = PrefUtil.getBoolean(mContext, PrefUtil.SP_IS_USER_LOGIN, false);
         if (isUserLogin) {
             if (isAppWentToBg) {
-                //IntentUtil.startActivity(this, MainActivity.class);
                 //ARouter.getInstance().build("/mainproject/MainActivity").greenChannel().navigation();
                 ARouter.getInstance().build("/mainproject/MainActivity").navigation();
                 finish();
@@ -74,7 +94,6 @@ public class SplashActivity extends BaseActivity {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //IntentUtil.startActivity(SplashActivity.this, MainActivity.class);
                         //ARouter.getInstance().build("/mainproject/MainActivity").greenChannel().navigation();
                         ARouter.getInstance().build("/mainproject/MainActivity").navigation();
                         finish();
@@ -86,7 +105,6 @@ public class SplashActivity extends BaseActivity {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //IntentUtil.startActivity(SplashActivity.this, LoginActivity.class);
                     //ARouter.getInstance().build("/mainproject/LoginActivity").greenChannel().navigation();
                     ARouter.getInstance().build("/mainproject/LoginActivity").navigation();
                     finish();
@@ -110,7 +128,12 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        enterMyApp();
+        isPermissionRequestFinished = PermissionManager.getInstance().checkCustomPermission(this, mPermissionArray);
+        if (!isPermissionRequestFinished) {
+            PermissionManager.getInstance().getCustomPermission(this, mPermissionArray);
+        } else {
+            enterMyApp();
+        }
     }
 
     @Override

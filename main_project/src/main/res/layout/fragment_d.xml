@@ -105,6 +105,18 @@
                 app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="设置" />
+
+            <View
+                style="@style/line_horizontal"
+                android:layout_marginLeft="20dp" />
+
+            <com.mythmayor.basicproject.ui.view.NavigationItemView
+                android:id="@+id/niv_maptest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_icon="@mipmap/icon_main_tab_selected"
+                app:niv_title="高德地图测试" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.mythmayor.basicproject.BasicProjectApplication;
+import com.mythmayor.basicproject.BasicApplication;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -14,7 +14,7 @@ import com.mythmayor.basicproject.BasicProjectApplication;
 public class ToastUtil {
 
     protected static Toast mToast = null;
-    private static Context mContext = BasicProjectApplication.getInstance().getContext();
+    private static Context mContext = BasicApplication.getInstance().getContext();
 
     private static String oldMsg;
     private static long oneTime = 0;
