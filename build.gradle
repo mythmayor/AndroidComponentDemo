@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
@@ -20,7 +20,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 
@@ -68,4 +70,19 @@ ext {
     autosizeVersion = '1.2.1'
 
     roomVersion = '2.2.5'
+
+    amapVersion = 'latest.integration'
+
+    umsdkCommonVersion = '9.1.0'
+    umsdkUtdidVersion = '1.5.2'
+    umsdkAsmsVersion = '1.1.3'
+    umsdkCrashVersion = '0.0.4'
+    umsdkPushVersion = '6.1.0'
+    umsdkAlicloudHttpdnsVersion = '1.2.5'
+    umsdkAlicloudUtilsVersion = '1.1.5'
+    umsdkAlicloudBeaconVersion = '1.0.1'
+    umsdkAgooAccsVersion = '3.3.8.8-open-fix2'
+    umsdkAgooNetworksdkVersion = '3.5.5'
+    umsdkAgooTlogVersion = '3.0.0.17'
+    umsdkAgooTnet4androidVersion = '3.1.14.9'
 }

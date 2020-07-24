@@ -34,5 +34,9 @@ public interface MyConstant {
             + MyConstant.AES_KEY_PART4;
     String AES_KEY_PART4 = "!@#$%^";
 
+    //友盟消息推送信息
+    String UMENG_APP_KAY = "5f1922b39ec54a20b7efd239";
+    String UMENG_MESSAGE_SECRET = "fa5badcf610c40183dc4028d98202f84";
+    String UMENG_APP_MASTER_SECRET = "xdbrxrej3buojocrzdayc5fx2zxhskgd";
 
 }

@@ -20,6 +20,12 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -77,19 +83,35 @@ dependencies {
     //AndroidAutoSize适配方案
     api "me.jessyan:autosize:$rootProject.ext.autosizeVersion"
     //Room持久性库
-    api "androidx.room:room-runtime:$roomVersion"
+    api "androidx.room:room-runtime:$rootProject.ext.roomVersion"
     //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
-    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.ext.roomVersion"
     //Room持久性库 - optional - Kotlin Extensions and Coroutines support for Room
-    api "androidx.room:room-ktx:$roomVersion"
+    api "androidx.room:room-ktx:$rootProject.ext.roomVersion"
     //Room持久性库 - optional - RxJava support for Room
-    api "androidx.room:room-rxjava2:$roomVersion"
+    api "androidx.room:room-rxjava2:$rootProject.ext.roomVersion"
     //Room持久性库 - optional - Guava support for Room, including Optional and ListenableFuture
-    api "androidx.room:room-guava:$roomVersion"
+    api "androidx.room:room-guava:$rootProject.ext.roomVersion"
     //Room持久性库 - Test helpers
-    testImplementation "androidx.room:room-testing:$roomVersion"
+    testImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
     //高德地图：latest.integration为最新版本
-    api "com.amap.api:3dmap:latest.integration"//3D地图
-    api "com.amap.api:search:latest.integration"//搜索
-    api "com.amap.api:location:latest.integration"//定位
+    api "com.amap.api:3dmap:$rootProject.ext.amapVersion"//3D地图
+    api "com.amap.api:search:$rootProject.ext.amapVersion"//搜索
+    api "com.amap.api:location:$rootProject.ext.amapVersion"//定位
+
+    //友盟消息推送
+    //基础组件库依赖(必须) Push 6.1.0版本必须升级新版本Common SDK
+    api "com.umeng.umsdk:common:$rootProject.ext.umsdkCommonVersion"
+    api "com.umeng.umsdk:utdid:$rootProject.ext.umsdkUtdidVersion"
+    api "com.umeng.umsdk:asms:$rootProject.ext.umsdkAsmsVersion"
+    api "com.umeng.umsdk:crash:$rootProject.ext.umsdkCrashVersion"
+    //友盟push相关依赖(必须)
+    api "com.umeng.umsdk:push:$rootProject.ext.umsdkPushVersion"
+    api "com.umeng.umsdk:alicloud-httpdns:$rootProject.ext.umsdkAlicloudHttpdnsVersion"
+    api "com.umeng.umsdk:alicloud-utils:$rootProject.ext.umsdkAlicloudUtilsVersion"
+    api "com.umeng.umsdk:alicloud_beacon:$rootProject.ext.umsdkAlicloudBeaconVersion"
+    api "com.umeng.umsdk:agoo-accs:$rootProject.ext.umsdkAgooAccsVersion"
+    api "com.umeng.umsdk:agoo_networksdk:$rootProject.ext.umsdkAgooNetworksdkVersion"
+    api "com.umeng.umsdk:agoo_tlog:$rootProject.ext.umsdkAgooTlogVersion"
+    api "com.umeng.umsdk:agoo_tnet4android:$rootProject.ext.umsdkAgooTnet4androidVersion"
 }

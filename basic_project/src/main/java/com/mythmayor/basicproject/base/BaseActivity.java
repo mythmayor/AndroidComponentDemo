@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.utils.ActivityCollector;
+import com.umeng.message.PushAgent;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -49,6 +50,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initEvent();
         //初始化数据
         initData(getIntent());
+        //开启友盟应用数据统计
+        PushAgent.getInstance(this).onAppStart();
     }
 
     /**
