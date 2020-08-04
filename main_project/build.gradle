@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCoreVersion"
 
-    implementation project(path: ':basic_project')
+    api project(path: ':basic_project')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
     annotationProcessor "androidx.room:room-compiler:$roomVersion"

@@ -2,15 +2,19 @@ package com.mythmayor.androidcomponentdemo;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
+import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PermissionManager;
 import com.mythmayor.basicproject.utils.PrefUtil;
@@ -19,6 +23,7 @@ import com.mythmayor.basicproject.utils.PrefUtil;
  * Created by mythmayor on 2020/6/30.
  * 启动页面
  */
+@Route(path = "/app/SplashActivity")
 public class SplashActivity extends BaseActivity {
 
     // 用于判断是否从后台返回或者是否到后台
@@ -87,8 +92,15 @@ public class SplashActivity extends BaseActivity {
         boolean isUserLogin = PrefUtil.getBoolean(mContext, PrefUtil.SP_IS_USER_LOGIN, false);
         if (isUserLogin) {
             if (isAppWentToBg) {
-                //ARouter.getInstance().build("/mainproject/MainActivity").greenChannel().navigation();
-                ARouter.getInstance().build("/mainproject/MainActivity").navigation();
+                //不带参数跳转
+                //ARouter.getInstance().build("/mainproject/MainActivity").navigation();
+                //携带参数跳转
+                Bundle bundle = new Bundle();
+                bundle.putInt(MyConstant.ID, 36);
+                bundle.putString(MyConstant.NAME, "admin");
+                LoginRequest object = new LoginRequest("admin", "123456");
+                bundle.putSerializable(MyConstant.OBJECT, object);
+                ARouter.getInstance().build("/mainproject/MainActivity").with(bundle).navigation();
                 finish();
             } else {
                 mHandler.postDelayed(new Runnable() {

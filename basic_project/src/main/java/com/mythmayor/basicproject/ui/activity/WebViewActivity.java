@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
@@ -32,6 +33,7 @@ import com.mythmayor.basicproject.base.BaseTitleBarActivity;
  *       }
  *    });
  */
+@Route(path = "/basicproject/WebViewActivity")
 public class WebViewActivity extends BaseTitleBarActivity {
 
     private WebView mWebView;

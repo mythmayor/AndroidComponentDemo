@@ -26,6 +26,7 @@ import java.util.Random;
 
 /**
  * Created by mythmayor on 2020/7/15.
+ * 搜索页面
  */
 public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements SearchContract.View {
 

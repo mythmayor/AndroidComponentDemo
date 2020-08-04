@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.navigation.NavigationView;
 import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.adapter.FragmentAdapter;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
@@ -34,6 +36,7 @@ import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
+import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.MainContract;
 import com.mythmayor.mainproject.presenter.MainPresenter;
@@ -174,6 +177,18 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     protected void initData(Intent intent) {
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                LogUtil.d("bundle not null");
+                int id = bundle.getInt(MyConstant.ID);
+                String name = bundle.getString(MyConstant.NAME);
+                LoginRequest object = (LoginRequest) bundle.getSerializable(MyConstant.OBJECT);
+                LogUtil.d("id=" + id + ", name=" + name + ", object=" + HttpUtil.mGson.toJson(object));
+            } else {
+                LogUtil.d("bundle is null");
+            }
+        }
         PrefUtil.putBoolean(this, PrefUtil.SP_IS_USER_LOGIN, true);
         initViewPager();
     }

@@ -57,7 +57,7 @@ import java.util.List;
 
 /**
  * Created by mythmayor on 2020/7/20.
- * 高德地图测试
+ * 高德地图测试页面
  * 高德开放平台：https://lbs.amap.com/
  */
 public class MapTestActivity extends BaseTitleBarActivity implements LocationSource, AMapLocationListener {

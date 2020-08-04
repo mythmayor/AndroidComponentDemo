@@ -10,7 +10,7 @@ import com.mythmayor.basicproject.base.BaseDialog;
 
 /**
  * Created by mythmayor on 2020/6/30.
- * 退出登录Dialog弹窗
+ * 退出登录弹窗
  */
 public class LogoutDialog extends BaseDialog {
 

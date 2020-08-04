@@ -20,7 +20,7 @@ import com.mythmayor.basicproject.utils.CommonUtil;
 
 /**
  * Created by mythmayor on 2020/7/15.
- * 输入框
+ * 自定义输入框
  */
 public class InputBox extends FrameLayout {
 

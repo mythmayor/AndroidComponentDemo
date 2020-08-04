@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -49,7 +50,8 @@ public class GlideUtil {
 
     /**
      * 加载图片
-     * @param url 图片路径
+     *
+     * @param url       图片路径
      * @param imageView ImageView对象
      */
     public static void loadImage(String url, final ImageView imageView) {
@@ -61,6 +63,7 @@ public class GlideUtil {
         Glide.with(BasicApplication.getInstance().getContext())
                 .load(url)
                 .apply(options)
+                //.into(imageView);
                 .into(new SimpleTarget<Drawable>() {//加上这段代码可以解决加载不显示的问题
                     @Override
                     public void onResourceReady(Drawable drawable, Transition<? super Drawable> transition) {
@@ -71,12 +74,14 @@ public class GlideUtil {
 
     /**
      * 加载图片
-     * @param url 图片路径
+     *
+     * @param url        图片路径
      * @param errImageId 错误图片ID
-     * @param imageView ImageView对象
+     * @param imageView  ImageView对象
      */
     public static void loadImage(String url, int errImageId, final ImageView imageView) {
         if (TextUtils.isEmpty(url) || null == imageView) {
+            imageView.setImageResource(errImageId);
             return;
         }
         RequestOptions options = new RequestOptions()
@@ -86,10 +91,17 @@ public class GlideUtil {
         Glide.with(BasicApplication.getInstance().getContext())
                 .load(url)
                 .apply(options)
-                .into(new SimpleTarget<Drawable>() {
+                //.into(imageView);
+                .into(new SimpleTarget<Drawable>() {//加上这段代码可以解决加载不显示的问题
                     @Override
                     public void onResourceReady(Drawable drawable, Transition<? super Drawable> transition) {
                         imageView.setImageDrawable(drawable); //显示图片
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        imageView.setImageResource(errImageId); //显示图片
                     }
                 });
     }

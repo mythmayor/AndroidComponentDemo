@@ -18,7 +18,7 @@ import com.mythmayor.basicproject.R;
 
 /**
  * Created by mythmayor on 2020/7/10.
- * 导航条
+ * 自定义导航条
  */
 public class NavigationItemView extends FrameLayout {
 

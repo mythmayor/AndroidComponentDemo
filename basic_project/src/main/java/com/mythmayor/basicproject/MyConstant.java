@@ -13,8 +13,13 @@ public interface MyConstant {
     String ERROR_NET = "网络异常";
     String ERROR_DATA = "数据异常";
 
+    String ID = "ID";
+    String NAME = "NAME";
+    String OBJECT = "OBJECT";
     String INTENT_EXTRA_TITLE = "INTENT_EXTRA_TITLE";
     String INTENT_EXTRA_URL = "INTENT_EXTRA_URL";
+
+    String EVENT_KEY_NOTIFICATION = "EVENT_KEY_NOTIFICATION";
 
     String APK_NAME = "MyApp_prod";
 

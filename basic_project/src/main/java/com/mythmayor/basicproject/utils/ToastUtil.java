@@ -26,8 +26,13 @@ public class ToastUtil {
     public static final int GRAVITY_CENTER = Gravity.CENTER;//位置居中
     public static final int GRAVITY_TOP = Gravity.TOP;//位置居上
 
+    /**
+     * 过时方法，存在Bug: 连续多次点击同一个会不展示
+     *
+     * @deprecated Use {@link #showToast(String message)} instead.
+     */
     @Deprecated
-    public static void showToast(Context context, String s) {//连续多次点击同一个会不展示
+    public static void showToast(Context context, String s) {
         if (null == mToast) {
             mToast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
             mToast.show();
@@ -47,8 +52,13 @@ public class ToastUtil {
         oneTime = twoTime;
     }
 
+    /**
+     * 过时方法，存在Bug: 连续多次点击同一个会不展示
+     *
+     * @deprecated Use {@link #showToast(int msgResId)} instead.
+     */
     @Deprecated
-    public static void showToast(Context context, int resId) {//连续多次点击同一个会不展示
+    public static void showToast(Context context, int resId) {
         showToast(context, context.getString(resId));
     }
 

@@ -47,7 +47,7 @@ public class FlowLayout extends ViewGroup {
         //EXACTLY模式：对应于给定大小或者match_parent情况
         if (widtMode == MeasureSpec.EXACTLY) {
             measuredWidth = widthSize;
-            //AT_MOS模式：对应wrap-content（需要手动计算大小，否则相当于match_parent）
+            //AT_MOST模式：对应wrap-content（需要手动计算大小，否则相当于match_parent）
         } else if (widtMode == MeasureSpec.AT_MOST) {
             measuredWidth = compute.get("allChildWidth");
         }

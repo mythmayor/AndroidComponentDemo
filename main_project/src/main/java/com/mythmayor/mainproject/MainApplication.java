@@ -2,8 +2,6 @@ package com.mythmayor.mainproject;
 
 import android.app.Application;
 
-import androidx.multidex.MultiDex;
-
 import com.mythmayor.basicproject.BasicApplication;
 
 import me.jessyan.autosize.AutoSize;
@@ -21,8 +19,6 @@ public class MainApplication extends Application {
         super.onCreate();
         //当App中出现多进程, 并且您需要适配所有的进程, 就需要在App初始化时调用initCompatMultiProcess()
         AutoSize.initCompatMultiProcess(this);
-        //解决方法数超过65535的报错问题
-        MultiDex.install(this);
         BasicApplication.getInstance().init(this);
     }
 

@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 /**
  * Created by mythmayor on 2020/7/15.
+ * 自定义输入框
  */
 public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText {
     public CustomEditText(Context context) {

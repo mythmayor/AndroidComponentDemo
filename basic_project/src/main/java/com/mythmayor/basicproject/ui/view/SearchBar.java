@@ -24,7 +24,7 @@ import com.mythmayor.basicproject.utils.ProjectUtil;
 
 /**
  * Created by mythmayor on 2020/7/15.
- * 搜索框
+ * 自定义搜索框
  */
 public class SearchBar extends FrameLayout {
 

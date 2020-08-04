@@ -3,12 +3,16 @@ package com.mythmayor.basicproject;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
+
+import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.BuildConfig;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.mythmayor.basicproject.base.BaseActivity;
 import com.mythmayor.basicproject.database.AppDatabase;
 import com.mythmayor.basicproject.database.DataRepository;
+import com.mythmayor.basicproject.utils.CrashHandler;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
@@ -63,16 +67,22 @@ public class BasicApplication {
     private AppExecutors mAppExecutors;
 
     public void init(Application application) {
+        //解决方法数超过65535的报错问题
+        MultiDex.install(application);
+        //初始化数据
         initData(application);
         //初始化网络请求框架
         initHttp();
-        //初始化友盟消息推送
-        initUmengPush();
-        //开启Crash日志监听
-        //CrashHandler.getInstance().init(application);
     }
 
     private void initData(Application application) {
+        if (com.mythmayor.basicproject.BuildConfig.DEBUG) {//调试模式
+            //【性能优化工具】开启严格模式，用于检测主线程违规的情况并进行弹窗。
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDialog().build());
+        } else {//非调试模式
+            //开启Crash日志监听
+            CrashHandler.getInstance().init(application);
+        }
         mContext = application;
         mApplication = application;
         mActivities = new LinkedList<>();
@@ -82,8 +92,15 @@ public class BasicApplication {
             ARouter.openLog();//打印日志
             ARouter.openDebug();//开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
-        ARouter.init(application);
-
+        mAppExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                //初始化ARouter
+                ARouter.init(application);
+                //初始化友盟消息推送
+                initUmengPush();
+            }
+        });
     }
 
     private void initHttp() {
@@ -120,7 +137,7 @@ public class BasicApplication {
             }
         });
         //自定义通知栏打开动作
-        mPushAgent.setNotificationClickHandler(new UmengNotificationClickHandler(){
+        mPushAgent.setNotificationClickHandler(new UmengNotificationClickHandler() {
             @Override
             public void dealWithCustomAction(Context context, UMessage uMessage) {
 

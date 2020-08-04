@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseMvpFragment;
+import com.mythmayor.basicproject.bean.EventBusBean;
 import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.ui.view.NavigationItemView;
@@ -30,6 +32,10 @@ import com.mythmayor.mainproject.ui.activity.MapTestActivity;
 import com.mythmayor.mainproject.ui.activity.NotificationActivity;
 import com.mythmayor.mainproject.ui.activity.PersonalInfoActivity;
 import com.mythmayor.mainproject.ui.activity.SettingActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by mythmayor on 2020/7/9.
@@ -64,6 +70,7 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);//注册EventBus
         isPrepared = true;
         if (view == null) {
             view = super.onCreateView(inflater, container, savedInstanceState);
@@ -122,9 +129,22 @@ public class DFragment extends BaseMvpFragment<DFragmentPresenter> implements DF
         if (requestCode == PermissionManager.REQUEST_CODE_CUSTOM) {
             if (!PermissionManager.getInstance().checkCustomPermission(getContext(), mPermissionArray)) {
                 ToastUtil.showToast("用户拒绝开启权限");
-            }else {
+            } else {
                 IntentUtil.startActivity(getActivity(), MapTestActivity.class);
             }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);//取消注册EventBus
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventBusBean bean) {//EventBus订阅方法，当接收到事件的时候，会调用该方法
+        if (MyConstant.EVENT_KEY_NOTIFICATION.equals(bean.getKey())) {
+            nivmessage.isShowTips(false);
         }
     }
 

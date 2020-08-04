@@ -24,6 +24,10 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.mythmayor.basicproject.R;
 
+/**
+ * Created by mythmayor on 2020/7/16.
+ * 圆形图片
+ */
 public class CircleImageView extends AppCompatImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

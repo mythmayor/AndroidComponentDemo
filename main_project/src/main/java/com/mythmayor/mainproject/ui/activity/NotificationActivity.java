@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
+import com.mythmayor.basicproject.bean.EventBusBean;
 import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.NotificationContract;
 import com.mythmayor.mainproject.presenter.NotificationPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by mythmayor on 2020/7/13.
@@ -35,13 +39,19 @@ public class NotificationActivity extends BaseTitleBarMvpActivity<NotificationPr
 
     @Override
     public void initSubData(Intent intent) {
-
     }
 
     @Override
     public void setTitleBar() {
         setLeftImage(true, R.mipmap.arrow_left);
         setTopTitle(true, "消息通知");
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().post(new EventBusBean(MyConstant.EVENT_KEY_NOTIFICATION));
     }
 
     @Override
