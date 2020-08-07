@@ -2,7 +2,7 @@ package com.mythmayor.mainproject.presenter;
 
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BasePresenter;
-import com.mythmayor.basicproject.itype.NetCallback;
+import com.mythmayor.basicproject.itype.HttpCallback;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.LogUtil;
@@ -112,7 +112,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
     private void useOkHttpUtils(LoginRequest request) {
         mView.showLoading(MyConstant.URL_LOGIN);
-        HttpUtil.login2(request, new NetCallback() {
+        HttpUtil.login2(request, new HttpCallback() {
             @Override
             public void onSuccess(String response, int id) {
                 mView.hideLoading(MyConstant.URL_LOGIN);

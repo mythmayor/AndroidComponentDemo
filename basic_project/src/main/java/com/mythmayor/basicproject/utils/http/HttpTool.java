@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 
 import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.MyConstant;
-import com.mythmayor.basicproject.itype.NetCallback;
+import com.mythmayor.basicproject.itype.HttpCallback;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -67,7 +67,7 @@ public class HttpTool {
      * @param url    请求地址
      * @param params 表单请求参数
      */
-    public void postForm(String url, Map<String, String> params, final NetCallback callback) {
+    public void postForm(String url, Map<String, String> params, final HttpCallback callback) {
         RequestCall build;
         if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             build = OkHttpUtils.post().url(url).params(params).build();
@@ -131,7 +131,7 @@ public class HttpTool {
      * @param url  请求地址
      * @param json Json请求参数
      */
-    public void postJson(String url, String json, final NetCallback callback) {
+    public void postJson(String url, String json, final HttpCallback callback) {
         RequestCall build;
         if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
             build = OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
@@ -159,6 +159,73 @@ public class HttpTool {
                     }
                 } catch (Exception e) {
                     ToastUtil.showToast(BasicApplication.getInstance().getContext(),MyConstant.ERROR_DATA);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onBefore(Request request, int id) {
+                super.onBefore(request, id);
+                if (null != callback) {
+                    callback.onBefore(request, id);
+                }
+            }
+
+            @Override
+            public void onAfter(int id) {
+                super.onAfter(id);
+                if (null != callback) {
+                    callback.onAfter(id);
+                }
+            }
+
+            @Override
+            public void inProgress(float progress, long total, int id) {
+                super.inProgress(progress, total, id);
+                if (null != callback) {
+                    callback.inProgress(progress, total, id);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * GET请求
+     *
+     * @param url 请求地址
+     */
+    public void get(String url, StringCallback callback) {
+        OkHttpUtils.get().url(url).build().execute(callback);
+    }
+
+    /**
+     * GET请求
+     *
+     * @param url 请求地址
+     */
+    public void get(String url, final HttpCallback callback) {
+        OkHttpUtils.get().url(url).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                if (!isNetworkAvailable(BasicApplication.getInstance().getContext())) {
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(), MyConstant.ERROR_NET);
+                } else {
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(), MyConstant.ERROR_SERVER);
+                }
+                if (null != callback) {
+                    callback.onFailed(call, e, id);
+                }
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    if (null != callback) {
+                        callback.onSuccess(response, id);
+                    }
+                } catch (Exception e) {
+                    ToastUtil.showToast(BasicApplication.getInstance().getContext(), MyConstant.ERROR_DATA);
                     e.printStackTrace();
                 }
             }

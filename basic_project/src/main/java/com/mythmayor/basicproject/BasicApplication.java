@@ -78,7 +78,8 @@ public class BasicApplication {
     private void initData(Application application) {
         if (com.mythmayor.basicproject.BuildConfig.DEBUG) {//调试模式
             //【性能优化工具】开启严格模式，用于检测主线程违规的情况并进行弹窗。
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDialog().build());
+            //StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDialog().build());
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
         } else {//非调试模式
             //开启Crash日志监听
             CrashHandler.getInstance().init(application);

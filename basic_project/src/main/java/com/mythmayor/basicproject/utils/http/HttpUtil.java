@@ -2,7 +2,7 @@ package com.mythmayor.basicproject.utils.http;
 
 import com.google.gson.Gson;
 import com.mythmayor.basicproject.MyConstant;
-import com.mythmayor.basicproject.itype.NetCallback;
+import com.mythmayor.basicproject.itype.HttpCallback;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.utils.FileUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -46,22 +46,32 @@ public class HttpUtil {
     }
 
     //POST提交表单
-    private static void requestNetData(String url, Map<String, String> params, NetCallback callback) {
+    private static void requestNetData(String url, Map<String, String> params, HttpCallback callback) {
         HttpTool.getInstance().postForm(url, params, callback);
     }
 
     //POST提交Json
-    private static void requestNetData(String url, String json, NetCallback callback) {
+    private static void requestNetData(String url, String json, HttpCallback callback) {
         HttpTool.getInstance().postJson(url, json, callback);
     }
 
+    //GET请求
+    private static void requestNetData(String url, StringCallback callback) {
+        HttpTool.getInstance().get(url, callback);
+    }
+
+    //GET请求
+    private static void requestNetData(String url, HttpCallback callback) {
+        HttpTool.getInstance().get(url, callback);
+    }
+
     //登录接口-Json
-    public static void login(LoginRequest request, NetCallback callback) {
+    public static void login(LoginRequest request, HttpCallback callback) {
         requestNetData(MyConstant.URL_ABSOLUTE_LOGIN, mGson.toJson(request), callback);
     }
 
     //登录接口-表单
-    public static void login2(LoginRequest request, NetCallback callback) {
+    public static void login2(LoginRequest request, HttpCallback callback) {
         Map<String, String> params = getBaseParams();
         params.put("username", request.getUsername());
         params.put("password", request.getPassword());

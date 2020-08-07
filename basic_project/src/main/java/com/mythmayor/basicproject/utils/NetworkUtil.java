@@ -26,7 +26,8 @@ import java.io.InputStreamReader;
  * 3.最后记得调用release方法进行资源释放（一般在Activity的onDestroy方法中调用）
  */
 public class NetworkUtil {
-    public static NetChangeListener mListener;
+
+    public static NetworkChangeListener mListener;
     private static NetworkBroadcastReceiver netBroadcastReceiver;
     private static boolean mReceiverRegisted = false;//判断广播是否注册
     /**
@@ -68,7 +69,7 @@ public class NetworkUtil {
      * @param listener
      * @return 当前有无网络，true有网络 false无网络
      */
-    public static boolean initNetworkAvailableListener(Activity activity, NetChangeListener listener) {
+    public static boolean initNetworkAvailableListener(Activity activity, NetworkChangeListener listener) {
         mListener = listener;
         //Android 7.0以上需要动态注册
         if (!mReceiverRegisted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -90,7 +91,7 @@ public class NetworkUtil {
      * @param listener
      * @return 当前网络状态值
      */
-    public static int initNetworkStateListener(Context activity, NetChangeListener listener) {
+    public static int initNetworkStateListener(Context activity, NetworkChangeListener listener) {
         mListener = listener;
         //Android 7.0以上需要动态注册
         if (!mReceiverRegisted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -170,7 +171,7 @@ public class NetworkUtil {
     /**
      * 用于监听网络变化的接口
      */
-    public interface NetChangeListener {
+    public interface NetworkChangeListener {
         void onChangeListener(int status);
     }
 

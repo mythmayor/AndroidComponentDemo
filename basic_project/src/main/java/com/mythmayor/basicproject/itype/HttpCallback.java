@@ -7,7 +7,7 @@ import okhttp3.Request;
  * Created by mythmayor on 2020/6/30.
  * 自定义网络请求回调
  */
-public abstract class NetCallback {
+public abstract class HttpCallback {
 
     public abstract void onSuccess(String response, int id);
 
