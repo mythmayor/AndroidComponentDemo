@@ -1,15 +1,16 @@
-package com.mythmayor.mainproject.presenter;
+package com.mythmayor.mainproject.viewmodel;
+
+import androidx.lifecycle.ViewModel;
 
 import com.mythmayor.basicproject.MyConstant;
-import com.mythmayor.basicproject.base.BasePresenter;
 import com.mythmayor.basicproject.itype.HttpCallback;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.basicproject.utils.http.RxScheduler;
-import com.mythmayor.mainproject.contract.LoginContract;
 import com.mythmayor.mainproject.model.LoginModel;
+import com.mythmayor.mainproject.ui.activity.LoginActivity;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
@@ -18,28 +19,24 @@ import okhttp3.Call;
 
 /**
  * Created by mythmayor on 2020/6/30.
- * 登录Presenter
  */
-public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
+public class LoginViewModel extends ViewModel {
 
-    private LoginContract.Model mModel;
+    private LoginModel mLoginModel;
+    private LoginActivity mView;
 
-    public LoginPresenter() {
-        mModel = new LoginModel();
+    public LoginViewModel() {
+        mLoginModel = new LoginModel();
     }
 
-    @Override
-    public void login(LoginRequest request) {
-        //View是否绑定，如果没有绑定，就不执行网络请求
-        if (!isViewAttached()) {
-            return;
-        }
+    public void login(LoginActivity view, LoginRequest request) {
+        mView = view;
         useRetrofit(request);
         //useOkHttpUtils(request);
     }
 
     private void useRetrofit(LoginRequest request) {
-        mModel.login(request)
+        mLoginModel.login(request)
                 .compose(RxScheduler.Obs_io_main())
                 .to(mView.bindAutoDispose())//解决内存泄漏
                 .subscribe(new Observer<LoginResponse>() {//这里需要在build.gradle中指定jdk版本，否则会报错
@@ -64,7 +61,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         mView.hideLoading(MyConstant.URL_LOGIN);
                     }
                 });
-        mModel.login2(request)
+        mLoginModel.login2(request)
                 .compose(RxScheduler.Obs_io_main())
                 .to(mView.bindAutoDispose())//解决内存泄漏
                 .subscribe(new Observer<LoginResponse>() {
@@ -86,7 +83,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     public void onComplete() {
                     }
                 });
-        mModel.login3(request)
+        mLoginModel.login3(request)
                 .compose(RxScheduler.Obs_io_main())
                 .to(mView.bindAutoDispose())//解决内存泄漏
                 .subscribe(new Observer<LoginResponse>() {
@@ -116,6 +113,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
             @Override
             public void onSuccess(String response, int id) {
                 mView.hideLoading(MyConstant.URL_LOGIN);
+                LogUtil.i(response);
                 LoginResponse resp = HttpUtil.mGson.fromJson(response, LoginResponse.class);
                 mView.onSuccess(MyConstant.URL_LOGIN, resp);
             }

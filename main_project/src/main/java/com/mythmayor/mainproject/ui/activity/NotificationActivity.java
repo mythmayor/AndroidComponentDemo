@@ -5,12 +5,13 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.MyConstant;
-import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
+import com.mythmayor.basicproject.base.BaseTitleBarMvvmActivity;
 import com.mythmayor.basicproject.bean.EventBusBean;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.mainproject.R;
-import com.mythmayor.mainproject.contract.NotificationContract;
-import com.mythmayor.mainproject.presenter.NotificationPresenter;
+import com.mythmayor.mainproject.databinding.ActivityNotificationBinding;
+import com.mythmayor.mainproject.viewmodel.NotificationViewModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,34 +20,28 @@ import org.greenrobot.eventbus.EventBus;
  * 消息通知页面
  */
 @Route(path = "/mainproject/NotificationActivity")
-public class NotificationActivity extends BaseTitleBarMvpActivity<NotificationPresenter> implements NotificationContract.View {
+public class NotificationActivity extends BaseTitleBarMvvmActivity<NotificationViewModel, ActivityNotificationBinding> {
 
     @Override
-    public int getSubLayoutResId() {
+    protected int getMvvmLayoutResId() {
         return R.layout.activity_notification;
     }
 
     @Override
-    public void initSubView(View view) {
-        mPresenter = new NotificationPresenter();
-        mPresenter.attachView(this);
-    }
-
-    @Override
-    public void initSubEvent() {
+    protected void initMvvmEvent() {
 
     }
 
     @Override
-    public void initSubData(Intent intent) {
+    protected void initMvvmData(Intent intent) {
+
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "消息通知");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "消息通知");
     }
-
 
     @Override
     protected void onDestroy() {

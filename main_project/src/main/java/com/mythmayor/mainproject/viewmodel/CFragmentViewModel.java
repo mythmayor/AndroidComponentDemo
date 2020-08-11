@@ -1,61 +1,53 @@
-package com.mythmayor.mainproject.presenter;
+package com.mythmayor.mainproject.viewmodel;
+
+import androidx.lifecycle.ViewModel;
 
 import com.mythmayor.basicproject.MyConstant;
-import com.mythmayor.basicproject.base.BasePresenter;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.utils.http.RxScheduler;
-import com.mythmayor.mainproject.contract.CFragmentContract;
 import com.mythmayor.mainproject.model.CFragmentModel;
+import com.mythmayor.mainproject.ui.fragment.CFragment;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
- * Created by mythmayor on 2020/7/9.
+ * Created by mythmayor on 2020/8/10.
  */
-public class CFragmentPresenter extends BasePresenter<CFragmentContract.View> implements CFragmentContract.Presenter {
+public class CFragmentViewModel extends ViewModel {
 
-    private CFragmentContract.Model mModel;
+    private CFragmentModel mModel;
 
-    public CFragmentPresenter() {
+    public CFragmentViewModel() {
         mModel = new CFragmentModel();
     }
 
-    @Override
-    public void getUserInfo(UserInfoRequest request) {
-        //View是否绑定，如果没有绑定，就不执行网络请求
-        if (!isViewAttached()) {
-            return;
-        }
-        useRetrofit(request);
-    }
-
-    private void useRetrofit(UserInfoRequest request) {
+    public void getUserInfo(CFragment view, UserInfoRequest request) {
         mModel.getUserInfo(request)
                 .compose(RxScheduler.Obs_io_main())
-                .to(mView.bindAutoDispose())//解决内存泄漏
+                .to(view.bindAutoDispose())//解决内存泄漏
                 .subscribe(new Observer<UserInfoResponse>() {//这里需要在build.gradle中指定jdk版本，否则会报错
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mView.showLoading(MyConstant.URL_LOGIN);
+                        view.showLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onNext(@NonNull UserInfoResponse resp) {
-                        mView.onSuccess(MyConstant.URL_LOGIN,resp);
+                        view.onSuccess(MyConstant.URL_LOGIN,resp);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        mView.onError(MyConstant.URL_LOGIN,e.getMessage());
-                        mView.hideLoading(MyConstant.URL_LOGIN);
+                        view.onError(MyConstant.URL_LOGIN,e.getMessage());
+                        view.hideLoading(MyConstant.URL_LOGIN);
                     }
 
                     @Override
                     public void onComplete() {
-                        mView.hideLoading(MyConstant.URL_LOGIN);
+                        view.hideLoading(MyConstant.URL_LOGIN);
                     }
                 });
     }

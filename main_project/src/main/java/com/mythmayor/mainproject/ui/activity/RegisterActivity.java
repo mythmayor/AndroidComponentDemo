@@ -3,13 +3,10 @@ package com.mythmayor.mainproject.ui.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
-import com.mythmayor.basicproject.base.BaseMvpActivity;
+import com.mythmayor.basicproject.base.BaseMvvmActivity;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.RegisterRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -20,93 +17,70 @@ import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.MyCountDownTimer;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.mainproject.R;
-import com.mythmayor.mainproject.contract.RegisterContract;
-import com.mythmayor.mainproject.presenter.RegisterPresenter;
+import com.mythmayor.mainproject.databinding.ActivityRegisterBinding;
+import com.mythmayor.mainproject.viewmodel.RegisterViewModel;
 
 /**
  * Created by mythmayor on 2020/6/30.
  * 注册页面
  */
 @Route(path = "/mainproject/RegisterActivity")
-public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.View {
+public class RegisterActivity extends BaseMvvmActivity<RegisterViewModel, ActivityRegisterBinding> {
 
-    private TextInputEditText etusername;
-    private TextInputEditText etverifycode;
-    private TextView tvverifycode;
-    private TextInputEditText etpassword;
-    private Button btnregister;
     private MyCountDownTimer mCountDownTimer;
 
     @Override
-    protected int getLayoutResId() {
+    protected int getMvvmLayoutResId() {
         return R.layout.activity_register;
     }
 
     @Override
-    protected void initView() {
-        mPresenter = new RegisterPresenter();
-        mPresenter.attachView(this);
+    protected void initMvvmEvent() {
+        mViewDataBinding.setRegisterActivity(this);
+    }
+
+    @Override
+    protected void initMvvmData(Intent intent) {
         ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
-        etusername = (TextInputEditText) findViewById(R.id.et_username);
-        etverifycode = (TextInputEditText) findViewById(R.id.et_verifycode);
-        tvverifycode = (TextView) findViewById(R.id.tv_verifycode);
-        etpassword = (TextInputEditText) findViewById(R.id.et_password);
-        btnregister = (Button) findViewById(R.id.btn_register);
-    }
-
-    @Override
-    protected void initEvent() {
-        tvverifycode.setOnClickListener(this);
-        btnregister.setOnClickListener(this);
-    }
-
-    @Override
-    protected void initData(Intent intent) {
-
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         //在Android依赖库中switch-case语句访问资源ID时会报错，这是因为Android library中生成的R.java中的资源ID不是常数
-        if (v == tvverifycode) {
-            sendVerifyCode();
-        } else if (v.getId() == R.id.btn_register) {
-            register();
-        }
     }
 
-    private void sendVerifyCode() {
-        mCountDownTimer = new MyCountDownTimer(60000, 1000, tvverifycode, CommonUtil.getColor(R.color.color_white), CommonUtil.getColor(R.color.color_white));
+    public void sendVerifyCode(View view) {
+        mCountDownTimer = new MyCountDownTimer(60000, 1000, mViewDataBinding.tvVerifycode, CommonUtil.getColor(R.color.color_white), CommonUtil.getColor(R.color.color_white));
         mCountDownTimer.start();
     }
 
-
-    private void register() {
+    public void register(View view) {
         String username = getUsername();
         String password = getPassword();
-        LogUtil.i("username=" + username + ", password=" + password);
+        String verifyCode = getVerifyCode();
+        LogUtil.i("username=" + username + ", password=" + password + ", verifyCode=" + verifyCode);
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(this, "请输入账号和密码");
+            ToastUtil.showToast("请输入账号和密码");
             return;
         }
         RegisterRequest request = new RegisterRequest(username, password);
-        mPresenter.register(request);
+        mViewModel.register(this, request);
     }
 
     //获取账号
     private String getUsername() {
-        return etusername.getText().toString().trim();
+        return mViewDataBinding.etUsername.getText().toString().trim();
     }
 
     //获取验证码
     private String getVerifyCode() {
-        return etverifycode.getText().toString().trim();
+        return mViewDataBinding.etVerifycode.getText().toString().trim();
     }
 
     //获取密码
     private String getPassword() {
-        return etpassword.getText().toString().trim();
+        return mViewDataBinding.etPassword.getText().toString().trim();
     }
 
     private void cancelCountDownTimer() {
@@ -145,17 +119,17 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
     public void onSuccess(String address, BaseResponse baseResp) {
         RegisterResponse resp = (RegisterResponse) baseResp;
         if (resp.getErrorCode() == 0) {//注册成功
-            ToastUtil.showToast(getApplicationContext(), "注册成功: " + resp.getData().getUsername());
+            ToastUtil.showToast("注册成功: " + resp.getData().getUsername());
             finish();
         } else {//注册失败
-            ToastUtil.showToast(this, resp.getErrorMsg());
+            ToastUtil.showToast(resp.getErrorMsg());
         }
     }
 }

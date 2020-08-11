@@ -4,7 +4,6 @@ import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.response.LoginResponse;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.basicproject.utils.http.RetrofitClient;
-import com.mythmayor.mainproject.contract.LoginContract;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,19 +17,17 @@ import okhttp3.RequestBody;
  * Created by mythmayor on 2020/6/30.
  * 登录Model
  */
-public class LoginModel implements LoginContract.Model {
-    @Override
+public class LoginModel {
+
     public Observable<LoginResponse> login(LoginRequest request) {//POST FORM
         return RetrofitClient.getInstance().getHttpService().login(request.getUsername(), request.getPassword());
     }
 
-    @Override
     public Observable<LoginResponse> login2(LoginRequest request) {//POST JSON
         RequestBody body = FormBody.create(HttpUtil.mGson.toJson(request), MediaType.parse("application/json; charset=utf-8"));
         return RetrofitClient.getInstance().getHttpService().login2(body);
     }
 
-    @Override
     public Observable<LoginResponse> login3(LoginRequest request) {//POST FORM
         Map<String, Object> params = new HashMap<>();
         params.put("username", request.getUsername());

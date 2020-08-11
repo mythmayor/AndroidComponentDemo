@@ -66,16 +66,12 @@ public abstract class BaseFragment extends SimpleImmersionFragment implements Vi
         }
     }
 
-    /**
-     * 视图可见
-     */
+    //视图可见
     protected void onVisible() {
         lazyLoad();
     }
 
-    /**
-     * 视图不可见
-     */
+    //视图不可见
     protected void onInvisible() {
     }
 

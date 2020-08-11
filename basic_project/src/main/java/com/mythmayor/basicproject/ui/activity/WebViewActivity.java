@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -60,7 +61,7 @@ public class WebViewActivity extends BaseTitleBarActivity {
     public void initSubData(Intent intent) {
         mTitle = intent.getStringExtra(MyConstant.INTENT_EXTRA_TITLE);
         mUrl = intent.getStringExtra(MyConstant.INTENT_EXTRA_URL);
-        setTopTitle(true, mTitle);
+        mTopTitleBar.setTopTitle(true, mTitle);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -88,7 +89,7 @@ public class WebViewActivity extends BaseTitleBarActivity {
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
     }
 }

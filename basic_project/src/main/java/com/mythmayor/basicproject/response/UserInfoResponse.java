@@ -8,12 +8,6 @@ import java.util.List;
  */
 public class UserInfoResponse extends BaseResponse {
 
-    /**
-     * data : {"admin":false,"chapterTops":[],"collectIds":[],"email":"","icon":"","id":68684,"nickname":"mythmayor","password":"","publicName":"mythmayor","token":"","type":0,"username":"mythmayor"}
-     * errorCode : 0
-     * errorMsg :
-     */
-
     private DataBean data;
     private int errorCode;
     private String errorMsg;
@@ -43,20 +37,6 @@ public class UserInfoResponse extends BaseResponse {
     }
 
     public static class DataBean {
-        /**
-         * admin : false
-         * chapterTops : []
-         * collectIds : []
-         * email :
-         * icon :
-         * id : 68684
-         * nickname : mythmayor
-         * password :
-         * publicName : mythmayor
-         * token :
-         * type : 0
-         * username : mythmayor
-         */
 
         private boolean admin;
         private String email;

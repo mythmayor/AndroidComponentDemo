@@ -2,23 +2,22 @@ package com.mythmayor.mainproject.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.base.BaseDialog;
-import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
+import com.mythmayor.basicproject.base.BaseTitleBarMvvmActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.ui.activity.WebViewActivity;
 import com.mythmayor.basicproject.ui.dialog.LogoutDialog;
-import com.mythmayor.basicproject.ui.view.NavigationItemView;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.GlideCacheUtil;
 import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UpdateUtil;
 import com.mythmayor.mainproject.R;
-import com.mythmayor.mainproject.contract.SettingContract;
-import com.mythmayor.mainproject.presenter.SettingPresenter;
+import com.mythmayor.mainproject.databinding.ActivitySettingBinding;
+import com.mythmayor.mainproject.viewmodel.SettingViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,77 +27,58 @@ import java.util.List;
  * 设置页面
  */
 @Route(path = "/mainproject/SettingActivity")
-public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> implements SettingContract.View {
-
-    private NavigationItemView nivclearcache;
-    private NavigationItemView nivcheckupdate;
-    private NavigationItemView nivuserprivacy;
-    private NavigationItemView nivaboutus;
-    private NavigationItemView nivtestroom;
-    private TextView tvlogout;
+public class SettingActivity extends BaseTitleBarMvvmActivity<SettingViewModel, ActivitySettingBinding> {
 
     @Override
-    public int getSubLayoutResId() {
+    protected int getMvvmLayoutResId() {
         return R.layout.activity_setting;
     }
 
     @Override
-    public void initSubView(View view) {
-        mPresenter = new SettingPresenter();
-        mPresenter.attachView(this);
-        nivclearcache = (NavigationItemView) findViewById(R.id.niv_clearcache);
-        nivcheckupdate = (NavigationItemView) findViewById(R.id.niv_checkupdate);
-        nivuserprivacy = (NavigationItemView) findViewById(R.id.niv_userprivacy);
-        nivaboutus = (NavigationItemView) findViewById(R.id.niv_aboutus);
-        nivtestroom = (NavigationItemView) findViewById(R.id.niv_testroom);
-        tvlogout = (TextView) findViewById(R.id.tv_logout);
+    protected void initMvvmEvent() {
+        mViewDataBinding.nivClearcache.setOnClickListener(this);
+        mViewDataBinding.nivCheckupdate.setOnClickListener(this);
+        mViewDataBinding.nivUserprivacy.setOnClickListener(this);
+        mViewDataBinding.nivAboutus.setOnClickListener(this);
+        mViewDataBinding.nivTestroom.setOnClickListener(this);
+        mViewDataBinding.tvLogout.setOnClickListener(this);
     }
 
     @Override
-    public void initSubEvent() {
-        nivclearcache.setOnClickListener(this);
-        nivcheckupdate.setOnClickListener(this);
-        nivuserprivacy.setOnClickListener(this);
-        nivaboutus.setOnClickListener(this);
-        nivtestroom.setOnClickListener(this);
-        tvlogout.setOnClickListener(this);
+    protected void initMvvmData(Intent intent) {
+        mViewDataBinding.nivClearcache.setContent("36M");
+        mViewDataBinding.nivCheckupdate.setContent("发现新版本");
+        mViewDataBinding.nivCheckupdate.isShowTips(true);
     }
 
     @Override
-    public void initSubData(Intent intent) {
-        nivclearcache.setContent("36M");
-        nivcheckupdate.setContent("发现新版本");
-        nivcheckupdate.isShowTips(true);
-    }
-
-    @Override
-    public void setTitleBar() {
-        setLeftImage(true, com.mythmayor.basicproject.R.mipmap.arrow_left);
-        setTopTitle(true, "设置");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, com.mythmayor.basicproject.R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "设置");
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         //在Android依赖库中switch-case语句访问资源ID时会报错，这是因为Android library中生成的R.java中的资源ID不是常数
-        if (v == nivclearcache) {
+        if (v == mViewDataBinding.nivClearcache) {
             GlideCacheUtil.getInstance().clearImageAllCache(this);
-            nivclearcache.setContent("0M");
-            ToastUtil.showToast(this, "清理缓存成功");
-        } else if (v == nivcheckupdate) {
+            mViewDataBinding.nivClearcache.setContent("0M");
+            ToastUtil.showToast("清理缓存成功");
+        } else if (v == mViewDataBinding.nivCheckupdate) {
             List<String> updateContent = new ArrayList<>();
             updateContent.add("1.修复已知Bug。");
             updateContent.add("2.优化用户体验。");
             String url = "https://shouji.sogou.com/apkdl/?gr=opact&tp=pcyunying&id=0";
             UpdateUtil updateUtil = new UpdateUtil(this, "1.0.0", false, updateContent, url);
             updateUtil.alertUpdateAppDialog();
-        } else if (v == nivuserprivacy) {
+        } else if (v == mViewDataBinding.nivUserprivacy) {
             IntentUtil.startWebViewActivity(this, "用户隐私协议", "https://www.baidu.com/", WebViewActivity.class);
-        } else if (v == nivaboutus) {
+        } else if (v == mViewDataBinding.nivAboutus) {
             IntentUtil.startActivity(this, AboutUsActivity.class);
-        } else if (v == nivtestroom) {
+        } else if (v == mViewDataBinding.nivTestroom) {
             IntentUtil.startActivity(this, TestRoomDatabaseActivity.class);
-        } else if (v == tvlogout) {
+        } else if (v == mViewDataBinding.tvLogout) {
             showLogoutDialog();
         }
     }

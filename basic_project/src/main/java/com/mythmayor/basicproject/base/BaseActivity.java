@@ -1,5 +1,6 @@
 package com.mythmayor.basicproject.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,8 +13,10 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.utils.ActivityCollector;
+import com.mythmayor.basicproject.utils.CommonUtil;
 import com.umeng.message.PushAgent;
 
 /**
@@ -114,5 +117,21 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onNetworkListener(int status) {
+    }
+
+    protected ProgressDialog mProgressDialog;
+
+    protected void showLoadingDialog(String title) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+        }
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setTitle(CommonUtil.getString(R.string.dialog_text));
+        mProgressDialog.setMessage(title);
+        mProgressDialog.show();
+    }
+
+    protected void dismissLoadingDialog() {
+        mProgressDialog.dismiss();
     }
 }

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
@@ -25,25 +23,24 @@ import com.google.android.material.navigation.NavigationView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.adapter.FragmentAdapter;
-import com.mythmayor.basicproject.base.BaseMvpActivity;
+import com.mythmayor.basicproject.base.BaseMvvmActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.LoginRequest;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
-import com.mythmayor.basicproject.ui.view.NoScrollViewPager;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
 import com.mythmayor.mainproject.R;
-import com.mythmayor.mainproject.contract.MainContract;
-import com.mythmayor.mainproject.presenter.MainPresenter;
+import com.mythmayor.mainproject.databinding.ActivityMainBinding;
 import com.mythmayor.mainproject.ui.fragment.AFragment;
 import com.mythmayor.mainproject.ui.fragment.BFragment;
 import com.mythmayor.mainproject.ui.fragment.CFragment;
 import com.mythmayor.mainproject.ui.fragment.DFragment;
+import com.mythmayor.mainproject.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +50,7 @@ import java.util.List;
  * 主页面
  */
 @Route(path = "/mainproject/MainActivity")
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View, ViewPager.OnPageChangeListener {
-
-    private NoScrollViewPager mViewPager;
-    private RadioGroup mRadioGroup;
-    private RadioButton rbtab01, rbtab02, rbtab03, rbtab04;
-    private DrawerLayout mDrawerLayout;
-    private NavigationView drawerleftnavigation;
-    private Button drawerrightbtnclose;
+public class MainActivity extends BaseMvvmActivity<MainViewModel, ActivityMainBinding> implements ViewPager.OnPageChangeListener {
 
     private AFragment mAFragment;
     private BFragment mBFragment;
@@ -92,49 +82,32 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         }
     };
 
-
     @Override
-    protected int getLayoutResId() {
+    protected int getMvvmLayoutResId() {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void initView() {
-        mPresenter = new MainPresenter();
-        mPresenter.attachView(this);
-        ImmersionBar.with(this).statusBarDarkFont(true).statusBarColor(R.color.color_white).fitsSystemWindows(true).init();
-        mViewPager = (NoScrollViewPager) findViewById(R.id.viewpager_main);
-        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        rbtab01 = (RadioButton) findViewById(R.id.rb_tab01);
-        rbtab02 = (RadioButton) findViewById(R.id.rb_tab02);
-        rbtab03 = (RadioButton) findViewById(R.id.rb_tab03);
-        rbtab04 = (RadioButton) findViewById(R.id.rb_tab04);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerleftnavigation = (NavigationView) findViewById(R.id.drawer_left_navigation);
-        drawerrightbtnclose = (Button) findViewById(R.id.drawer_right_btn_close);
-    }
-
-    @Override
-    protected void initEvent() {
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    protected void initMvvmEvent() {
+        mViewDataBinding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.rb_tab01) {
-                    mViewPager.setCurrentItem(0, false);
+                    mViewDataBinding.viewpagerMain.setCurrentItem(0, false);
                     setCloseGestureSwipe();
                 } else if (checkedId == R.id.rb_tab02) {
-                    mViewPager.setCurrentItem(1, false);
+                    mViewDataBinding.viewpagerMain.setCurrentItem(1, false);
                     setOpenGestureSwipe();
                 } else if (checkedId == R.id.rb_tab03) {
-                    mViewPager.setCurrentItem(2, false);
+                    mViewDataBinding.viewpagerMain.setCurrentItem(2, false);
                     setCloseGestureSwipe();
                 } else if (checkedId == R.id.rb_tab04) {
-                    mViewPager.setCurrentItem(3, false);
+                    mViewDataBinding.viewpagerMain.setCurrentItem(3, false);
                     setCloseGestureSwipe();
                 }
             }
         });
-        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+        mViewDataBinding.drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
                 LogUtil.d("滑动中");
@@ -155,7 +128,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 LogUtil.d("状态改变");
             }
         });
-        drawerleftnavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mViewDataBinding.drawerLeftNavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 String title = (String) item.getTitle();
@@ -167,16 +140,17 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 return false;
             }
         });
-        drawerrightbtnclose.setOnClickListener(new View.OnClickListener() {
+        mViewDataBinding.drawerRightBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDrawerLayout.closeDrawer(GravityCompat.END);
+                mViewDataBinding.drawerLayout.closeDrawer(GravityCompat.END);
             }
         });
     }
 
     @Override
-    protected void initData(Intent intent) {
+    protected void initMvvmData(Intent intent) {
+        ImmersionBar.with(this).statusBarDarkFont(true).statusBarColor(R.color.color_white).fitsSystemWindows(true).init();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
@@ -205,18 +179,18 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         //初始化Adapter
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragmentList);
         //设置ViewPager的缓存页面的个数
-        mViewPager.setOffscreenPageLimit(4);
-        mViewPager.setAdapter(mFragmentAdapter);
-        mViewPager.addOnPageChangeListener(this);
-        mViewPager.setCurrentItem(0, false);
-        rbtab01.setChecked(true);
+        mViewDataBinding.viewpagerMain.setOffscreenPageLimit(4);
+        mViewDataBinding.viewpagerMain.setAdapter(mFragmentAdapter);
+        mViewDataBinding.viewpagerMain.addOnPageChangeListener(this);
+        mViewDataBinding.viewpagerMain.setCurrentItem(0, false);
+        mViewDataBinding.rbTab01.setChecked(true);
     }
 
     private void getUserInfo() {
         LoginRequest accountInfo = UserInfoManager.getAccountInfo(this);
         if (accountInfo != null) {
             UserInfoRequest request = new UserInfoRequest(accountInfo.getUsername(), accountInfo.getPassword());
-            mPresenter.getUserInfo(request);
+            mViewModel.getUserInfo(this, request);
         }
     }
 
@@ -240,12 +214,12 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             finish();
         } else {
             mPrevBackPressTimeMillis = mCurrBackPressTimeMillis;
-            ToastUtil.showToast(getApplicationContext(), "再按一次退出软件");
+            ToastUtil.showToast("再按一次退出软件");
         }
     }
 
     private void destroy() {
-        mViewPager.removeOnPageChangeListener(this);
+        mViewDataBinding.viewpagerMain.removeOnPageChangeListener(this);
     }
 
     @Override
@@ -273,22 +247,22 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     //打开左侧抽屉
     public void openLeftDrawer() {
-        mDrawerLayout.openDrawer(GravityCompat.START);
+        mViewDataBinding.drawerLayout.openDrawer(GravityCompat.START);
     }
 
     //打开右侧抽屉
     public void openRightDrawer() {
-        mDrawerLayout.openDrawer(GravityCompat.END);
+        mViewDataBinding.drawerLayout.openDrawer(GravityCompat.END);
     }
 
     //关闭手势滑动
     public void setCloseGestureSwipe() {
-        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     //打开手势滑动
     public void setOpenGestureSwipe() {
-        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 
     @Override

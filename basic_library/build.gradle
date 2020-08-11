@@ -32,6 +32,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     //指定jdk版本
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -55,6 +58,7 @@ dependencies {
     api "com.zhy:okhttputils:$rootProject.ext.okhttputilsVersion"//okhttputils
     api "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"//eventbus
     api "androidx.lifecycle:lifecycle-runtime:$rootProject.ext.lifecycleVersion"//lifecycle
+    api "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.lifecycleExtensionsVersion"//lifecycle-extensions
     api "com.android.support:multidex:$rootProject.ext.multidexVersion"//解决方法数超过65535的报错问题
     //ARouter
     api("com.alibaba:arouter-api:$rootProject.ext.arouterApi") {

@@ -5,21 +5,19 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.mythmayor.basicproject.base.BaseMvpActivity;
+import com.mythmayor.basicproject.base.BaseMvvmActivity;
 import com.mythmayor.basicproject.bean.SearchHistoryBean;
 import com.mythmayor.basicproject.response.BaseResponse;
-import com.mythmayor.basicproject.ui.view.FlowLayout;
 import com.mythmayor.basicproject.ui.view.SearchBar;
 import com.mythmayor.basicproject.utils.CommonUtil;
 import com.mythmayor.basicproject.utils.SearchHistoryUtil;
 import com.mythmayor.mainproject.R;
-import com.mythmayor.mainproject.contract.SearchContract;
-import com.mythmayor.mainproject.presenter.SearchPresenter;
+import com.mythmayor.mainproject.databinding.ActivitySearchBinding;
+import com.mythmayor.mainproject.viewmodel.SearchViewModel;
 
 import java.util.List;
 import java.util.Random;
@@ -28,45 +26,23 @@ import java.util.Random;
  * Created by mythmayor on 2020/7/15.
  * 搜索页面
  */
-public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements SearchContract.View {
-
-    private SearchBar mSearchBar;
-    private ImageView ivdeletehistory;
-    private FlowLayout mFlowLayout;
-    private LinearLayout llhistory;
-    private TextView tvnodata;
-    private TextView tvresult;
-    private LinearLayout llresult;
+public class SearchActivity extends BaseMvvmActivity<SearchViewModel, ActivitySearchBinding> {
 
     @Override
-    protected int getLayoutResId() {
+    protected int getMvvmLayoutResId() {
         return R.layout.activity_search;
     }
 
     @Override
-    protected void initView() {
-        mPresenter = new SearchPresenter();
-        mPresenter.attachView(this);
-        ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
-        mSearchBar = (SearchBar) findViewById(R.id.search_bar);
-        ivdeletehistory = (ImageView) findViewById(R.id.iv_delete_history);
-        mFlowLayout = (FlowLayout) findViewById(R.id.flowLayout);
-        llhistory = (LinearLayout) findViewById(R.id.ll_history);
-        tvnodata = (TextView) findViewById(R.id.tv_no_data);
-        tvresult = (TextView) findViewById(R.id.tv_result);
-        llresult = (LinearLayout) findViewById(R.id.ll_result);
-    }
-
-    @Override
-    protected void initEvent() {
-        ivdeletehistory.setOnClickListener(this);
-        mSearchBar.setOnCancelClickListener(new View.OnClickListener() {
+    protected void initMvvmEvent() {
+        mViewDataBinding.ivDeleteHistory.setOnClickListener(this);
+        mViewDataBinding.searchBar.setOnCancelClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        mSearchBar.setOnSearchListener(new SearchBar.OnSearchListener() {
+        mViewDataBinding.searchBar.setOnSearchListener(new SearchBar.OnSearchListener() {
             @Override
             public void onInputFinished(String input) {
                 if (!TextUtils.isEmpty(input)) {//搜索内容不为空，存储到本地
@@ -78,28 +54,29 @@ public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements 
         });
     }
 
-    private void search(String input) {
-        Random random = new Random();
-        boolean haveResult = random.nextBoolean();//模拟搜索结果
-        llhistory.setVisibility(View.GONE);
-        if (haveResult) {
-            tvnodata.setVisibility(View.GONE);
-            llresult.setVisibility(View.VISIBLE);
-            tvresult.setText(input);
-        } else {
-            tvnodata.setVisibility(View.VISIBLE);
-            llresult.setVisibility(View.GONE);
-        }
-    }
-
     @Override
-    protected void initData(Intent intent) {
+    protected void initMvvmData(Intent intent) {
+        ImmersionBar.with(this).statusBarDarkFont(true).titleBarMarginTop(R.id.view_blank).init();
         initFlowLayout();
     }
 
+    private void search(String input) {
+        Random random = new Random();
+        boolean haveResult = random.nextBoolean();//模拟搜索结果
+        mViewDataBinding.llHistory.setVisibility(View.GONE);
+        if (haveResult) {
+            mViewDataBinding.tvNoData.setVisibility(View.GONE);
+            mViewDataBinding.llResult.setVisibility(View.VISIBLE);
+            mViewDataBinding.tvResult.setText(input);
+        } else {
+            mViewDataBinding.tvNoData.setVisibility(View.VISIBLE);
+            mViewDataBinding.llResult.setVisibility(View.GONE);
+        }
+    }
+
     private void initFlowLayout() {
-        if (mFlowLayout != null) {
-            mFlowLayout.removeAllViews();
+        if (mViewDataBinding.flowLayout != null) {
+            mViewDataBinding.flowLayout.removeAllViews();
         }
         List<SearchHistoryBean> list = SearchHistoryUtil.getInstance().get(null);
         if (list == null || list.size() == 0) {
@@ -116,11 +93,11 @@ public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements 
                 @Override
                 public void onClick(View v) {
                     String content = textView.getText().toString().trim();
-                    mSearchBar.setEtSearchText(content);
+                    mViewDataBinding.searchBar.setEtSearchText(content);
                     search(content);
                 }
             });
-            mFlowLayout.addView(textView);
+            mViewDataBinding.flowLayout.addView(textView);
         }
     }
 
@@ -128,7 +105,7 @@ public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements 
     public void onClick(View v) {
         super.onClick(v);
         //在Android依赖库中switch-case语句访问资源ID时会报错，这是因为Android library中生成的R.java中的资源ID不是常数
-        if (v == ivdeletehistory) {
+        if (v == mViewDataBinding.ivDeleteHistory) {
             SearchHistoryUtil.getInstance().clear(null);
             initFlowLayout();
         }

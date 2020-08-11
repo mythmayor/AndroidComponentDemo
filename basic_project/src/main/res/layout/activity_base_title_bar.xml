@@ -12,7 +12,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <include layout="@layout/include_title_bar" />
+    <com.mythmayor.basicproject.ui.view.TopTitleBar
+        android:id="@+id/topTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/ll_content"
