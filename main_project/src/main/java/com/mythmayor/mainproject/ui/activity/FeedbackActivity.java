@@ -13,6 +13,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.ui.dialog.ProgressDialog01;
 import com.mythmayor.basicproject.ui.view.InputBox;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.FeedbackContract;
@@ -58,9 +59,9 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "意见反馈");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "意见反馈");
     }
 
     @Override
@@ -78,19 +79,19 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
         String title = inputboxtitle.getInputContent();
         String detail = etdetail.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
-            ToastUtil.showToast(this, "请输入姓名");
+            ToastUtil.showToast("请输入姓名");
             return;
         }
         if (TextUtils.isEmpty(contact)) {
-            ToastUtil.showToast(this, "请输入联系方式");
+            ToastUtil.showToast("请输入联系方式");
             return;
         }
         if (TextUtils.isEmpty(title)) {
-            ToastUtil.showToast(this, "请输入标题");
+            ToastUtil.showToast("请输入标题");
             return;
         }
         if (TextUtils.isEmpty(detail)) {
-            ToastUtil.showToast(this, "请输入详细说明");
+            ToastUtil.showToast("请输入详细说明");
             return;
         }
         mPresenter.getUserInfo(new UserInfoRequest("test", "test"));
@@ -108,13 +109,13 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
     public void onSuccess(String address, BaseResponse baseResp) {
         UserInfoResponse resp = (UserInfoResponse) baseResp;
-        ToastUtil.showToast(this, "提交成功，感谢您的反馈！");
+        ToastUtil.showToast("提交成功，感谢您的反馈！");
         finish();
     }
 }

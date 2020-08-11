@@ -3,6 +3,7 @@ package com.mythmayor.basicproject.ui.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -36,6 +37,7 @@ public class InputBox extends FrameLayout {
     private static final int DEFAULT_TVTITLE_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
     private static final int DEFAULT_TVCONTENT_TEXTCOLOR = CommonUtil.getColor(R.color.color_333333);
     private static final int DEFAULT_TVCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
+    private static final int DEFAULT_ETCONTENT_INPUTTYPE = InputType.TYPE_CLASS_TEXT;
     private static final int DEFAULT_ETCONTENT_TEXTCOLOR = CommonUtil.getColor(R.color.color_333333);
     private static final int DEFAULT_ETCONTENT_TEXTSIZE = CommonUtil.sp2px(BasicApplication.getInstance().getContext(), 16);
 
@@ -85,6 +87,8 @@ public class InputBox extends FrameLayout {
         Drawable tvcontentDrawableRight = typedArray.getDrawable(R.styleable.InputBox_inputbox_tvcontentDrawableRight);
         setTvcontentDrawableRight(tvcontentDrawableRight);
         //内容输入框
+        int inputType = typedArray.getInt(R.styleable.InputBox_inputbox_etcontentInputType, DEFAULT_ETCONTENT_INPUTTYPE);
+        setEtcontentInputType(inputType);
         String etcontentText = typedArray.getString(R.styleable.InputBox_inputbox_etcontentText);
         setEtcontentText(etcontentText);
         String etcontentHint = typedArray.getString(R.styleable.InputBox_inputbox_etcontentHint);
@@ -152,6 +156,12 @@ public class InputBox extends FrameLayout {
 
     public void setTvcontentDrawableRight(int drawableRightResId) {
         tvcontent.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableRightResId, 0);
+    }
+
+    public void setEtcontentInputType(int inputType) {
+        etcontent.setInputType(inputType);
+        //设置密文的时候，需要同时设置TYPE_CLASS_TEXT才能生效
+        //etcontent.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
     public void setEtcontentText(String etcontentText) {

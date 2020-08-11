@@ -240,7 +240,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             finish();
         } else {
             mPrevBackPressTimeMillis = mCurrBackPressTimeMillis;
-            ToastUtil.showToast(getApplicationContext(), "再按一次退出软件");
+            ToastUtil.showToast("再按一次退出软件");
         }
     }
 

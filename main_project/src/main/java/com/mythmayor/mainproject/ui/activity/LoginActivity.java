@@ -107,7 +107,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         String password = getPassword();
         LogUtil.i("username=" + username + ", password=" + password);
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(this, "请输入账号和密码");
+            ToastUtil.showToast("请输入账号和密码");
             return;
         }
         LoginRequest request = new LoginRequest(username, password);
@@ -156,7 +156,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
@@ -170,11 +170,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 UserInfoManager.clearAccountInfo(this);
             }
             UserInfoManager.setLoginInfo(this, HttpUtil.mGson.toJson(resp));
-            ToastUtil.showToast(getApplicationContext(), "登录成功: " + resp.getData().getUsername());
+            ToastUtil.showToast("登录成功: " + resp.getData().getUsername());
             IntentUtil.startActivity(this, MainActivity.class);
             finish();
         } else {//登录失败
-            ToastUtil.showToast(this, resp.getErrorMsg());
+            ToastUtil.showToast(resp.getErrorMsg());
         }
     }
 }

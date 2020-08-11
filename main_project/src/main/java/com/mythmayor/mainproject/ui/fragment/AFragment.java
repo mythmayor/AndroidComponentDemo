@@ -70,7 +70,7 @@ public class AFragment extends BaseMvpFragment<AFragmentPresenter> implements AF
         mSearchBar.setOnSearchListener(new SearchBar.OnSearchListener() {
             @Override
             public void onInputFinished(String input) {
-                ToastUtil.showToast(getActivity(), "input=" + input);
+                ToastUtil.showToast("input=" + input);
             }
         });
     }

@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.R;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -19,19 +20,19 @@ import com.mythmayor.basicproject.base.BaseTitleBarActivity;
  * android与js交互
  * 1.js调用安卓方法
  * (1)js：window.androidObject.androidMethod()
- *    安卓：调用webView.addJavascriptInterface，复写androidMethod方法，加上@JavascriptInterface
+ * 安卓：调用webView.addJavascriptInterface，复写androidMethod方法，加上@JavascriptInterface
  * (2)安卓通过shouldOverrideUrlLoading方法拦截url再解析
  * 2.安卓调用js方法
  * (1)js：定义jsMethod方法
- *   安卓：调用webView.loadUrl("javascript:jsMethod(" + jsonParams + ")");
+ * 安卓：调用webView.loadUrl("javascript:jsMethod(" + jsonParams + ")");
  * (2)js：定义jsMethod方法
- *   安卓：String method = "jsMethod(" + jsonParams + ")";
- *    调用webView.evaluateJavascript(method, new ValueCallback<String>() {
- *      @Override
- *       public void onReceiveValue(String value) {
- *           Log.i("test", "js返回的数据" + value);
- *       }
- *    });
+ * 安卓：String method = "jsMethod(" + jsonParams + ")";
+ * 调用webView.evaluateJavascript(method, new ValueCallback<String>() {
+ *
+ * @Override public void onReceiveValue(String value) {
+ * Log.i("test", "js返回的数据" + value);
+ * }
+ * });
  */
 @Route(path = "/basicproject/WebViewActivity")
 public class WebViewActivity extends BaseTitleBarActivity {
@@ -60,7 +61,7 @@ public class WebViewActivity extends BaseTitleBarActivity {
     public void initSubData(Intent intent) {
         mTitle = intent.getStringExtra(MyConstant.INTENT_EXTRA_TITLE);
         mUrl = intent.getStringExtra(MyConstant.INTENT_EXTRA_URL);
-        setTopTitle(true, mTitle);
+        mTopTitleBar.setTopTitle(true, mTitle);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -88,7 +89,7 @@ public class WebViewActivity extends BaseTitleBarActivity {
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
     }
 }

@@ -8,6 +8,7 @@ import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.bean.EventBusBean;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.NotificationContract;
 import com.mythmayor.mainproject.presenter.NotificationPresenter;
@@ -42,9 +43,9 @@ public class NotificationActivity extends BaseTitleBarMvpActivity<NotificationPr
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "消息通知");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "消息通知");
     }
 
 

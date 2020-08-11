@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.GlideUtil;
 import com.mythmayor.basicproject.utils.ProjectUtil;
 import com.mythmayor.mainproject.R;
@@ -50,9 +51,9 @@ public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> i
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "关于我们");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "关于我们");
     }
 
     @Override

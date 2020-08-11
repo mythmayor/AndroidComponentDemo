@@ -19,6 +19,7 @@ import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.database.DataGenerator;
 import com.mythmayor.basicproject.database.DataRepository;
 import com.mythmayor.basicproject.database.entity.UserEntity;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.ProjectUtil;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.basicproject.utils.http.HttpUtil;
@@ -125,9 +126,9 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "Room数据库测试");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "Room数据库测试");
     }
 
     @Override
@@ -152,7 +153,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
         } else if (v == btncleartable) {
             mDataRepository.clearAllTables(this);
             tvresult.setText("");
-            ToastUtil.showToast(TestRoomDatabaseActivity.this, "删除所有数据库表成功！");
+            ToastUtil.showToast("删除所有数据库表成功！");
         }
     }
 
@@ -160,9 +161,9 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
         Boolean exist = mDataRepository.getDatabaseCreated().getValue();
         if (exist != null && exist) {//数据库已存在，无需创建
             btncreate.setText("数据库已存在，无需创建");
-            ToastUtil.showToast(TestRoomDatabaseActivity.this, "数据库已存在，无需创建");
+            ToastUtil.showToast("数据库已存在，无需创建");
         } else {
-            ToastUtil.showToast(TestRoomDatabaseActivity.this, "正在创建数据库，请稍后...");
+            ToastUtil.showToast("正在创建数据库，请稍后...");
             mHandler.sendEmptyMessage(WHAT_CREATE_TABLE);
         }
     }
@@ -223,7 +224,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtil.showToast(TestRoomDatabaseActivity.this, "插入全部成功！");
+                                ToastUtil.showToast("插入全部成功！");
                                 queryAllUsers();
                             }
                         });
@@ -245,7 +246,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(TestRoomDatabaseActivity.this, "插入单个成功！");
+                        ToastUtil.showToast("插入单个成功！");
                         queryAllUsers();
                     }
                 });
@@ -263,7 +264,7 @@ public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(TestRoomDatabaseActivity.this, "删除单个成功！");
+                        ToastUtil.showToast("删除单个成功！");
                         queryAllUsers();
                     }
                 });

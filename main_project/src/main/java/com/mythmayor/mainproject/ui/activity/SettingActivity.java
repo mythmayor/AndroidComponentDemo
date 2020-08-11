@@ -11,6 +11,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.ui.activity.WebViewActivity;
 import com.mythmayor.basicproject.ui.dialog.LogoutDialog;
 import com.mythmayor.basicproject.ui.view.NavigationItemView;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.GlideCacheUtil;
 import com.mythmayor.basicproject.utils.IntentUtil;
 import com.mythmayor.basicproject.utils.PrefUtil;
@@ -72,9 +73,9 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, com.mythmayor.basicproject.R.mipmap.arrow_left);
-        setTopTitle(true, "设置");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, com.mythmayor.basicproject.R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "设置");
     }
 
     @Override
@@ -84,7 +85,7 @@ public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> i
         if (v == nivclearcache) {
             GlideCacheUtil.getInstance().clearImageAllCache(this);
             nivclearcache.setContent("0M");
-            ToastUtil.showToast(this, "清理缓存成功");
+            ToastUtil.showToast("清理缓存成功");
         } else if (v == nivcheckupdate) {
             List<String> updateContent = new ArrayList<>();
             updateContent.add("1.修复已知Bug。");

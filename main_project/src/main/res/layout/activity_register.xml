@@ -93,7 +93,7 @@
                     android:text="获取验证码"
                     android:textColor="@color/color_white"
                     android:textColorHint="@color/color_transparent"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout

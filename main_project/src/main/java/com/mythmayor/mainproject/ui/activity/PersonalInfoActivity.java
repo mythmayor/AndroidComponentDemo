@@ -13,6 +13,7 @@ import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.ui.dialog.NumberPickerDialog;
 import com.mythmayor.basicproject.ui.dialog.ProgressDialog01;
 import com.mythmayor.basicproject.ui.view.InputBox;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.PersonalInfoContract;
@@ -63,9 +64,9 @@ public class PersonalInfoActivity extends BaseTitleBarMvpActivity<PersonalInfoPr
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "个人信息");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "个人信息");
     }
 
     @Override
@@ -122,12 +123,12 @@ public class PersonalInfoActivity extends BaseTitleBarMvpActivity<PersonalInfoPr
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
     public void onSuccess(String address, BaseResponse baseResp) {
         UserInfoResponse resp = (UserInfoResponse) baseResp;
-        ToastUtil.showToast(this, "Success");
+        ToastUtil.showToast("Success");
     }
 }

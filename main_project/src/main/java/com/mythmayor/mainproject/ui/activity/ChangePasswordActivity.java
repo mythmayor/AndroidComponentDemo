@@ -12,6 +12,7 @@ import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.ui.dialog.ProgressDialog01;
 import com.mythmayor.basicproject.ui.view.InputBox;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.ToastUtil;
 import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.ChangePasswordContract;
@@ -54,9 +55,9 @@ public class ChangePasswordActivity extends BaseTitleBarMvpActivity<ChangePasswo
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "修改密码");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "修改密码");
     }
 
     @Override
@@ -73,19 +74,19 @@ public class ChangePasswordActivity extends BaseTitleBarMvpActivity<ChangePasswo
         String newpwd = inputboxnewpwd.getInputContent();
         String newpwd2 = inputboxnewpwd2.getInputContent();
         if (TextUtils.isEmpty(oldpwd)) {
-            ToastUtil.showToast(this, "请输入旧密码");
+            ToastUtil.showToast("请输入旧密码");
             return;
         }
         if (TextUtils.isEmpty(newpwd)) {
-            ToastUtil.showToast(this, "请输入新密码");
+            ToastUtil.showToast("请输入新密码");
             return;
         }
         if (TextUtils.isEmpty(newpwd2)) {
-            ToastUtil.showToast(this, "请确认新密码");
+            ToastUtil.showToast("请确认新密码");
             return;
         }
         if (!newpwd.equals(newpwd2)) {
-            ToastUtil.showToast(this, "两次输入的密码不一致");
+            ToastUtil.showToast("两次输入的密码不一致");
             return;
         }
         mPresenter.getUserInfo(new UserInfoRequest("test", "test"));
@@ -103,13 +104,13 @@ public class ChangePasswordActivity extends BaseTitleBarMvpActivity<ChangePasswo
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
     public void onSuccess(String address, BaseResponse baseResp) {
         UserInfoResponse resp = (UserInfoResponse) baseResp;
-        ToastUtil.showToast(this, "Success! 新密码：" + inputboxnewpwd.getInputContent());
+        ToastUtil.showToast("Success! 新密码：" + inputboxnewpwd.getInputContent());
         finish();
     }
 }

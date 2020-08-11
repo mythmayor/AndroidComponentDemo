@@ -93,7 +93,7 @@ public class UpdateUtil {
                     int i = mUtil.cancelDownload();
                     if (i == 1) {
                         canceledDialog();
-                        ToastUtil.showToast(mActivity, CommonUtil.getString(R.string.updateutil01));
+                        ToastUtil.showToast(CommonUtil.getString(R.string.updateutil01));
                     }
                 }
             });

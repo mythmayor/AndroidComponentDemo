@@ -40,6 +40,7 @@ import com.amap.api.services.district.DistrictResult;
 import com.amap.api.services.district.DistrictSearch;
 import com.amap.api.services.district.DistrictSearchQuery;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
+import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.CommonUtil;
 import com.mythmayor.basicproject.utils.DateUtil;
 import com.mythmayor.basicproject.utils.IntentUtil;
@@ -298,9 +299,9 @@ public class MapTestActivity extends BaseTitleBarActivity implements LocationSou
     }
 
     @Override
-    public void setTitleBar() {
-        setLeftImage(true, R.mipmap.arrow_left);
-        setTopTitle(true, "高德地图测试");
+    public void setTitleBar(TopTitleBar topTitleBar) {
+        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setTopTitle(true, "高德地图测试");
     }
 
     @Override

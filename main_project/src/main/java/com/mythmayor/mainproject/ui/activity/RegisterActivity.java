@@ -87,7 +87,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
         String password = getPassword();
         LogUtil.i("username=" + username + ", password=" + password);
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(this, "请输入账号和密码");
+            ToastUtil.showToast("请输入账号和密码");
             return;
         }
         RegisterRequest request = new RegisterRequest(username, password);
@@ -145,17 +145,17 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void onError(String address, String errMessage) {
-        ToastUtil.showToast(this, errMessage);
+        ToastUtil.showToast(errMessage);
     }
 
     @Override
     public void onSuccess(String address, BaseResponse baseResp) {
         RegisterResponse resp = (RegisterResponse) baseResp;
         if (resp.getErrorCode() == 0) {//注册成功
-            ToastUtil.showToast(getApplicationContext(), "注册成功: " + resp.getData().getUsername());
+            ToastUtil.showToast("注册成功: " + resp.getData().getUsername());
             finish();
         } else {//注册失败
-            ToastUtil.showToast(this, resp.getErrorMsg());
+            ToastUtil.showToast(resp.getErrorMsg());
         }
     }
 }
