@@ -95,6 +95,10 @@
 - 自定义Handler类 - LifecycleHandler。
 - 登录接口使用的www.wanandroid.com的，有需要的可以自行去注册。
 
+### MvpArchitecture项目
+
+Github地址：https://github.com/mythmayor/MvpArchitecture
+
 ### MvvmArchitecture项目
 
 Github地址：https://github.com/mythmayor/MvvmArchitecture
@@ -201,6 +205,10 @@ If it is a separate application, you need to comment out this line of code.
 - NTP time alignment tool related - SntpClient.
 - Custom Handler class - LifecycleHandler.
 - The login interface uses www.wanandroid.com, if necessary, you can register yourself.
+
+### MvpArchitecture Project
+
+Github address: https://github.com/mythmayor/MvpArchitecture
 
 ### MvvmArchitecture Project
 
