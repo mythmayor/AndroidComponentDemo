@@ -56,6 +56,7 @@ public class DFragment extends BaseMvvmFragment<DFragmentViewModel, FragmentDBin
 
     @Override
     protected int getMvvmLayoutResId() {
+        EventBus.getDefault().register(this);//注册EventBus
         isPrepared = true;
         return R.layout.fragment_d;
     }
