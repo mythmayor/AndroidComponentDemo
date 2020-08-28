@@ -48,21 +48,31 @@
 
 切换Library/Application的步骤：
 
-1.打开该模块下的build.gradle，设置"apply plugin"。
+1、方案一(推荐方案)
+
+打开项目下的gradle.properties文件，配置isMainProjectAsApp等参数。
+
+2、方案二(已过时，请查看方案一)
+
+(1)打开该模块下的build.gradle，设置"apply plugin"。
 如果是作为依赖库则设置为'com.android.library'；
 如果是作为单独的应用程序则设置为'com.android.application'。
 
-2.打开该模块下的build.gradle，设置android-defaultConfig下面的applicationId。
+(2)打开该模块下的build.gradle，设置android-defaultConfig下面的applicationId。
 如果是作为依赖库则需要注释掉该行代码；
 如果是作为单独的应用程序则需要取消注释该行代码。
 
-3.打开该模块下的清单文件，设置<application>下<activity>的<intent-filter>的LAUNCHER配置。
+(3)打开该模块下的清单文件，设置<application>下<activity>的<intent-filter>的LAUNCHER配置。
 如果是作为依赖库则需要在注释掉<intent-filter>相关代码；
 如果是作为单独的应用程序则需要取消注释<intent-filter>相关代码。
 
-4.打开该模块下的清单文件，设置<application-name>配置。
-如果是作为依赖库则需要在<application>中配置(android:name=".MainApplication")；
-如果是作为单独的应用程序则需要取消<application-name>的配置。
+(4)打开该模块下的清单文件，设置<application>下name参数。
+如果是作为依赖库则需要在注释掉android:name=".MainApplication"代码；
+如果是作为单独的应用程序则需要取消注释android:name=".MainApplication"代码。
+
+(5)打开app模块下的build.gradle，设置dependencies中对该库的依赖。
+如果是作为依赖库则需要取消注释该行代码；
+如果是作为单独的应用程序则需要注释掉该行代码。
 
 5.打开app模块下的build.gradle，设置dependencies中对该库的依赖。
 如果是作为依赖库则需要取消注释该行代码；
@@ -159,19 +169,29 @@ This module can be used either as a Library or as a separate Application.
 
 Steps to switch Library/Application:
 
-1. Open the build.gradle under this module and set "apply plugin".
+1. Plan One (Recommended Plan)
+
+Open the gradle.properties file under the project and configure isMainProjectAsApp and other parameters.
+
+2. Plan two (outdated, please check plan one)
+
+(1) Open the build.gradle under this module and set "apply plugin".
 If it is used as a dependent library, set to 'com.android.library';
 If it is a separate application, set to 'com.android.application'.
 
-2. Open build.gradle under this module and set applicationId under android-defaultConfig.
+(2) Open build.gradle under this module and set applicationId under android-defaultConfig.
 If it is used as a dependent library, you need to comment out this line of code;
 If it is a separate application, you need to uncomment this line of code.
 
-3. Open the manifest file under the module and set the LAUNCHER configuration of <intent-filter> of <activity> under <application>.
+(3) Open the manifest file under the module and set the LAUNCHER configuration of <intent-filter> of <activity> under <application>.
 If it is used as a dependent library, you need to comment out the relevant code of <intent-filter>;
 If it is a separate application, you need to uncomment the relevant code of <intent-filter>.
 
-4. Open the manifest file under the module and set the <application-name> configuration.
+(4) Open the manifest file under the module and set the name parameter under <application>.
+If it is used as a dependent library, you need to comment out the android:name=".MainApplication" code;
+If it is a separate application, you need to uncomment the android:name=".MainApplication" code.
+
+(5) Open the manifest file under the module and set the <application-name> configuration.
 If it is used as a dependent library, you need to configure (android:name=".MainApplication") in the <application>;
 If it is a separate application, you need to cancel the configuration of <application-name>.
 

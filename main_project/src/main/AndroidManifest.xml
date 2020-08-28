@@ -39,6 +39,7 @@
     <!-- 作为Library时注释掉，作为Application时打开注释并配置到application中 -->
     <!--android:name=".MainApplication"-->
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -56,11 +57,11 @@
 
         <activity android:name=".ui.activity.LoginActivity">
             <!-- 作为Library时注释掉，作为Application时打开注释 -->
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
@@ -80,7 +81,7 @@
 
         <service android:name="com.amap.api.location.APSService" />
         <!-- android7.0读取文件需要注册FileProvider -->
-        <!--<provider
+        <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.mythmayor.mainproject.fileprovider"
             android:exported="false"
@@ -88,7 +89,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>-->
+        </provider>
 
         <!-- 友盟消息推送基本配置信息 -->
         <service
@@ -139,7 +140,7 @@
         <service
             android:name="com.taobao.accs.internal.AccsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:process=":channel"/>
+            android:process=":channel" />
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
             android:process=":channel" />
@@ -178,7 +179,6 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
         <service
             android:name="com.umeng.message.UmengMessageIntentReceiverService"
             android:exported="true"
@@ -192,8 +192,8 @@
             android:exported="false" />
         <service
             android:name="com.umeng.message.UmengMessageCallbackHandlerService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false">
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="com.umeng.messge.registercallback.action" />
             </intent-filter>
@@ -212,14 +212,15 @@
         </service>
         <service
             android:name="com.umeng.message.UmengDownloadResourceService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false" />
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
             android:authorities="${applicationId}.umeng.message"
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
+
     </application>
 
 </manifest>

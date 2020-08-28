@@ -34,7 +34,7 @@ import com.mythmayor.basicproject.ui.view.TopTitleBar;
  * }
  * });
  */
-@Route(path = "/basicproject/WebViewActivity")
+@Route(path = MyConstant.AROUTER_WebViewActivity)
 public class WebViewActivity extends BaseTitleBarActivity {
 
     private WebView mWebView;

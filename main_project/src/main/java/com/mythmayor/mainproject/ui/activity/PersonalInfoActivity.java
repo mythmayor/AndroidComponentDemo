@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -23,7 +24,7 @@ import com.mythmayor.mainproject.presenter.PersonalInfoPresenter;
  * Created by mythmayor on 2020/7/13.
  * 个人信息页面
  */
-@Route(path = "/mainproject/PersonalInfoActivity")
+@Route(path = MyConstant.AROUTER_PersonalInfoActivity)
 public class PersonalInfoActivity extends BaseTitleBarMvpActivity<PersonalInfoPresenter> implements PersonalInfoContract.View {
 
     private InputBox inputboxname;

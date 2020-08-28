@@ -9,7 +9,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -69,7 +69,10 @@ dependencies {
 
     implementation project(path: ':basic_project')
     //如果是依赖库则取消注释该行代码，如果是单独的应用程序则要注释该行代码。
-    implementation project(path: ':main_project')
+    //implementation project(path: ':main_project')
+    if (!isMainProjectAsApp.toBoolean()) {
+        implementation project(path: ':main_project')
+    }
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //Room持久性库 - For Kotlin use kapt instead of annotationProcessor
     annotationProcessor "androidx.room:room-compiler:$roomVersion"

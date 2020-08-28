@@ -13,7 +13,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.BasicApplication;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
 import com.mythmayor.basicproject.base.LifecycleHandler;
 import com.mythmayor.basicproject.database.DataGenerator;
@@ -32,6 +34,7 @@ import java.util.Random;
  * Created by mythmayor on 2020/7/14.
  * 用以测试Room数据库访问
  */
+@Route(path = MyConstant.AROUTER_TestRoomDatabaseActivity)
 public class TestRoomDatabaseActivity extends BaseTitleBarActivity {
 
     private Button btncreate;

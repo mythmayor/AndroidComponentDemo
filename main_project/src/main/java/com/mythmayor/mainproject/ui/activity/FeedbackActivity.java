@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -23,7 +24,7 @@ import com.mythmayor.mainproject.presenter.FeedbackPresenter;
  * Created by mythmayor on 2020/7/13.
  * 意见反馈页面
  */
-@Route(path = "/mainproject/FeedbackActivity")
+@Route(path = MyConstant.AROUTER_FeedbackActivity)
 public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter> implements FeedbackContract.View {
 
     private InputBox inputboxname;

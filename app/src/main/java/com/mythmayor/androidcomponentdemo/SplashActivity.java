@@ -23,7 +23,7 @@ import com.mythmayor.basicproject.utils.PrefUtil;
  * Created by mythmayor on 2020/6/30.
  * 启动页面
  */
-@Route(path = "/app/SplashActivity")
+@Route(path = MyConstant.AROUTER_SplashActivity)
 public class SplashActivity extends BaseActivity {
 
     // 用于判断是否从后台返回或者是否到后台
@@ -93,21 +93,21 @@ public class SplashActivity extends BaseActivity {
         if (isUserLogin) {
             if (isAppWentToBg) {
                 //不带参数跳转
-                //ARouter.getInstance().build("/mainproject/MainActivity").navigation();
+                //ARouter.getInstance().build(MyConstant.AROUTER_MainActivity).navigation();
                 //携带参数跳转
                 Bundle bundle = new Bundle();
                 bundle.putInt(MyConstant.ID, 36);
                 bundle.putString(MyConstant.NAME, "admin");
                 LoginRequest object = new LoginRequest("admin", "123456");
                 bundle.putSerializable(MyConstant.OBJECT, object);
-                ARouter.getInstance().build("/mainproject/MainActivity").with(bundle).navigation();
+                ARouter.getInstance().build(MyConstant.AROUTER_MainActivity).with(bundle).navigation();
                 finish();
             } else {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //ARouter.getInstance().build("/mainproject/MainActivity").greenChannel().navigation();
-                        ARouter.getInstance().build("/mainproject/MainActivity").navigation();
+                        //ARouter.getInstance().build(MyConstant.AROUTER_MainActivity).greenChannel().navigation();
+                        ARouter.getInstance().build(MyConstant.AROUTER_MainActivity).navigation();
                         finish();
                         overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
                     }
@@ -117,8 +117,8 @@ public class SplashActivity extends BaseActivity {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //ARouter.getInstance().build("/mainproject/LoginActivity").greenChannel().navigation();
-                    ARouter.getInstance().build("/mainproject/LoginActivity").navigation();
+                    //ARouter.getInstance().build(MyConstant.AROUTER_LoginActivity).greenChannel().navigation();
+                    ARouter.getInstance().build(MyConstant.AROUTER_LoginActivity).navigation();
                     finish();
                     overridePendingTransition(R.anim.anim_static, R.anim.anim_static);
                 }

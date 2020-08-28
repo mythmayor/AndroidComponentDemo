@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.bean.SearchHistoryBean;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -28,6 +30,7 @@ import java.util.Random;
  * Created by mythmayor on 2020/7/15.
  * 搜索页面
  */
+@Route(path = MyConstant.AROUTER_SearchActivity)
 public class SearchActivity extends BaseMvpActivity<SearchPresenter> implements SearchContract.View {
 
     private SearchBar mSearchBar;

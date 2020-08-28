@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -22,7 +23,7 @@ import com.mythmayor.mainproject.presenter.ChangePasswordPresenter;
  * Created by mythmayor on 2020/7/13.
  * 修改密码页面
  */
-@Route(path = "/mainproject/ChangePasswordActivity")
+@Route(path = MyConstant.AROUTER_ChangePasswordActivity)
 public class ChangePasswordActivity extends BaseTitleBarMvpActivity<ChangePasswordPresenter> implements ChangePasswordContract.View {
 
     private InputBox inputboxoldpwd;

@@ -3,11 +3,13 @@ package com.mythmayor.basicproject.utils.http;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 
 import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.itype.HttpCallback;
 import com.mythmayor.basicproject.utils.ToastUtil;
+import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
@@ -40,10 +42,11 @@ public class HttpTool {
      * @param params 表单请求参数
      */
     public void postForm(String url, Map<String, String> params, StringCallback callback) {
-        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
+        String token = UserInfoManager.getHeaderToken(BasicApplication.getInstance().getContext());
+        if(TextUtils.isEmpty(token)) {
             OkHttpUtils.post().url(url).params(params).build().execute(callback);
-        } else {
-            OkHttpUtils.post().url(url).addHeader("Authorization", getToken()).params(params).build().execute(callback);
+        }else {
+            OkHttpUtils.post().url(url).addHeader(MyConstant.HEADER_KEY, token).params(params).build().execute(callback);
         }
     }
 
@@ -54,10 +57,11 @@ public class HttpTool {
      * @param json Json请求参数
      */
     public void postJson(String url, String json, StringCallback callback) {
-        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
-            OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build().execute(callback);
-        } else {
-            OkHttpUtils.postString().url(url).addHeader("Authorization", getToken()).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build().execute(callback);
+        String token = UserInfoManager.getHeaderToken(BasicApplication.getInstance().getContext());
+        if(TextUtils.isEmpty(token)) {
+            OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse(MyConstant.MEDIA_TYPE)).build().execute(callback);
+        }else {
+            OkHttpUtils.postString().url(url).addHeader(MyConstant.HEADER_KEY, token).content(json).mediaType(MediaType.parse(MyConstant.MEDIA_TYPE)).build().execute(callback);
         }
     }
 
@@ -69,10 +73,11 @@ public class HttpTool {
      */
     public void postForm(String url, Map<String, String> params, final HttpCallback callback) {
         RequestCall build;
-        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
+        String token = UserInfoManager.getHeaderToken(BasicApplication.getInstance().getContext());
+        if(TextUtils.isEmpty(token)) {
             build = OkHttpUtils.post().url(url).params(params).build();
-        } else {
-            build = OkHttpUtils.post().url(url).addHeader("Authorization", getToken()).params(params).build();
+        }else {
+            build = OkHttpUtils.post().url(url).addHeader(MyConstant.HEADER_KEY, token).params(params).build();
         }
         build.execute(new StringCallback() {
             @Override
@@ -133,10 +138,11 @@ public class HttpTool {
      */
     public void postJson(String url, String json, final HttpCallback callback) {
         RequestCall build;
-        if (MyConstant.URL_ABSOLUTE_LOGIN.equals(url)) {
-            build = OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
-        } else {
-            build = OkHttpUtils.postString().url(url).addHeader("Authorization", getToken()).content(json).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
+        String token = UserInfoManager.getHeaderToken(BasicApplication.getInstance().getContext());
+        if(TextUtils.isEmpty(token)) {
+            build = OkHttpUtils.postString().url(url).content(json).mediaType(MediaType.parse(MyConstant.MEDIA_TYPE)).build();
+        }else {
+            build = OkHttpUtils.postString().url(url).addHeader(MyConstant.HEADER_KEY, token).content(json).mediaType(MediaType.parse(MyConstant.MEDIA_TYPE)).build();
         }
         build.execute(new StringCallback() {
             @Override
@@ -265,10 +271,5 @@ public class HttpTool {
             }
         }
         return false;
-    }
-
-    private String getToken() {
-        String token = "";
-        return token;
     }
 }

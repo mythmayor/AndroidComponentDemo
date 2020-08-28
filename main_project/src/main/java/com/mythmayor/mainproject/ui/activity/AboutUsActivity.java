@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
 import com.mythmayor.basicproject.ui.view.TopTitleBar;
@@ -19,7 +20,7 @@ import com.mythmayor.mainproject.presenter.AboutUsPresenter;
  * Created by mythmayor on 2020/7/13.
  * 关于我们页面
  */
-@Route(path = "/mainproject/AboutUsActivity")
+@Route(path = MyConstant.AROUTER_AboutUsActivity)
 public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> implements AboutUsContract.View {
 
     private ImageView ivicon;

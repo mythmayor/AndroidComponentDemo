@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseDialog;
 import com.mythmayor.basicproject.base.BaseTitleBarMvpActivity;
 import com.mythmayor.basicproject.response.BaseResponse;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by mythmayor on 2020/7/10.
  * 设置页面
  */
-@Route(path = "/mainproject/SettingActivity")
+@Route(path = MyConstant.AROUTER_SettingActivity)
 public class SettingActivity extends BaseTitleBarMvpActivity<SettingPresenter> implements SettingContract.View {
 
     private NavigationItemView nivclearcache;

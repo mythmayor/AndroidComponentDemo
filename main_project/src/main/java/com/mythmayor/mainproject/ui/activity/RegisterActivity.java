@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.RegisterRequest;
@@ -27,7 +28,7 @@ import com.mythmayor.mainproject.presenter.RegisterPresenter;
  * Created by mythmayor on 2020/6/30.
  * 注册页面
  */
-@Route(path = "/mainproject/RegisterActivity")
+@Route(path = MyConstant.AROUTER_RegisterActivity)
 public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.View {
 
     private TextInputEditText etusername;

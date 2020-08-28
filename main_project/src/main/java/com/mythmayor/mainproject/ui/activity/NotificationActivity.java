@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.EventBus;
  * Created by mythmayor on 2020/7/13.
  * 消息通知页面
  */
-@Route(path = "/mainproject/NotificationActivity")
+@Route(path = MyConstant.AROUTER_NotificationActivity)
 public class NotificationActivity extends BaseTitleBarMvpActivity<NotificationPresenter> implements NotificationContract.View {
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.amap.api.fence.GeoFence;
 import com.amap.api.fence.GeoFenceClient;
 import com.amap.api.fence.GeoFenceListener;
@@ -39,6 +40,7 @@ import com.amap.api.maps.offlinemap.OfflineMapActivity;
 import com.amap.api.services.district.DistrictResult;
 import com.amap.api.services.district.DistrictSearch;
 import com.amap.api.services.district.DistrictSearchQuery;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseTitleBarActivity;
 import com.mythmayor.basicproject.ui.view.TopTitleBar;
 import com.mythmayor.basicproject.utils.CommonUtil;
@@ -61,6 +63,7 @@ import java.util.List;
  * 高德地图测试页面
  * 高德开放平台：https://lbs.amap.com/
  */
+@Route(path = MyConstant.AROUTER_MapTestActivity)
 public class MapTestActivity extends BaseTitleBarActivity implements LocationSource, AMapLocationListener {
 
     private Button btn01;

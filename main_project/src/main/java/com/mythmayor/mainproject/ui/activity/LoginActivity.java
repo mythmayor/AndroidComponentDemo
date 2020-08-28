@@ -15,6 +15,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.textfield.TextInputEditText;
 import com.gyf.immersionbar.ImmersionBar;
+import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseMvpActivity;
 import com.mythmayor.basicproject.receiver.NetworkBroadcastReceiver;
 import com.mythmayor.basicproject.request.LoginRequest;
@@ -34,7 +35,7 @@ import com.mythmayor.mainproject.presenter.LoginPresenter;
  * Created by mythmayor on 2020/6/30.
  * 登录页面
  */
-@Route(path = "/mainproject/LoginActivity")
+@Route(path = MyConstant.AROUTER_LoginActivity)
 public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements LoginContract.View {
 
     private TextInputEditText etusername;

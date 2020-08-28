@@ -41,7 +41,7 @@ import com.mythmayor.mainproject.R;
 import com.mythmayor.mainproject.contract.MainContract;
 import com.mythmayor.mainproject.presenter.MainPresenter;
 import com.mythmayor.mainproject.ui.fragment.AFragment;
-import com.mythmayor.mainproject.ui.fragment.BFragment;
+import com.mythmayor.moduleb.ui.BFragment;
 import com.mythmayor.mainproject.ui.fragment.CFragment;
 import com.mythmayor.mainproject.ui.fragment.DFragment;
 
@@ -52,7 +52,7 @@ import java.util.List;
  * Created by mythmayor on 2020/6/30.
  * 主页面
  */
-@Route(path = "/mainproject/MainActivity")
+@Route(path = MyConstant.AROUTER_MainActivity)
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View, ViewPager.OnPageChangeListener {
 
     private NoScrollViewPager mViewPager;
