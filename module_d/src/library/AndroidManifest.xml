@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mythmayor.moduled">
 
+    <!-- 作为Library时注释掉，作为Application时打开注释并配置到application中 -->
+    <!--android:name=".ModuleDApplication"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,18 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
 
-        <!-- 支持超过16:9的纵横比设备 -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.1" />
-
-        <activity android:name="com.mythmayor.moduled.DActivity">
+        <activity android:name=".ui.activity.ModuleDActivity">
+            <!-- 作为Library时注释掉，作为Application时打开注释 -->
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.AboutUsActivity" />
+        <activity android:name=".ui.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.activity.FeedbackActivity" />
+        <activity android:name=".ui.activity.NotificationActivity" />
+        <activity android:name=".ui.activity.PersonalInfoActivity" />
+        <activity android:name=".ui.activity.TestRoomDatabaseActivity" />
     </application>
-
 </manifest>

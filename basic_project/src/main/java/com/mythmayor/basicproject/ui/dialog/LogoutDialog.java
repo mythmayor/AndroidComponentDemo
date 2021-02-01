@@ -64,16 +64,16 @@ public class LogoutDialog extends BaseDialog {
         tvleft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != noOnclickListener) {
-                    noOnclickListener.onNoClick(null);
+                if (null != mListener) {
+                    mListener.onClickLeft(null);
                 }
             }
         });
         tvright.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != yesOnclickListener) {
-                    yesOnclickListener.onYesClick(null);
+                if (null != mListener) {
+                    mListener.onClickRight(null);
                 }
             }
         });

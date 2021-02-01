@@ -33,7 +33,7 @@
 
 对于每个组件都有一些是公共的抽象，例如我们工程中自己定义的BaseActivity、BaseFragment、自定义控件等，这些对于每个组件都是一样的，每个组件都基于一样的基础工程开发，一方面可以减少开发工作，另一方面也可以让各个组件的开发人员能够统一架构框架，这样每个组件的技术代码框架看起来都是一样的，也便于后期代码维护和人员互备。
 
-##### main_project模块(业务模块)
+##### module_a、module_b、module_c、module_d模块(业务模块)
 
 应用的主要业务逻辑在此实现，上面的几部分都实现以后，剩余的主要体力工作就是实现各个拆分出来的业务模块。
 
@@ -41,7 +41,7 @@
 
 壳工程主要用于将各个组件组合起来和做一些工程初始化，初始化包含了后续各个组件会用到的一些库的初始化，也包括ApplicationContext的初始化工作。
 
-##### 关于main_project模块说明
+##### 关于module_a、module_b、module_c、module_d模块说明
 
 ```
 该模块既可以作为Library，也可以作为单独的Application。
@@ -50,7 +50,7 @@
 
 1、方案一(推荐方案)
 
-打开项目下的gradle.properties文件，配置isMainProjectAsApp等参数。
+打开项目下的gradle.properties文件，配置isModuleAAsApp、isModuleBAsApp、isModuleCAsApp、isModuleDAsApp等参数。
 
 2、方案二(已过时，请查看方案一)
 
@@ -154,7 +154,7 @@ The basic class library mainly encapsulates some basic libraries that will be us
 
 For each component, there are some public abstractions, such as BaseActivity, BaseFragment, and custom controls defined in our project. These are the same for each component, and each component is developed based on the same basic project. On the one hand, it can reduce the development work, on the other hand, it can also allow the developers of various components to unify the architectural framework, so that the technical code framework of each component looks the same, and it is also convenient for later code maintenance and personnel preparation.
 
-##### main_project module (business module)
+##### module_a/module_b/module_c/module_d module (business module)
 
 The main business logic of the application is implemented here. After the above parts have been implemented, the remaining main manual work is to realize the business modules that are split out.
 
@@ -162,7 +162,7 @@ The main business logic of the application is implemented here. After the above 
 
 The shell project is mainly used to combine various components and do some project initialization. Initialization includes the initialization of some libraries that will be used by each subsequent component, and also includes the initialization of ApplicationContext.
 
-##### About the main_project module description
+##### About the module_a/module_b/module_c/module_d module description
 
 ```
 This module can be used either as a Library or as a separate Application.
@@ -171,7 +171,7 @@ Steps to switch Library/Application:
 
 1. Plan One (Recommended Plan)
 
-Open the gradle.properties file under the project and configure isMainProjectAsApp and other parameters.
+Open the gradle.properties file under the project and configure isModuleAAsApp/isModuleBAsApp/isModuleCAsApp/isModuleDAsApp and other parameters.
 
 2. Plan two (outdated, please check plan one)
 

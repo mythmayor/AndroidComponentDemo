@@ -94,10 +94,6 @@ dependencies {
     api "androidx.room:room-guava:$rootProject.ext.roomVersion"
     //Room持久性库 - Test helpers
     testImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
-    //高德地图：latest.integration为最新版本
-    api "com.amap.api:3dmap:$rootProject.ext.amapVersion"//3D地图
-    api "com.amap.api:search:$rootProject.ext.amapVersion"//搜索
-    api "com.amap.api:location:$rootProject.ext.amapVersion"//定位
 
     //友盟消息推送
     //基础组件库依赖(必须) Push 6.1.0版本必须升级新版本Common SDK

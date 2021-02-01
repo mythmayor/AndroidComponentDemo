@@ -50,28 +50,30 @@ public interface MyConstant {
     //ARouter路由常量
     //app模块
     String AROUTER_SplashActivity = "/app/SplashActivity";
+    String AROUTER_RegisterActivity = "/app/RegisterActivity";
+    String AROUTER_LoginActivity = "/app/LoginActivity";
+    String AROUTER_MainActivity = "/app/MainActivity";
     //basicproject模块
     String AROUTER_WebViewActivity = "/basicproject/WebViewActivity";
-    //mainproject模块
-    String AROUTER_AboutUsActivity = "/mainproject/AboutUsActivity";
-    String AROUTER_ChangePasswordActivity = "/mainproject/ChangePasswordActivity";
-    String AROUTER_FeedbackActivity = "/mainproject/FeedbackActivity";
-    String AROUTER_LoginActivity = "/mainproject/LoginActivity";
-    String AROUTER_MainActivity = "/mainproject/MainActivity";
-    String AROUTER_MapTestActivity = "/mainproject/MapTestActivity";
-    String AROUTER_NotificationActivity = "/mainproject/NotificationActivity";
-    String AROUTER_PersonalInfoActivity = "/mainproject/PersonalInfoActivity";
-    String AROUTER_RegisterActivity = "/mainproject/RegisterActivity";
-    String AROUTER_SearchActivity = "/mainproject/SearchActivity";
-    String AROUTER_SettingActivity = "/mainproject/SettingActivity";
-    String AROUTER_TestRoomDatabaseActivity = "/mainproject/TestRoomDatabaseActivity";
+    String AROUTER_UmengClickActivity = "/basicproject/UmengClickActivity";
     //modulea模块
-    String AROUTER_AActivity = "/modulea/AActivity";
+    String AROUTER_ModuleAActivity = "/modulea/ModuleAActivity";
+    String AROUTER_SearchActivity = "/modulea/SearchActivity";
+    String AROUTER_ModuleAFragment = "/modulea/ModuleAFragment";
     //moduleb模块
-    String AROUTER_BActivity = "/moduleb/BActivity";
+    String AROUTER_ModuleBActivity = "/moduleb/ModuleBActivity";
+    String AROUTER_ModuleBFragment = "/moduleb/ModuleBFragment";
     //modulec模块
-    String AROUTER_CActivity = "/modulec/CActivity";
+    String AROUTER_ModuleCActivity = "/modulec/ModuleCActivity";
+    String AROUTER_ModuleCFragment = "/modulec/ModuleCFragment";
     //moduled模块
-    String AROUTER_DActivity = "/moduled/DActivity";
-
+    String AROUTER_ModuleDActivity = "/moduled/ModuleDActivity";
+    String AROUTER_SettingActivity = "/moduled/SettingActivity";
+    String AROUTER_AboutUsActivity = "/moduled/AboutUsActivity";
+    String AROUTER_ChangePasswordActivity = "/moduled/ChangePasswordActivity";
+    String AROUTER_FeedbackActivity = "/moduled/FeedbackActivity";
+    String AROUTER_NotificationActivity = "/moduled/NotificationActivity";
+    String AROUTER_PersonalInfoActivity = "/moduled/PersonalInfoActivity";
+    String AROUTER_TestRoomDatabaseActivity = "/moduled/TestRoomDatabaseActivity";
+    String AROUTER_ModuleDFragment = "/moduled/ModuleDFragment";
 }

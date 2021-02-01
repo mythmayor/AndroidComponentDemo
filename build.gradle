@@ -71,8 +71,6 @@ ext {
 
     roomVersion = '2.2.5'
 
-    amapVersion = 'latest.integration'
-
     umsdkCommonVersion = '9.1.0'
     umsdkUtdidVersion = '1.5.2'
     umsdkAsmsVersion = '1.1.3'

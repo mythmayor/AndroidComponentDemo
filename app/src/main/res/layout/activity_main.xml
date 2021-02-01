@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    tools:context=".activty.MainActivity">
+
+    <com.mythmayor.basicproject.ui.view.NoScrollViewPager
+        android:id="@+id/viewpager_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_tab01"
+            style="@style/main_tab_style"
+            android:drawableTop="@drawable/main_tab_icon01"
+            android:text="首页1" />
+
+        <RadioButton
+            android:id="@+id/rb_tab02"
+            style="@style/main_tab_style"
+            android:drawableTop="@drawable/main_tab_icon02"
+            android:text="首页2" />
+
+        <RadioButton
+            android:id="@+id/rb_tab03"
+            style="@style/main_tab_style"
+            android:drawableTop="@drawable/main_tab_icon03"
+            android:text="首页3" />
+
+        <RadioButton
+            android:id="@+id/rb_tab04"
+            style="@style/main_tab_style"
+            android:drawableTop="@drawable/main_tab_icon04"
+            android:text="首页4" />
+    </RadioGroup>
+</LinearLayout>
