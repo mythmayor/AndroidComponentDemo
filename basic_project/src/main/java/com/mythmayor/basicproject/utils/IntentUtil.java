@@ -12,6 +12,8 @@ import com.mythmayor.basicproject.MyConstant;
  */
 public class IntentUtil {
 
+    public static final int FLAGS_CLEAK_TASK = Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK;
+
     public static void startActivity(Context context, Class<?> cls) {
         Intent intent = new Intent();
         intent.setClass(context, cls);
@@ -28,7 +30,7 @@ public class IntentUtil {
     public static void startActivityClearTask(Context context, Class<?> cls) {
         Intent intent = new Intent();
         intent.setClass(context, cls);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(FLAGS_CLEAK_TASK);
         context.startActivity(intent);
     }
 
@@ -36,7 +38,7 @@ public class IntentUtil {
         Intent intent = new Intent();
         intent.putExtras(bundle);
         intent.setClass(context, cls);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(FLAGS_CLEAK_TASK);
         context.startActivity(intent);
     }
 

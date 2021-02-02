@@ -79,15 +79,15 @@ public class PermissionManager {
     /**
      * 权限
      */
-    public static final String PERMISSION_CALENDAR = Manifest.permission.READ_CALENDAR;//日历权限
+    public static final String PERMISSION_CALENDAR = Manifest.permission.WRITE_CALENDAR;//日历权限
     public static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;//摄像头权限
-    public static final String PERMISSION_CONTACTS = Manifest.permission.READ_CONTACTS;//联系人权限
+    public static final String PERMISSION_CONTACTS = Manifest.permission.WRITE_CONTACTS;//联系人权限
     public static final String PERMISSION_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;//定位权限
     public static final String PERMISSION_MICROPHONE = Manifest.permission.RECORD_AUDIO;//麦克风权限
     public static final String PERMISSION_PHONE = Manifest.permission.READ_PHONE_STATE;//手机状态权限
     public static final String PERMISSION_SENSORS = Manifest.permission.BODY_SENSORS;//传感器权限
     public static final String PERMISSION_SMS = Manifest.permission.SEND_SMS;//短信权限
-    public static final String PERMISSION_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE;//存储权限
+    public static final String PERMISSION_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;//存储权限
     /**
      * 请求码
      */

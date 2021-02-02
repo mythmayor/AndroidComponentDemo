@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +50,24 @@ public class GlideUtil {
     /**
      * 加载图片
      *
+     * @param imageResId 图片资源ID
+     * @param imageView  ImageView对象
+     */
+    public static void loadImage(int imageResId, final ImageView imageView) {
+        if (imageResId == 0 || null == imageView) {
+            return;
+        }
+        RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        Glide.with(BasicApplication.getInstance().getContext())
+                .load(imageResId)
+                .apply(options)
+                .into(imageView);
+    }
+
+    /**
+     * 加载图片
+     *
      * @param url       图片路径
      * @param imageView ImageView对象
      */
@@ -71,7 +88,6 @@ public class GlideUtil {
                     }
                 });
     }
-
     /**
      * 加载图片
      *

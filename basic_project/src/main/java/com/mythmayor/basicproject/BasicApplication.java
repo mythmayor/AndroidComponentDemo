@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import me.jessyan.autosize.AutoSize;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 
@@ -62,11 +63,13 @@ public class BasicApplication {
     //Activity集合，用来管理所有的Activity
     private List<BaseActivity> mActivities;
     //要销毁的Activity的集合
-    private Map<String, Activity> mDestoryMap;
+    private Map<String, Activity> mDestroyMap;
     //全局的线程池
     private AppExecutors mAppExecutors;
 
     public void init(Application application) {
+        //当App中出现多进程, 并且您需要适配所有的进程, 就需要在App初始化时调用initCompatMultiProcess()
+        AutoSize.initCompatMultiProcess(application);
         //解决方法数超过65535的报错问题
         MultiDex.install(application);
         //初始化数据
@@ -87,7 +90,7 @@ public class BasicApplication {
         mContext = application;
         mApplication = application;
         mActivities = new LinkedList<>();
-        mDestoryMap = new HashMap<>();
+        mDestroyMap = new HashMap<>();
         mAppExecutors = new AppExecutors();
         if (BuildConfig.DEBUG) {
             ARouter.openLog();//打印日志
@@ -201,8 +204,8 @@ public class BasicApplication {
      *
      * @param activity 要销毁的activity
      */
-    public void addDestoryActivity(Activity activity, String activityName) {
-        mDestoryMap.put(activityName, activity);
+    public void addDestroyActivity(Activity activity, String activityName) {
+        mDestroyMap.put(activityName, activity);
     }
 
     /**
@@ -210,15 +213,16 @@ public class BasicApplication {
      *
      * @param activityName 要销毁的Activity
      */
-    public void destoryActivity(String activityName) {
-        Set<String> keySet = mDestoryMap.keySet();
+    public void destroyActivity(String activityName) {
+        Set<String> keySet = mDestroyMap.keySet();
         if (keySet.size() > 0) {
             for (String key : keySet) {
                 if (activityName.equals(key)) {
-                    mDestoryMap.get(key).finish();
+                    mDestroyMap.get(key).finish();
                 }
             }
         }
+        mDestroyMap.remove(activityName);
     }
 
     public AppExecutors getAppExecutors() {

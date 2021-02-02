@@ -104,7 +104,7 @@ public class SearchBar extends FrameLayout {
                     search();
                 }
             });
-            etsearch.setOnKeyListener(new View.OnKeyListener() {
+            etsearch.setOnKeyListener(new OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次

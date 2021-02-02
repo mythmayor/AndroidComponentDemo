@@ -23,6 +23,9 @@ public interface MyConstant {
 
     String APK_NAME = "MyApp_prod";
 
+    //网络请求信息
+    String MEDIA_TYPE = "application/json; charset=utf-8";
+    String HEADER_KEY = "Authorization";
     //网络请求地址
     //接口基础地址
     String URL_BASE = "https://www.wanandroid.com";
@@ -44,4 +47,33 @@ public interface MyConstant {
     String UMENG_MESSAGE_SECRET = "fa5badcf610c40183dc4028d98202f84";
     String UMENG_APP_MASTER_SECRET = "xdbrxrej3buojocrzdayc5fx2zxhskgd";
 
+    //ARouter路由常量
+    //app模块
+    String AROUTER_SplashActivity = "/app/SplashActivity";
+    String AROUTER_RegisterActivity = "/app/RegisterActivity";
+    String AROUTER_LoginActivity = "/app/LoginActivity";
+    String AROUTER_MainActivity = "/app/MainActivity";
+    //basicproject模块
+    String AROUTER_WebViewActivity = "/basicproject/WebViewActivity";
+    String AROUTER_UmengClickActivity = "/basicproject/UmengClickActivity";
+    //modulea模块
+    String AROUTER_ModuleAActivity = "/modulea/ModuleAActivity";
+    String AROUTER_SearchActivity = "/modulea/SearchActivity";
+    String AROUTER_ModuleAFragment = "/modulea/ModuleAFragment";
+    //moduleb模块
+    String AROUTER_ModuleBActivity = "/moduleb/ModuleBActivity";
+    String AROUTER_ModuleBFragment = "/moduleb/ModuleBFragment";
+    //modulec模块
+    String AROUTER_ModuleCActivity = "/modulec/ModuleCActivity";
+    String AROUTER_ModuleCFragment = "/modulec/ModuleCFragment";
+    //moduled模块
+    String AROUTER_ModuleDActivity = "/moduled/ModuleDActivity";
+    String AROUTER_SettingActivity = "/moduled/SettingActivity";
+    String AROUTER_AboutUsActivity = "/moduled/AboutUsActivity";
+    String AROUTER_ChangePasswordActivity = "/moduled/ChangePasswordActivity";
+    String AROUTER_FeedbackActivity = "/moduled/FeedbackActivity";
+    String AROUTER_NotificationActivity = "/moduled/NotificationActivity";
+    String AROUTER_PersonalInfoActivity = "/moduled/PersonalInfoActivity";
+    String AROUTER_TestRoomDatabaseActivity = "/moduled/TestRoomDatabaseActivity";
+    String AROUTER_ModuleDFragment = "/moduled/ModuleDFragment";
 }

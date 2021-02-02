@@ -63,4 +63,13 @@ public class UserInfoManager {
         }
         return null;
     }
+
+    public static String getHeaderToken(Context context) {
+        String token = PrefUtil.getString(context, PrefUtil.SP_HTTP_HEADER_TOKEN, "");
+        return token;
+    }
+
+    public static void setHeaderToken(Context context, String token) {
+        PrefUtil.putString(context, PrefUtil.SP_HTTP_HEADER_TOKEN, token);
+    }
 }

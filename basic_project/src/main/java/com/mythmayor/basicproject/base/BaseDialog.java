@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.mythmayor.basicproject.R;
+import com.mythmayor.basicproject.itype.OnDialogClickListener;
 
 /**
  * Created by mythmayor on 2020/6/30.
@@ -12,14 +13,13 @@ import com.mythmayor.basicproject.R;
  */
 public abstract class BaseDialog extends Dialog {
 
-    public onNoOnclickListener noOnclickListener;//取消按钮被点击了的监听器
-    public onYesOnclickListener yesOnclickListener;//确定按钮被点击了的监听器
+    public OnDialogClickListener mListener;//点击按钮的监听
 
     public BaseDialog(Context context) {
         super(context, R.style.dialog_base);
     }
 
-    public BaseDialog(Context context,int themeResId) {
+    public BaseDialog(Context context, int themeResId) {
         super(context, themeResId);
     }
 
@@ -63,31 +63,11 @@ public abstract class BaseDialog extends Dialog {
     protected abstract void initData();
 
     /**
-     * 设置取消按钮的显示内容和监听
+     * 设置点击的按钮监听
      *
-     * @param onNoOnclickListener
+     * @param listener
      */
-    public void setNoOnclickListener(onNoOnclickListener onNoOnclickListener) {
-        this.noOnclickListener = onNoOnclickListener;
-    }
-
-    /**
-     * 设置确定按钮的显示内容和监听
-     *
-     * @param onYesOnclickListener
-     */
-    public void setYesOnclickListener(onYesOnclickListener onYesOnclickListener) {
-        this.yesOnclickListener = onYesOnclickListener;
-    }
-
-    /**
-     * 设置确定按钮和取消被点击的接口
-     */
-    public interface onYesOnclickListener {
-        void onYesClick(Object o);
-    }
-
-    public interface onNoOnclickListener {
-        void onNoClick(Object o);
+    public void setOnClickListener(OnDialogClickListener listener) {
+        this.mListener = listener;
     }
 }

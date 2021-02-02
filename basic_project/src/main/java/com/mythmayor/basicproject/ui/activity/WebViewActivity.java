@@ -20,21 +20,21 @@ import com.mythmayor.basicproject.ui.view.TopTitleBar;
  * android与js交互
  * 1.js调用安卓方法
  * (1)js：window.androidObject.androidMethod()
- *    安卓：调用webView.addJavascriptInterface，复写androidMethod方法，加上@JavascriptInterface
+ * 安卓：调用webView.addJavascriptInterface，复写androidMethod方法，加上@JavascriptInterface
  * (2)安卓通过shouldOverrideUrlLoading方法拦截url再解析
  * 2.安卓调用js方法
  * (1)js：定义jsMethod方法
- *   安卓：调用webView.loadUrl("javascript:jsMethod(" + jsonParams + ")");
+ * 安卓：调用webView.loadUrl("javascript:jsMethod(" + jsonParams + ")");
  * (2)js：定义jsMethod方法
- *   安卓：String method = "jsMethod(" + jsonParams + ")";
- *    调用webView.evaluateJavascript(method, new ValueCallback<String>() {
- *      @Override
- *       public void onReceiveValue(String value) {
- *           Log.i("test", "js返回的数据" + value);
- *       }
- *    });
+ * 安卓：String method = "jsMethod(" + jsonParams + ")";
+ * 调用webView.evaluateJavascript(method, new ValueCallback<String>() {
+ *
+ * @Override public void onReceiveValue(String value) {
+ * Log.i("test", "js返回的数据" + value);
+ * }
+ * });
  */
-@Route(path = "/basicproject/WebViewActivity")
+@Route(path = MyConstant.AROUTER_WebViewActivity)
 public class WebViewActivity extends BaseTitleBarActivity {
 
     private WebView mWebView;

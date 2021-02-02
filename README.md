@@ -33,7 +33,7 @@
 
 对于每个组件都有一些是公共的抽象，例如我们工程中自己定义的BaseActivity、BaseFragment、自定义控件等，这些对于每个组件都是一样的，每个组件都基于一样的基础工程开发，一方面可以减少开发工作，另一方面也可以让各个组件的开发人员能够统一架构框架，这样每个组件的技术代码框架看起来都是一样的，也便于后期代码维护和人员互备。
 
-##### main_project模块(业务模块)
+##### module_a、module_b、module_c、module_d模块(业务模块)
 
 应用的主要业务逻辑在此实现，上面的几部分都实现以后，剩余的主要体力工作就是实现各个拆分出来的业务模块。
 
@@ -41,28 +41,38 @@
 
 壳工程主要用于将各个组件组合起来和做一些工程初始化，初始化包含了后续各个组件会用到的一些库的初始化，也包括ApplicationContext的初始化工作。
 
-##### 关于main_project模块说明
+##### 关于module_a、module_b、module_c、module_d模块说明
 
 ```
 该模块既可以作为Library，也可以作为单独的Application。
 
 切换Library/Application的步骤：
 
-1.打开该模块下的build.gradle，设置"apply plugin"。
+1、方案一(推荐方案)
+
+打开项目下的gradle.properties文件，配置isModuleAAsApp、isModuleBAsApp、isModuleCAsApp、isModuleDAsApp等参数。
+
+2、方案二(已过时，请查看方案一)
+
+(1)打开该模块下的build.gradle，设置"apply plugin"。
 如果是作为依赖库则设置为'com.android.library'；
 如果是作为单独的应用程序则设置为'com.android.application'。
 
-2.打开该模块下的build.gradle，设置android-defaultConfig下面的applicationId。
+(2)打开该模块下的build.gradle，设置android-defaultConfig下面的applicationId。
 如果是作为依赖库则需要注释掉该行代码；
 如果是作为单独的应用程序则需要取消注释该行代码。
 
-3.打开该模块下的清单文件，设置<application>下<activity>的<intent-filter>的LAUNCHER配置。
+(3)打开该模块下的清单文件，设置<application>下<activity>的<intent-filter>的LAUNCHER配置。
 如果是作为依赖库则需要在注释掉<intent-filter>相关代码；
 如果是作为单独的应用程序则需要取消注释<intent-filter>相关代码。
 
-4.打开该模块下的清单文件，设置<application-name>配置。
-如果是作为依赖库则需要在<application>中配置(android:name=".MainApplication")；
-如果是作为单独的应用程序则需要取消<application-name>的配置。
+(4)打开该模块下的清单文件，设置<application>下name参数。
+如果是作为依赖库则需要在注释掉android:name=".MainApplication"代码；
+如果是作为单独的应用程序则需要取消注释android:name=".MainApplication"代码。
+
+(5)打开app模块下的build.gradle，设置dependencies中对该库的依赖。
+如果是作为依赖库则需要取消注释该行代码；
+如果是作为单独的应用程序则需要注释掉该行代码。
 
 5.打开app模块下的build.gradle，设置dependencies中对该库的依赖。
 如果是作为依赖库则需要取消注释该行代码；
@@ -144,7 +154,7 @@ The basic class library mainly encapsulates some basic libraries that will be us
 
 For each component, there are some public abstractions, such as BaseActivity, BaseFragment, and custom controls defined in our project. These are the same for each component, and each component is developed based on the same basic project. On the one hand, it can reduce the development work, on the other hand, it can also allow the developers of various components to unify the architectural framework, so that the technical code framework of each component looks the same, and it is also convenient for later code maintenance and personnel preparation.
 
-##### main_project module (business module)
+##### module_a/module_b/module_c/module_d module (business module)
 
 The main business logic of the application is implemented here. After the above parts have been implemented, the remaining main manual work is to realize the business modules that are split out.
 
@@ -152,26 +162,36 @@ The main business logic of the application is implemented here. After the above 
 
 The shell project is mainly used to combine various components and do some project initialization. Initialization includes the initialization of some libraries that will be used by each subsequent component, and also includes the initialization of ApplicationContext.
 
-##### About the main_project module description
+##### About the module_a/module_b/module_c/module_d module description
 
 ```
 This module can be used either as a Library or as a separate Application.
 
 Steps to switch Library/Application:
 
-1. Open the build.gradle under this module and set "apply plugin".
+1. Plan One (Recommended Plan)
+
+Open the gradle.properties file under the project and configure isModuleAAsApp/isModuleBAsApp/isModuleCAsApp/isModuleDAsApp and other parameters.
+
+2. Plan two (outdated, please check plan one)
+
+(1) Open the build.gradle under this module and set "apply plugin".
 If it is used as a dependent library, set to 'com.android.library';
 If it is a separate application, set to 'com.android.application'.
 
-2. Open build.gradle under this module and set applicationId under android-defaultConfig.
+(2) Open build.gradle under this module and set applicationId under android-defaultConfig.
 If it is used as a dependent library, you need to comment out this line of code;
 If it is a separate application, you need to uncomment this line of code.
 
-3. Open the manifest file under the module and set the LAUNCHER configuration of <intent-filter> of <activity> under <application>.
+(3) Open the manifest file under the module and set the LAUNCHER configuration of <intent-filter> of <activity> under <application>.
 If it is used as a dependent library, you need to comment out the relevant code of <intent-filter>;
 If it is a separate application, you need to uncomment the relevant code of <intent-filter>.
 
-4. Open the manifest file under the module and set the <application-name> configuration.
+(4) Open the manifest file under the module and set the name parameter under <application>.
+If it is used as a dependent library, you need to comment out the android:name=".MainApplication" code;
+If it is a separate application, you need to uncomment the android:name=".MainApplication" code.
+
+(5) Open the manifest file under the module and set the <application-name> configuration.
 If it is used as a dependent library, you need to configure (android:name=".MainApplication") in the <application>;
 If it is a separate application, you need to cancel the configuration of <application-name>.
 

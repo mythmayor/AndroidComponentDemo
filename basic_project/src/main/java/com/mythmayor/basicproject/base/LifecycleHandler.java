@@ -2,7 +2,6 @@ package com.mythmayor.basicproject.base;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 

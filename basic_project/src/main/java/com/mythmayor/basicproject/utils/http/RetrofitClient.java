@@ -1,8 +1,12 @@
 package com.mythmayor.basicproject.utils.http;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
+import com.mythmayor.basicproject.BasicApplication;
 import com.mythmayor.basicproject.MyConstant;
+import com.mythmayor.basicproject.utils.UserInfoManager;
 import com.zhy.http.okhttp.BuildConfig;
 
 import java.io.IOException;
@@ -53,7 +57,10 @@ public class RetrofitClient {
                 Request original = chain.request();
                 Request.Builder requestBuilder = original.newBuilder();
                 //添加Token
-                //requestBuilder.header("token", "");
+                String token = UserInfoManager.getHeaderToken(BasicApplication.getInstance().getContext());
+                if (!TextUtils.isEmpty(token)) {
+                    requestBuilder.header(MyConstant.HEADER_KEY, token);
+                }
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             }
