@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -114,4 +114,7 @@ dependencies {
     api "com.umeng.umsdk:agoo_networksdk:$rootProject.ext.umsdkAgooNetworksdkVersion"
     api "com.umeng.umsdk:agoo_tlog:$rootProject.ext.umsdkAgooTlogVersion"
     api "com.umeng.umsdk:agoo_tnet4android:$rootProject.ext.umsdkAgooTnet4androidVersion"
+
+    //PictureSelector 2.0
+    //api "io.github.lucksiege:pictureselector:$rootProject.ext.pictureSelectorVersion"
 }

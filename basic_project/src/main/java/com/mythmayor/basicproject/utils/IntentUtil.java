@@ -1,5 +1,6 @@
 package com.mythmayor.basicproject.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +41,19 @@ public class IntentUtil {
         intent.setClass(context, cls);
         intent.setFlags(FLAGS_CLEAK_TASK);
         context.startActivity(intent);
+    }
+
+    public static void startActivityForResult(Activity activity, Class<?> cls, int requestCode) {
+        Intent intent = new Intent();
+        intent.setClass(activity, cls);
+        activity.startActivityForResult(intent, requestCode);
+    }
+
+    public static void startActivityForResultWithExtra(Activity activity, Bundle bundle, Class<?> cls, int requestCode) {
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        intent.setClass(activity, cls);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     public static void startInDevelopmentActivity(Context context, String title, Class<?> cls) {
