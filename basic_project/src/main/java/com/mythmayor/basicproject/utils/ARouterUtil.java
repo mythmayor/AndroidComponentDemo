@@ -93,27 +93,31 @@ public class ARouterUtil {
     }
 
     /**
-     * 页面跳转，指定Flag
+     * 页面跳转，指定Flags
      *
      * @param path
+     * @param flags
      */
-    public static void navigationwithFlags(String path, int flag) {
-        ARouter.getInstance().build(path).withFlags(flag).navigation();
+    public static void navigationwithFlags(String path, int flags) {
+        ARouter.getInstance().build(path).withFlags(flags).navigation();
     }
 
     /**
-     * 页面跳转，指定Flag
+     * 页面跳转，指定Flags
      *
      * @param uri
+     * @param flags
      */
-    public static void navigationwithFlags(Uri uri, int flag) {
-        ARouter.getInstance().build(uri).withFlags(flag).navigation();
+    public static void navigationwithFlags(Uri uri, int flags) {
+        ARouter.getInstance().build(uri).withFlags(flags).navigation();
     }
 
     /**
      * 带转场动画的页面跳转
      *
      * @param path
+     * @param enterAnim
+     * @param exitAnim
      */
     public static void navigationWithTransition(String path, int enterAnim, int exitAnim) {
         ARouter.getInstance().build(path).withTransition(enterAnim, exitAnim).navigation();
@@ -123,6 +127,8 @@ public class ARouterUtil {
      * 带转场动画的页面跳转
      *
      * @param uri
+     * @param enterAnim
+     * @param exitAnim
      */
     public static void navigationWithTransition(Uri uri, int enterAnim, int exitAnim) {
         ARouter.getInstance().build(uri).withTransition(enterAnim, exitAnim).navigation();
@@ -132,6 +138,7 @@ public class ARouterUtil {
      * 带转场动画(API 16+)的页面跳转
      *
      * @param path
+     * @param compat
      */
     public static void navigationWithTransition(String path, ActivityOptionsCompat compat) {
         //makeSceneTransitionAnimation使用共享元素的时候，需要在navigation方法中传入当前Activity
@@ -145,6 +152,7 @@ public class ARouterUtil {
      * 带转场动画(API 16+)的页面跳转
      *
      * @param uri
+     * @param compat
      */
     public static void navigationWithTransition(Uri uri, ActivityOptionsCompat compat) {
         //makeSceneTransitionAnimation使用共享元素的时候，需要在navigation方法中传入当前Activity

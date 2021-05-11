@@ -1,4 +1,4 @@
-# AndroidComponentDemo
+# AndroidMvpComponentDemo
 
 
 
@@ -251,7 +251,7 @@ Thanks to the providers of open source frameworks or resources used in the proje
 ### License
 
 ```
-Copyright 2020 The AndroidComponentDemo Authors
+Copyright 2020 The AndroidMvpComponentDemo Authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

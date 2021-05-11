@@ -1,4 +1,4 @@
-rootProject.name='AndroidComponentDemo'
+rootProject.name='AndroidMvpComponentDemo'
 include ':app'
 include ':basic_library'
 include ':basic_project'
