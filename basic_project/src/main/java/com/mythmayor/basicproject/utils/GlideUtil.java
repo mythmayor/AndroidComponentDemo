@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -88,6 +89,31 @@ public class GlideUtil {
                     }
                 });
     }
+
+    /**
+     * 加载图片
+     *
+     * @param url       图片路径
+     * @param imageView ImageView对象
+     */
+    public static void loadImage(Object url, final ImageView imageView) {
+        if (null == url || null == imageView) {
+            return;
+        }
+        RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.DATA);
+        Glide.with(BasicApplication.getInstance().getContext())
+                .load(url)
+                .apply(options)
+                //.into(imageView);
+                .into(new SimpleTarget<Drawable>() {//加上这段代码可以解决加载不显示的问题
+                    @Override
+                    public void onResourceReady(Drawable drawable, Transition<? super Drawable> transition) {
+                        imageView.setImageDrawable(drawable); //显示图片
+                    }
+                });
+    }
+
     /**
      * 加载图片
      *
@@ -123,7 +149,31 @@ public class GlideUtil {
     }
 
     /**
-     * 加载一组图片
+     * 加载圆形图片
+     *
+     * @param url       图片路径
+     * @param imageView ImageView对象
+     */
+    public static void loadCircleImage(Object url, final ImageView imageView) {
+        if (null == url || null == imageView) {
+            return;
+        }
+        RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.DATA).bitmapTransform(new CircleCrop());
+        Glide.with(BasicApplication.getInstance().getContext())
+                .load(url)
+                .apply(options)
+                //.into(imageView);
+                .into(new SimpleTarget<Drawable>() {//加上这段代码可以解决加载不显示的问题
+                    @Override
+                    public void onResourceReady(Drawable drawable, Transition<? super Drawable> transition) {
+                        imageView.setImageDrawable(drawable); //显示图片
+                    }
+                });
+    }
+
+    /**
+     * 预加载一组图片
      */
     public static void preloadGroupImage(List<String> imageList, OnGlideLoadListener listener) {
         mIndex = 0;

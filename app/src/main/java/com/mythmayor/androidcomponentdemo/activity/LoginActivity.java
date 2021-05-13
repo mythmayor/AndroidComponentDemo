@@ -69,8 +69,8 @@ public class LoginActivity extends BaseMvvmActivity<LoginViewModel, ActivityLogi
             mViewDataBinding.cbRemember.setChecked(false);
             //etusername.setText("");
             //etpassword.setText("");
-            mLoginRequest.setUsername("");
-            mLoginRequest.setPassword("");
+            mLoginRequest.setUsername("iamtest");
+            mLoginRequest.setPassword("123456");
         }
         //注册Lifecycle
         getLifecycle().addObserver(new LifecycleEventObserver() {
