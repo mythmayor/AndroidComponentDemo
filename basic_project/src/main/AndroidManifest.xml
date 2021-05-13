@@ -17,16 +17,18 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <!--相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
     <!--地图包、搜索包需要的基础权限-->
     <!--用于进行网络定位，允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!--用于申请获取蓝牙信息进行室内定位-->
-    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 友盟消息推送 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED" />
@@ -40,8 +42,10 @@
 
     <application
         android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/MyAppTheme">
+        android:theme="@style/MyAppTheme"
+        android:usesCleartextTraffic="true">
         <!-- 支持超过16:9的纵横比设备 -->
         <meta-data
             android:name="android.max_aspect"
@@ -50,10 +54,10 @@
         <!--AndroidAutoSize屏幕适配-->
         <meta-data
             android:name="design_width_in_dp"
-            android:value="360"/>
+            android:value="360" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="640"/>
+            android:value="640" />
 
         <activity android:name=".ui.activity.WebViewActivity" />
 
@@ -97,6 +101,7 @@
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
             </intent-filter>
         </service>
+
         <receiver
             android:name="com.taobao.accs.EventReceiver"
             android:process=":channel">
@@ -124,6 +129,7 @@
                 <action android:name="com.taobao.accs.intent.action.START_FROM_AGOO" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.taobao.accs.internal.AccsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
@@ -154,6 +160,7 @@
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
         </service>
+
         <receiver
             android:name="com.taobao.agoo.AgooCommondReceiver"
             android:exported="true"
@@ -177,6 +184,7 @@
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
             android:exported="false" />
+
         <service
             android:name="com.umeng.message.UmengMessageCallbackHandlerService"
             android:exported="false"
@@ -201,6 +209,7 @@
             android:name="com.umeng.message.UmengDownloadResourceService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
             android:authorities="${applicationId}.umeng.message"

@@ -1,4 +1,4 @@
-package com.mythmayor.androidcomponentdemo.activty;
+package com.mythmayor.androidcomponentdemo.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,6 +37,7 @@ public class SplashActivity extends BaseActivity {
     private String[] mPermissionArray = new String[]{
             PermissionManager.PERMISSION_LOCATION,
             PermissionManager.PERMISSION_PHONE,
+            PermissionManager.PERMISSION_CAMERA,
             PermissionManager.PERMISSION_STORAGE
     };
 

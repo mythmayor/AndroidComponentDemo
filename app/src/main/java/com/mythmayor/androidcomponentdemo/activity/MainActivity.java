@@ -1,4 +1,4 @@
-package com.mythmayor.androidcomponentdemo.activty;
+package com.mythmayor.androidcomponentdemo.activity;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;

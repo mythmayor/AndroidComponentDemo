@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_white"
     android:orientation="vertical"
-    tools:context=".activty.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <com.mythmayor.basicproject.ui.view.NoScrollViewPager
         android:id="@+id/viewpager_main"

@@ -1,4 +1,4 @@
-package com.mythmayor.androidcomponentdemo.activty;
+package com.mythmayor.androidcomponentdemo.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -91,8 +91,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
             etpassword.setText(accountInfo.getPassword());
         } else {
             cbremember.setChecked(false);
-            etusername.setText("");
-            etpassword.setText("");
+            etusername.setText("iamtest");
+            etpassword.setText("123456");
         }
         String version = ProjectUtil.getVersion(this);
         tvversion.setText(TextUtils.isEmpty(version) ? "" : "版本号v" + version);

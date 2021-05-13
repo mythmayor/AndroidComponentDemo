@@ -1,4 +1,4 @@
-package com.mythmayor.androidcomponentdemo.activty;
+package com.mythmayor.androidcomponentdemo.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;

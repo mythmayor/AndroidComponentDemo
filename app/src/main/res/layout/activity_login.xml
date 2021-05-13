@@ -50,6 +50,7 @@
                     android:inputType="text"
                     android:lines="1"
                     android:maxLength="32"
+                    android:text="iamtest"
                     android:textCursorDrawable="@drawable/login_et_cursor_color"
                     android:textSize="16sp" />
 
@@ -71,6 +72,7 @@
                     android:inputType="textPassword"
                     android:lines="1"
                     android:singleLine="true"
+                    android:text="123456"
                     android:textCursorDrawable="@drawable/login_et_cursor_color"
                     android:textSize="16sp" />
 
