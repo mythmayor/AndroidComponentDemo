@@ -23,7 +23,7 @@
                 android:id="@+id/niv_clearcache"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="清理缓存" />
 
@@ -35,7 +35,7 @@
                 android:id="@+id/niv_checkupdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="检查新版本" />
 
@@ -47,7 +47,7 @@
                 android:id="@+id/niv_userprivacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="用户隐私协议" />
 
@@ -59,7 +59,7 @@
                 android:id="@+id/niv_aboutus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="关于我们" />
 
@@ -71,7 +71,7 @@
                 android:id="@+id/niv_testroom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="Room数据库测试" />
         </LinearLayout>

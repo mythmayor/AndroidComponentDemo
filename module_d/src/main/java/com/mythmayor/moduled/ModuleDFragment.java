@@ -1,4 +1,4 @@
-package com.mythmayor.moduled.ui.fragment;
+package com.mythmayor.moduled;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -47,7 +47,6 @@ import com.mythmayor.basicproject.utils.GlideUtil;
 import com.mythmayor.basicproject.utils.LogUtil;
 import com.mythmayor.basicproject.utils.PermissionManager;
 import com.mythmayor.basicproject.utils.UserInfoManager;
-import com.mythmayor.moduled.R;
 import com.mythmayor.moduled.contract.ModuleDFragmentContract;
 import com.mythmayor.moduled.presenter.ModuleDFragmentPresenter;
 

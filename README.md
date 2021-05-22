@@ -93,16 +93,19 @@
 - 项目使用Lifecycle框架监听Activity与Fragment的生命周期变化。
 - 项目使用ImmersionBar框架处理沉浸式状态栏。
 - 项目使用LeakCanary框架以检测内存泄漏。
-- 项目使用自封装的CrashHandler用以捕捉全局的崩溃日志并输出到文件。
+- 项目使用自封装的CrashHandler捕捉全局的崩溃日志并输出到文件。
+- 项目使用自封装的AppExecutors管理项目中的线程池。
 - 权限相关 - PermissionManeger。
-- 加解密相关 - AESUtil。
+- 加解密相关 - AESUtil、RSAUtil、MD5Util、Base64Util。
 - 日期工具相关 - DateUtil。
 - 文件工具相关- FileUtil。
-- 日志工具相关 - LogUtil/LogToFileUtil。
+- 日志工具相关 - LogUtil、LogToFileUtil。
 - 网络工具相关 - NetworkUtil。
+- 下载工具相关 - MyDownloadUtil、DownloadUtil、DownloadDialog。
 - SharedPreference工具相关 - PreUtil。
 - NTP时间对齐工具相关 - SntpClient。
 - 自定义Handler类 - LifecycleHandler。
+- ARouter路由框架工具类 - ARouterUtil。
 - 登录接口使用的www.wanandroid.com的，有需要的可以自行去注册。
 
 ### MvpArchitecture项目
@@ -215,15 +218,18 @@ If it is a separate application, you need to comment out this line of code.
 - The project uses the ImmersionBar framework to handle the immersive status bar.
 - The project uses the LeakCanary framework to detect memory leaks.
 - The project uses a self-packaged CrashHandler to capture the global crash log and output it to a file.
+- The project uses a self-packaged AppExecutors to manage the thread pool in the project.
 - Permission related - PermissionManeger.
-- Related to encryption and decryption - AESUtil.
+- Related to encryption and decryption - AESUtil、RSAUtil、MD5Util、Base64Util.
 - Date tool related - DateUtil.
 - File tool related - FileUtil.
-- Log tool related - LogUtil/LogToFileUtil.
+- Log tool related - LogUtil、LogToFileUtil.
 - Network tools related - NetworkUtil.
+- Download tools related - MyDownloadUtil、DownloadUtil、DownloadDialog。
 - SharedPreference tool related - PreUtil.
 - NTP time alignment tool related - SntpClient.
 - Custom Handler class - LifecycleHandler.
+- ARouter routing framework tool class - ARouterUtil。
 - The login interface uses www.wanandroid.com, if necessary, you can register yourself.
 
 ### MvpArchitecture Project

@@ -61,7 +61,7 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
 
     @Override
     public void setTitleBar(TopTitleBar topTitleBar) {
-        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setLeftImage(true, R.mipmap.img_arrow_left_black);
         topTitleBar.setTopTitle(true, "意见反馈");
     }
 
@@ -118,5 +118,10 @@ public class FeedbackActivity extends BaseTitleBarMvpActivity<FeedbackPresenter>
         UserInfoResponse resp = (UserInfoResponse) baseResp;
         ToastUtil.showToast("提交成功，感谢您的反馈！");
         finish();
+    }
+
+    @Override
+    public int getBackgroundType() {
+        return BACKGROUND_STYLE_WHITE;
     }
 }

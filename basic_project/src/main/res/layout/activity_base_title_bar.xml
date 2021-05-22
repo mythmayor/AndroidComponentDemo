@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_titlebar_default"
     android:orientation="vertical">
-
-    <View
-        android:id="@+id/view_blank"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
 
     <com.mythmayor.basicproject.ui.view.TopTitleBar
         android:id="@+id/topTitleBar"
@@ -20,6 +14,7 @@
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
+        android:background="@color/color_F5F5F5"
         android:layout_height="match_parent"
         android:orientation="vertical" />
 </LinearLayout>

@@ -115,4 +115,10 @@ dependencies {
     api "io.github.lucksiege:pictureselector:$rootProject.ext.pictureSelectorVersion"
     api "androidx.camera:camera-core:$rootProject.ext.cameraCoreVersion"
     api "androidx.camera:camera-camera2:$rootProject.ext.cameraCamera2Version"
+    // If you want to additionally use the CameraX Lifecycle library
+    api "androidx.camera:camera-lifecycle:$rootProject.ext.cameraCoreVersion"
+    // If you want to additionally use the CameraX View class
+    //api "androidx.camera:camera-view:1.0.0-alpha24"
+    // If you want to additionally use the CameraX Extensions library
+    //api "androidx.camera:camera-extensions:1.0.0-alpha24"
 }

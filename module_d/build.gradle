@@ -65,9 +65,9 @@ android {
         release {
             if (isModuleDAsApp.toBoolean()) {
                 //开启混淆，删除无用代码
-                minifyEnabled true
+                minifyEnabled false
                 //开启删除无用资源
-                shrinkResources true
+                //shrinkResources true
                 signingConfig signingConfigs.releaseConfig
             } else {
                 minifyEnabled false

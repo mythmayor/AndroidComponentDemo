@@ -1,4 +1,4 @@
-package com.mythmayor.modulec.ui.fragment;
+package com.mythmayor.modulec;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

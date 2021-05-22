@@ -53,7 +53,7 @@ public class AboutUsActivity extends BaseTitleBarMvpActivity<AboutUsPresenter> i
 
     @Override
     public void setTitleBar(TopTitleBar topTitleBar) {
-        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setLeftImage(true, R.mipmap.img_arrow_left_white);
         topTitleBar.setTopTitle(true, "关于我们");
     }
 
