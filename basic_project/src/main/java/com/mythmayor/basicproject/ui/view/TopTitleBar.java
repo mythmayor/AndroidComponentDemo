@@ -60,6 +60,11 @@ public class TopTitleBar extends FrameLayout {
 
     }
 
+    //设置背景
+    public void setBackgroundResId(int resId) {
+        titlebarroot.setBackgroundResource(resId);
+    }
+
     //展示TopTitleBar
     public void showTitleBar() {
         titlebarroot.setVisibility(View.VISIBLE);

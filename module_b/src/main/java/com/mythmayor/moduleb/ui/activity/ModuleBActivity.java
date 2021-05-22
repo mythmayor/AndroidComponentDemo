@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mythmayor.basicproject.MyConstant;
 import com.mythmayor.basicproject.base.BaseModuleMainActivity;
-import com.mythmayor.moduleb.ui.fragment.ModuleBFragment;
+import com.mythmayor.moduleb.ModuleBFragment;
 
 @Route(path = MyConstant.AROUTER_ModuleBActivity)
 public class ModuleBActivity extends BaseModuleMainActivity {

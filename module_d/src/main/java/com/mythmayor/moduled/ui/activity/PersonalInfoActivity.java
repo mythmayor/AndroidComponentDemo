@@ -48,7 +48,7 @@ public class PersonalInfoActivity extends BaseTitleBarMvvmActivity<PersonalInfoV
 
     @Override
     public void setTitleBar(TopTitleBar topTitleBar) {
-        topTitleBar.setLeftImage(true, R.mipmap.arrow_left);
+        topTitleBar.setLeftImage(true, R.mipmap.img_arrow_left_white);
         topTitleBar.setTopTitle(true, "个人信息");
     }
 
@@ -85,7 +85,7 @@ public class PersonalInfoActivity extends BaseTitleBarMvvmActivity<PersonalInfoV
             mViewModel.getUserInfo(this,new UserInfoRequest("test", "test"));
         } else {
             mViewDataBinding.inputboxName.setType(InputBox.TYPE_EDIT);
-            mViewDataBinding.inputboxGender.setTvcontentDrawableRight(R.mipmap.arrow_right3);
+            mViewDataBinding.inputboxGender.setTvcontentDrawableRight(R.mipmap.img_arrow_right_gray4);
             mViewDataBinding.inputboxGender.setTvcontentHint("请选择");
             mViewDataBinding.inputboxAge.setType(InputBox.TYPE_EDIT);
             mViewDataBinding.inputboxPhone.setType(InputBox.TYPE_EDIT);

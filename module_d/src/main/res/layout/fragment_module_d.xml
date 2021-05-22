@@ -50,7 +50,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/arrow_right" />
+                android:src="@mipmap/img_arrow_right_gray2" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:id="@+id/niv_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="消息通知" />
@@ -77,7 +77,7 @@
                 android:id="@+id/niv_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="意见反馈" />
 
@@ -89,7 +89,7 @@
                 android:id="@+id/niv_modifypwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="修改密码" />
 
@@ -101,7 +101,7 @@
                 android:id="@+id/niv_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:niv_arrowImage="@mipmap/arrow_right"
+                app:niv_arrowImage="@mipmap/img_arrow_right_gray2"
                 app:niv_drawableRight="@drawable/bg_notification_tips"
                 app:niv_icon="@mipmap/icon_main_tab_selected"
                 app:niv_title="设置" />

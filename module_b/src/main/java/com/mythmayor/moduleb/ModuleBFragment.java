@@ -1,4 +1,4 @@
-package com.mythmayor.moduleb.ui.fragment;
+package com.mythmayor.moduleb;
 
 import android.view.MenuItem;
 import android.view.View;

@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
  * Created by mythmayor on 2021/1/29.
+ * ARouter路由框架工具类
  */
 public class ARouterUtil {
 

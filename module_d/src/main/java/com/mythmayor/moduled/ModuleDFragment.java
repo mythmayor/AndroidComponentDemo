@@ -1,4 +1,4 @@
-package com.mythmayor.moduled.ui.fragment;
+package com.mythmayor.moduled;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;

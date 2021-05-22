@@ -55,7 +55,7 @@ public class SettingActivity extends BaseTitleBarMvvmActivity<SettingViewModel, 
 
     @Override
     public void setTitleBar(TopTitleBar topTitleBar) {
-        topTitleBar.setLeftImage(true, com.mythmayor.basicproject.R.mipmap.arrow_left);
+        topTitleBar.setLeftImage(true, R.mipmap.img_arrow_left_white);
         topTitleBar.setTopTitle(true, "设置");
     }
 

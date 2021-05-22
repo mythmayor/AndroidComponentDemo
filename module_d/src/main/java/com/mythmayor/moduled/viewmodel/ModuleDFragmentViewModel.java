@@ -7,7 +7,7 @@ import com.mythmayor.basicproject.request.UserInfoRequest;
 import com.mythmayor.basicproject.response.UserInfoResponse;
 import com.mythmayor.basicproject.utils.http.RxScheduler;
 import com.mythmayor.moduled.model.ModuleDFragmentModel;
-import com.mythmayor.moduled.ui.fragment.ModuleDFragment;
+import com.mythmayor.moduled.ModuleDFragment;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;

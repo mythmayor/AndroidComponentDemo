@@ -1,4 +1,4 @@
-package com.mythmayor.modulec.ui.fragment;
+package com.mythmayor.modulec;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.ImmersionBar;
